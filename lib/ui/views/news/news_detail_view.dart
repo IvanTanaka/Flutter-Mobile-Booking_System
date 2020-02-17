@@ -28,7 +28,6 @@ class _NewsDetailViewState extends State<NewsDetailView> {
             child: _buildNewsDetailTop(),
           ),
           Expanded(child: _buildNewsDetailBody()),
-          _buildCheckMore(),
         ],
       ),
     );
@@ -88,55 +87,40 @@ class _NewsDetailViewState extends State<NewsDetailView> {
   }
 
   Widget _buildNewsDetailBody() {
-    return Material(
-      color: SharedColors.scaffoldColor,
-      child: Container(
-        margin: EdgeInsets.only(top: 25, left: 10, right: 10, bottom: 15),
-        child: Material(
-          elevation: 5,
-          color: SharedColors.scaffoldColor,
-          borderRadius: BorderRadius.circular(10),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 8,
-                  decoration: BoxDecoration(
-                      color: SharedColors.primaryColor,
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(10))),
-                ),
-                Container(
-                  height: 5,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    "franchise_name",
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .merge(TextStyle(color: SharedColors.txtColor)),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    "date",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                ),
-                Divider(
-                  color: Colors.grey[500],
-                ),
-                _buildNewsDetailDescription(),
-                _buildNewsDetailTermsAndConditions(),
-                _buildNewsDetailLocations(),
-              ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            height: 5,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              "franchise_name",
+              style: Theme.of(context)
+                  .textTheme
+                  .title
+                  .merge(TextStyle(color: SharedColors.txtColor)),
             ),
           ),
-        ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              "date",
+              style: Theme.of(context).textTheme.caption,
+            ),
+          ),
+          Divider(
+            color: Colors.grey[500],
+          ),
+          _buildNewsDetailDescription(),
+          _buildNewsDetailTermsAndConditions(),
+          _buildNewsDetailLocations(),
+          Container(
+            height: 20,
+          )
+        ],
       ),
     );
   }
@@ -230,11 +214,14 @@ class _NewsDetailViewState extends State<NewsDetailView> {
               child: Container(
                   margin: EdgeInsets.only(top: 5, bottom: 10),
                   child: Material(
-                    elevation: 1,
+                    elevation: 3,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      margin: EdgeInsets.only(
+                      padding: EdgeInsets.only(
                           left: 10, right: 10, top: 10, bottom: 12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -252,6 +239,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                               Icon(
                                 FontAwesomeIcons.mapMarker,
                                 size: 12,
+                                color: SharedColors.primaryColor,
                               ),
                               Container(
                                 width: 10,
@@ -269,6 +257,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                               Icon(
                                 FontAwesomeIcons.phone,
                                 size: 12,
+                                color: SharedColors.primaryColor,
                               ),
                               Container(
                                 width: 10,
