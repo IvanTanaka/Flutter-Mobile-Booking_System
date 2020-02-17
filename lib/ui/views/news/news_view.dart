@@ -10,12 +10,12 @@ import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/news/widgets/news_container.dart';
 
-class HomeView extends StatefulWidget {
+class NewsView extends StatefulWidget {
   @override
-  _HomeViewState createState() => _HomeViewState();
+  _NewsViewState createState() => _NewsViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _NewsViewState extends State<NewsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,16 +32,7 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Balance",
-                    style: Theme.of(context).textTheme.caption.merge(
-                          TextStyle(
-                            color: SharedColors.primaryColor,
-                          ),
-                        ),
-                  ),
-                  Text(
-                    "Rp 12.000",
-                    style: Theme.of(context).textTheme.title,
+                    "News",
                   )
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 
 import 'news/news_view.dart';
@@ -30,15 +31,15 @@ class _MainViewState extends State<MainView> {
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              title: Text('Search'),
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.compare_arrows),
               title: Text('Activity'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_balance_wallet),
+              icon: Icon(FontAwesomeIcons.newspaper),
+              title: Text('News'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.wallet),
               title: Text('Wallet'),
             ),
             BottomNavigationBarItem(
@@ -54,8 +55,8 @@ class _MainViewState extends State<MainView> {
 
   Widget _buildBody(){
     switch (_selectedPage){
-      case 0:
-        return HomeView();
+      case 2:
+        return NewsView();
       default:
         return Container(
           color: Colors.red,

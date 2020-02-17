@@ -18,14 +18,19 @@ class NewsContainer extends StatefulWidget {
 class _NewsContainerState extends State<NewsContainer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildNewsHeader(),
-          _buildNewsBody(),
-          _buildNewsDescription(),
-        ],
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, RoutePaths.NewsDetail);
+      },
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildNewsHeader(),
+            _buildNewsBody(),
+            _buildNewsDescription(),
+          ],
+        ),
       ),
     );
   }
@@ -93,18 +98,13 @@ class _NewsContainerState extends State<NewsContainer> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutePaths.NewsDetail);
-                  },
-                  child: ExtendedText(
-                    widget.newsDescription,
-                    maxLines: 2,
-                    textAlign: TextAlign.justify,
-                    overFlowTextSpan: OverFlowTextSpan(
-                      text: " ... more",
-                      style: TextStyle(color: Colors.black45),
-                    ),
+                ExtendedText(
+                  widget.newsDescription,
+                  maxLines: 2,
+                  textAlign: TextAlign.justify,
+                  overFlowTextSpan: OverFlowTextSpan(
+                    text: " ... more",
+                    style: TextStyle(color: Colors.black45),
                   ),
                 ),
               ],
