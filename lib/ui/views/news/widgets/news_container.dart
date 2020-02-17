@@ -1,7 +1,6 @@
 import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
 import 'package:member_apps/router.dart';
-import 'package:member_apps/ui/prototype_constant.dart';
 
 class NewsContainer extends StatefulWidget {
   final String franchiseName;

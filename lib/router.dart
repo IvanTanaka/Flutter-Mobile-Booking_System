@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:member_apps/ui/views/news/news_detail_view.dart';
-import 'package:member_apps/ui/views/news/news_favorite.dart';
+import 'package:member_apps/ui/views/news/news_favorite_view.dart';
 import 'package:member_apps/ui/views/order/order_store.dart';
 import 'ui/views/login_view.dart';
 import 'ui/views/main_view.dart';
@@ -34,12 +34,12 @@ class Router {
       case RoutePaths.NewsFavorite:
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.NewsFavorite),
-          builder: (_) => NewsFavorite(),
+          builder: (_) => NewsFavoriteView(),
         );
       case RoutePaths.NewsFavorite:
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.NewsFavorite),
-          builder: (_) => NewsFavorite(),
+          builder: (_) => NewsFavoriteView(),
         );
       case RoutePaths.OrderStore:
         return MaterialPageRoute(

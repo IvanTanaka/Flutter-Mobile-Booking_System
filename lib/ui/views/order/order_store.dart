@@ -5,7 +5,6 @@ import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
-import 'package:toast/toast.dart';
 
 class OrderStore extends StatefulWidget {
   @override

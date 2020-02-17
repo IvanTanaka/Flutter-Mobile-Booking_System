@@ -1,17 +1,14 @@
-import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:member_apps/router.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/news/widgets/news_container.dart';
 
-class NewsFavorite extends StatefulWidget {
+class NewsFavoriteView extends StatefulWidget {
   @override
-  _NewsFavoriteState createState() => _NewsFavoriteState();
+  _NewsFavoriteViewState createState() => _NewsFavoriteViewState();
 }
 
-class _NewsFavoriteState extends State<NewsFavorite> {
+class _NewsFavoriteViewState extends State<NewsFavoriteView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

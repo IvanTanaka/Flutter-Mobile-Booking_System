@@ -1,8 +1,3 @@
-import 'dart:ui';
-
-import 'package:extended_text/extended_text.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/router.dart';
