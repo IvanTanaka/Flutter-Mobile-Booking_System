@@ -8,8 +8,11 @@ import 'ui/views/main_view.dart';
 class RoutePaths {
   static const String Login = "/login";
   static const String Main = "/";
+
   static const String NewsDetail = "/news/detail";
   static const String NewsFavorite = "/news/favorite";
+
+  static const String SearchFranchise = "/search/Franchise";
   static const String OrderStore = "/order/store";
 }
 
@@ -26,6 +29,7 @@ class Router {
           settings: RouteSettings(name: RoutePaths.Main),
           builder: (_) => MainView(),
         );
+
       case RoutePaths.NewsDetail:
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.NewsDetail),
@@ -36,9 +40,9 @@ class Router {
           settings: RouteSettings(name: RoutePaths.NewsFavorite),
           builder: (_) => NewsFavoriteView(),
         );
-      case RoutePaths.NewsFavorite:
+      case RoutePaths.SearchFranchise:
         return MaterialPageRoute(
-          settings: RouteSettings(name: RoutePaths.NewsFavorite),
+          settings: RouteSettings(name: RoutePaths.SearchFranchise),
           builder: (_) => NewsFavoriteView(),
         );
       case RoutePaths.OrderStore:

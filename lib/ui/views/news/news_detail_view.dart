@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/router.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
-import 'package:member_apps/ui/widgets/shared_button.dart';
 
 class NewsDetailView extends StatefulWidget {
   @override
@@ -273,16 +272,6 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                   )),
             );
           }),
-    );
-  }
-
-  Widget _buildCheckMore(){
-    return Container(
-      color: SharedColors.scaffoldColor,
-      child: SharedButton(
-        text: "Check More",
-        onTap: (){},
-      ),
     );
   }
 }

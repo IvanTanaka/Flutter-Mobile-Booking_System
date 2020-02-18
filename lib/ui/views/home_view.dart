@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dash/flutter_dash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:member_apps/base_widget.dart';
+import 'package:member_apps/core/constants/service_item_name.dart';
+import 'package:member_apps/core/models/service_item_model.dart';
+import 'package:member_apps/core/viewmodels/views/home_viewmodel.dart';
+import 'package:member_apps/router.dart';
+import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/news/widgets/news_container.dart';
@@ -32,32 +37,37 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      body: _buildBody(),
+      body: BaseWidget<HomeViewmodel>(
+          model: locator<HomeViewmodel>(),
+          builder: (BuildContext context, HomeViewmodel viewmodel, Widget child){
+            return _buildBody(viewmodel);
+          },
+      ),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(HomeViewmodel viewmodel) {
     return Container(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildWalletContainer(),
+            _buildWalletContainer(viewmodel),
             Container(
               height: 20,
             ),
-            _buildListService(),
+            _buildListService(viewmodel),
             Container(
               height: 50,
             ),
-            _buildLatestNews()
+            _buildLatestNews(viewmodel)
           ],
         ),
       ),
     );
   }
 
-  Widget _buildWalletContainer() {
+  Widget _buildWalletContainer(HomeViewmodel viewmodel) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Material(
@@ -122,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildListService() {
+  Widget _buildListService(HomeViewmodel viewmodel) {
     return Container(
       child: Column(
         children: <Widget>[
@@ -136,38 +146,41 @@ class _HomeViewState extends State<HomeView> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true, crossAxisCount: 4,
             // Generate 100 widgets that display their index in the List.
-            children: <Widget>[
-              _buildServiceItem(itemName: "Food"),
-              _buildServiceItem(itemName: "Barber"),
-              _buildServiceItem(itemName: "Karaoke"),
-              _buildServiceItem(itemName: "Sports"),
-            ],
+            children: List.generate(viewmodel.serviceItems.length, (index) {
+              return _buildServiceItem(serviceItemModel: viewmodel.serviceItems[index]);
+            }),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildServiceItem({String itemName}){
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          CircleAvatar(
-            radius: 30,
-            backgroundImage:
-            NetworkImage(PrototypeConstant.FRANCHISE_PROFILE_IMAGE),
-          ),
-          Text(
-            itemName,
-            style: Theme.of(context).textTheme.body2,
-          ),
-        ],
+  Widget _buildServiceItem({ServiceItemModel serviceItemModel}){
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, RoutePaths.SearchFranchise);
+      },
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 30,
+              backgroundImage:
+//          TODO replace with AssetImage(serviceItemModel.imagePath)
+              NetworkImage(PrototypeConstant.FRANCHISE_PROFILE_IMAGE),
+            ),
+            Text(
+              serviceItemModel.name,
+              style: Theme.of(context).textTheme.body2,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildLatestNews() {
+  Widget _buildLatestNews(HomeViewmodel viewmodel) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +189,7 @@ class _HomeViewState extends State<HomeView> {
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               "Latest News",
-              style: Theme.of(context).textTheme.title.merge(TextStyle(color: SharedColors.accentColor)),
+              style: Theme.of(context).textTheme.title.merge(TextStyle(color: SharedColors.primaryColor)),
             ),
           ),
           Divider(),
