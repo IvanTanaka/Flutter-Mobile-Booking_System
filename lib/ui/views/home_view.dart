@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
-import 'package:member_apps/core/constants/service_item_name.dart';
-import 'package:member_apps/core/models/service_item_model.dart';
-import 'package:member_apps/core/viewmodels/views/home_viewmodel.dart';
+import 'package:member_apps/core/constants/service_menu_name.dart';
+import 'package:member_apps/core/models/service_menu_model.dart';
+import 'package:member_apps/core/viewmodels/views/home_view_model.dart';
 import 'package:member_apps/router.dart';
 import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
@@ -37,37 +37,37 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      body: BaseWidget<HomeViewmodel>(
-          model: locator<HomeViewmodel>(),
-          builder: (BuildContext context, HomeViewmodel viewmodel, Widget child){
-            return _buildBody(viewmodel);
+      body: BaseWidget<HomeViewModel>(
+          model: locator<HomeViewModel>(),
+          builder: (BuildContext context, HomeViewModel viewModel, Widget child){
+            return _buildBody(viewModel);
           },
       ),
     );
   }
 
-  Widget _buildBody(HomeViewmodel viewmodel) {
+  Widget _buildBody(HomeViewModel viewModel) {
     return Container(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildWalletContainer(viewmodel),
+            _buildWalletContainer(viewModel),
             Container(
               height: 20,
             ),
-            _buildListService(viewmodel),
+            _buildListService(viewModel),
             Container(
               height: 50,
             ),
-            _buildLatestNews(viewmodel)
+            _buildLatestNews(viewModel)
           ],
         ),
       ),
     );
   }
 
-  Widget _buildWalletContainer(HomeViewmodel viewmodel) {
+  Widget _buildWalletContainer(HomeViewModel viewModel) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Material(
@@ -132,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildListService(HomeViewmodel viewmodel) {
+  Widget _buildListService(HomeViewModel viewModel) {
     return Container(
       child: Column(
         children: <Widget>[
@@ -146,8 +146,8 @@ class _HomeViewState extends State<HomeView> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true, crossAxisCount: 4,
             // Generate 100 widgets that display their index in the List.
-            children: List.generate(viewmodel.serviceItems.length, (index) {
-              return _buildServiceItem(serviceItemModel: viewmodel.serviceItems[index]);
+            children: List.generate(viewModel.serviceMenus.length, (index) {
+              return _buildServiceMenu(serviceMenuModel: viewModel.serviceMenus[index]);
             }),
           ),
         ],
@@ -155,10 +155,10 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildServiceItem({ServiceItemModel serviceItemModel}){
+  Widget _buildServiceMenu({ServiceMenuModel serviceMenuModel}){
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, RoutePaths.SearchFranchise);
+        Navigator.pushNamed(context, RoutePaths.SearchFranchise, arguments: serviceMenuModel.type);
       },
       child: Center(
         child: Column(
@@ -171,7 +171,7 @@ class _HomeViewState extends State<HomeView> {
               NetworkImage(PrototypeConstant.FRANCHISE_PROFILE_IMAGE),
             ),
             Text(
-              serviceItemModel.name,
+              serviceMenuModel.name,
               style: Theme.of(context).textTheme.body2,
             ),
           ],
@@ -180,7 +180,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildLatestNews(HomeViewmodel viewmodel) {
+  Widget _buildLatestNews(HomeViewModel viewModel) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
