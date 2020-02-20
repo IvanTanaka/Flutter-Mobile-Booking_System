@@ -136,19 +136,28 @@ class _HomeViewState extends State<HomeView> {
     return Container(
       child: Column(
         children: <Widget>[
+//          Container(
+//            child: Text("Start Ordering", style: Theme.of(context).textTheme.headline.merge(TextStyle(color: SharedColors.primaryColor)),),
+//          ),
           Container(
-            child: Text("Start Ordering", style: TextStyle(
-              fontSize: 19,
-              color: SharedColors.primaryColor
-            ),),
-          ),
-          GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true, crossAxisCount: 4,
-            // Generate 100 widgets that display their index in the List.
-            children: List.generate(viewModel.serviceMenus.length, (index) {
-              return _buildServiceMenu(serviceMenuModel: viewModel.serviceMenus[index]);
-            }),
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Material(
+              borderRadius: BorderRadius.circular(5),
+              elevation: 3,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true, crossAxisCount: 4,
+                  // Generate 100 widgets that display their index in the List.
+                  children: List.generate(viewModel.serviceMenus.length, (index) {
+                    return _buildServiceMenu(serviceMenuModel: viewModel.serviceMenus[index]);
+                  }),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -189,7 +198,7 @@ class _HomeViewState extends State<HomeView> {
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               "Latest News",
-              style: Theme.of(context).textTheme.title.merge(TextStyle(color: SharedColors.primaryColor)),
+              style: Theme.of(context).textTheme.subhead.merge(TextStyle(color: SharedColors.primaryColor)),
             ),
           ),
           Divider(),

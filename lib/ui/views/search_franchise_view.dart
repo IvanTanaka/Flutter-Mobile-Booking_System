@@ -11,7 +11,7 @@ import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 
 class SearchFranchiseView extends StatefulWidget {
-  final ServiceMenuType serviceMenuType;
+  final ServiceType serviceMenuType;
 
   const SearchFranchiseView({Key key, this.serviceMenuType}) : super(key: key);
 
@@ -20,12 +20,34 @@ class SearchFranchiseView extends StatefulWidget {
 }
 
 class _SearchFranchiseViewState extends State<SearchFranchiseView> {
+  TextEditingController _searchController = new TextEditingController();
+  ScrollController _scrollController = new ScrollController();
+  SearchFranchiseViewModel _viewModel = locator<SearchFranchiseViewModel>();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() async {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        await _viewModel.getMoreStoreByName(_searchController.text);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseWidget<SearchFranchiseViewModel>(
-      model: locator<SearchFranchiseViewModel>(),
+      model: _viewModel,
       onModelReady: (SearchFranchiseViewModel viewModel) {
         viewModel.type = widget.serviceMenuType;
+        viewModel.searchStoreModel = [];
       },
       builder: (BuildContext context, SearchFranchiseViewModel viewModel,
           Widget child) {
@@ -37,34 +59,39 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
                 viewModel.searchPageTitle,
               ),
             ),
-            body: _buildBody(viewModel));
+            body: _buildBody());
       },
     );
   }
 
-  Widget _buildBody(SearchFranchiseViewModel viewModel) {
+  Widget _buildBody() {
     return Container(
       child: Column(
         children: <Widget>[
           Container(
             height: 50,
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: _buildSearchBar(viewModel),
+            child: _buildSearchBar(),
           ),
           Expanded(
-              child: (viewModel.busy)
-                  ? SharedLoadingPage()
-                  : _buildStoreList(viewModel))
+              child:
+                  (_viewModel.busy) ? SharedLoadingPage() : _buildStoreList())
         ],
       ),
     );
   }
 
-  Widget _buildStoreList(SearchFranchiseViewModel viewModel) {
+  Widget _buildStoreList() {
     return ListView.separated(
-      itemCount: viewModel.searchStoreModel.length,
+      controller: _scrollController,
+      itemCount: _viewModel.searchStoreModel.length + 1,
       itemBuilder: (BuildContext context, int index) {
-        return _buildStoreContainer(viewModel, viewModel.searchStoreModel[index]);
+        return (index == _viewModel.searchStoreModel.length)
+            ? Container(
+                height: 50,
+                child: (_viewModel.listIsUpdate)?SharedLoadingPage():Container(),
+              )
+            : _buildStoreContainer(_viewModel.searchStoreModel[index]);
       },
       separatorBuilder: (BuildContext context, int index) {
         return Divider(
@@ -73,11 +100,11 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
     );
   }
 
-  Widget _buildStoreContainer(SearchFranchiseViewModel viewModel,SearchStoreModel model) {
+  Widget _buildStoreContainer(SearchStoreModel model) {
     return GestureDetector(
       onTap: () {
-        if (!model.haveBranches){
-          _navigateToStorePage(viewModel, model.id);
+        if (!model.haveBranches) {
+          _navigateToStorePage(model.id);
         }
       },
       child: Container(
@@ -118,7 +145,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            return _buildBranchContainer(viewModel, model.branches[index]);
+                            return _buildBranchContainer(model.branches[index]);
                           },
                           separatorBuilder: (BuildContext context, int index) {
                             return Divider(
@@ -137,10 +164,10 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
     ;
   }
 
-  Widget _buildBranchContainer(SearchFranchiseViewModel viewModel, BranchModel model) {
+  Widget _buildBranchContainer(BranchModel model) {
     return GestureDetector(
-      onTap: (){
-        _navigateToStorePage(viewModel, model.id);
+      onTap: () {
+        _navigateToStorePage(model.id);
       },
       child: Container(
         padding: EdgeInsets.only(left: 25, top: 10, bottom: 10, right: 15),
@@ -151,7 +178,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
             Container(
               padding: EdgeInsets.only(left: 22),
               child: Text(
-                "Cab. index",
+                model.branchName,
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
               ),
             ),
@@ -184,7 +211,11 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
         ),
         Expanded(
           child: Container(
-            child: Text(text, overflow: TextOverflow.ellipsis, maxLines: 3,),
+            child: Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+            ),
           ),
         ),
       ],
@@ -209,26 +240,29 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
     );
   }
 
-  void _navigateToStorePage(SearchFranchiseViewModel viewModel, String id){
-    viewModel.getStore(id);
+  void _navigateToStorePage(String id) {
     Navigator.pushNamed(context, RoutePaths.OrderStore);
   }
 
-  Widget _buildSearchBar(SearchFranchiseViewModel viewModel) {
+  Widget _buildSearchBar() {
     return Material(
       elevation: 3,
-      borderRadius: BorderRadius.circular(3),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: EdgeInsets.only(left: 10, right: 10, bottom: 3),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(3),
-        ),
-        child: TextFormField(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: SharedColors.accentColor, width: 3)),
+        child: TextField(
           textInputAction: TextInputAction.search,
           cursorColor: Colors.black,
+          onSubmitted: (String value) async {
+            await _viewModel.getStoreByName(value);
+          },
+          controller: _searchController,
           decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: viewModel.searchPagePlaceholder,
+              hintText: _viewModel.searchPagePlaceholder,
               prefixIcon: Icon(Icons.search)),
         ),
       ),

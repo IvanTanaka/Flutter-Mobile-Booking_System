@@ -2,21 +2,21 @@ import 'package:member_apps/core/constants/service_menu_name.dart';
 
 class ServiceMenuModel{
 
-  final ServiceMenuType type;
+  final ServiceType type;
 
   // ignore: missing_return
   String get name{
     switch (this.type){
-      case ServiceMenuType.food:
+      case ServiceType.food:
         return ServiceMenuName.FOOD;
         break;
-      case ServiceMenuType.barber:
+      case ServiceType.barber:
         return ServiceMenuName.BARBER;
         break;
-      case ServiceMenuType.karaoke:
+      case ServiceType.karaoke:
         return ServiceMenuName.KARAOKE;
         break;
-      case ServiceMenuType.sport:
+      case ServiceType.sport:
         return ServiceMenuName.SPORT;
         break;
     }
@@ -25,17 +25,17 @@ class ServiceMenuModel{
   // ignore: missing_return
   String get imagePath{
     switch (this.type){
-      case ServiceMenuType.food:
+      case ServiceType.food:
         // TODO: Handle this case.
         return "";
         break;
-      case ServiceMenuType.barber:
+      case ServiceType.barber:
         // TODO: Handle this case.
         break;
-      case ServiceMenuType.karaoke:
+      case ServiceType.karaoke:
         // TODO: Handle this case.
         break;
-      case ServiceMenuType.sport:
+      case ServiceType.sport:
         // TODO: Handle this case.
         break;
     }
@@ -45,6 +45,6 @@ class ServiceMenuModel{
 
 }
 
-enum ServiceMenuType{
+enum ServiceType{
   food, barber, karaoke, sport
 }

@@ -1,88 +1,36 @@
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
-import 'package:member_apps/core/viewmodels/base_viewmodel.dart';
+import 'package:member_apps/core/services/store_service.dart';
+import 'package:member_apps/core/viewmodels/base_view_model.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 
-class SearchFranchiseViewModel extends BaseViewmodel {
-  ServiceMenuType type;
+class SearchFranchiseViewModel extends BaseViewModel {
+  ServiceType type;
+  StoreService _storeService;
+  bool listIsUpdate = false;
+  int page=1;
 
-  List<SearchStoreModel> get searchStoreModel => [
-        SearchStoreModel(
-          id: "23123131",
-          franchiseName: "Coco Bop",
-          branches: [
-            BranchModel(
-                branchName: "Coco Bop",
-                address: "Lippo Mall",
-                phoneNumber: "+323 3232 32")
-          ],
-        ),
-        SearchStoreModel(
-          id: "321njkk2ni3",
-          franchiseName: "Mie Akhun",
-          branches: [
-            BranchModel(
-                branchName: "Cab. S. Parman",
-                address: "Jl. S. Parman No 12A",
-                phoneNumber: "+62 9292929"),
-            BranchModel(
-              branchName: "Cab. Wahidin",
-              address: "Jl. Wahidin No 6",
-              phoneNumber: "020 20101010",
-            )
-          ],
-        ),
-        SearchStoreModel(
-          id: "23123131",
-          franchiseName: "Coco Bop",
-          branches: [
-            BranchModel(
-                branchName: "Coco Bop",
-                address: "Lippo Mall",
-                phoneNumber: "+323 3232 32")
-          ],
-        ),
-        SearchStoreModel(
-          id: "23123131",
-          franchiseName: "Coco Bop",
-          branches: [
-            BranchModel(
-                branchName: "Coco Bop",
-                address: PrototypeConstant.LOREM_IPSUM,
-                phoneNumber: "+323 3232 32")
-          ],
-        ),
-        SearchStoreModel(
-          id: "321njkk2ni3",
-          franchiseName: "Mie Akhun",
-          branches: [
-            BranchModel(
-                branchName: "Cab. S. Parman",
-                address: PrototypeConstant.LOREM_IPSUM,
-                phoneNumber: "+62 9292929"),
-            BranchModel(
-              branchName: "Cab. Wahidin",
-              address: "Jl. Wahidin No 6",
-              phoneNumber: "020 20101010",
-            )
-          ],
-        ),
-      ];
+  SearchFranchiseViewModel({StoreService storeService}){
+    this._storeService = storeService;
+  }
+
+
+  List<SearchStoreModel> searchStoreModel = [];
 
   // ignore: missing_return
   String get searchPageTitle {
     switch (this.type) {
-      case ServiceMenuType.food:
+      case ServiceType.food:
         return "Search Restaurant";
         break;
-      case ServiceMenuType.barber:
+      case ServiceType.barber:
         return "Search Barbershop";
         break;
-      case ServiceMenuType.karaoke:
+      case ServiceType.karaoke:
         return "Search Karaoke";
         break;
-      case ServiceMenuType.sport:
+      case ServiceType.sport:
         return "Search Sport Field";
         break;
     }
@@ -91,20 +39,36 @@ class SearchFranchiseViewModel extends BaseViewmodel {
   // ignore: missing_return
   String get searchPagePlaceholder {
     switch (this.type) {
-      case ServiceMenuType.food:
+      case ServiceType.food:
         return "Search restaurant name";
         break;
-      case ServiceMenuType.barber:
+      case ServiceType.barber:
         return "Search barbershop";
         break;
-      case ServiceMenuType.karaoke:
+      case ServiceType.karaoke:
         return "Search karaoke place";
         break;
-      case ServiceMenuType.sport:
+      case ServiceType.sport:
         return "Search court";
         break;
     }
   }
 
-  Future getStore(String id) async {}
+  Future getStoreByName(String name) async {
+    setBusy(true);
+    page=1;
+    searchStoreModel = await _storeService.getStoreByFilter(type: type, name: name);
+    setBusy(false);
+  }
+
+  Future getMoreStoreByName(String name) async {
+    if(!listIsUpdate){
+      listIsUpdate = true;
+      notifyListeners();
+      page++;
+      List<SearchStoreModel> tempList = await _storeService.getStoreByFilter(type: type, name: name,page: page);
+      listIsUpdate = false;
+      searchStoreModel.addAll(tempList);
+      setBusy(false);}
+  }
 }

@@ -6,43 +6,19 @@ import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
-class OrderStore extends StatefulWidget {
+class OrderFoodStore extends StatefulWidget {
   @override
-  _OrderStoreState createState() => _OrderStoreState();
+  _OrderFoodStoreState createState() => _OrderFoodStoreState();
 }
 
-class _OrderStoreState extends State<OrderStore> {
+class _OrderFoodStoreState extends State<OrderFoodStore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
         backgroundColor: SharedColors.scaffoldColor,
-        centerTitle: true,
-        title: Stack(
-          children: <Widget>[
-            Container(
-              height: 50,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Balance",
-                    style: Theme.of(context).textTheme.caption.merge(
-                          TextStyle(
-                            color: SharedColors.primaryColor,
-                          ),
-                        ),
-                  ),
-                  Text(
-                    "Rp 12.000",
-                    style: Theme.of(context).textTheme.title,
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+        title: Text("Coco Bop")
       ),
       body: _buildBody(),
     );

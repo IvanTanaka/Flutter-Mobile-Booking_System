@@ -1,12 +1,12 @@
 
 import 'package:member_apps/core/models/service_menu_model.dart';
-import 'package:member_apps/core/viewmodels/base_viewmodel.dart';
+import 'package:member_apps/core/viewmodels/base_view_model.dart';
 
-class HomeViewModel extends BaseViewmodel {
+class HomeViewModel extends BaseViewModel {
   List<ServiceMenuModel> serviceMenus = [
-    ServiceMenuModel(ServiceMenuType.food),
-    ServiceMenuModel(ServiceMenuType.barber),
-    ServiceMenuModel(ServiceMenuType.karaoke),
-    ServiceMenuModel(ServiceMenuType.sport),
+    ServiceMenuModel(ServiceType.food),
+    ServiceMenuModel(ServiceType.barber),
+    ServiceMenuModel(ServiceType.karaoke),
+    ServiceMenuModel(ServiceType.sport),
   ];
 }

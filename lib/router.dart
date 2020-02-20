@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
 import 'package:member_apps/ui/views/news/news_detail_view.dart';
 import 'package:member_apps/ui/views/news/news_favorite_view.dart';
-import 'package:member_apps/ui/views/order/order_store.dart';
+import 'package:member_apps/ui/views/order/order_food_store.dart';
 import 'package:member_apps/ui/views/search_franchise_view.dart';
 import 'ui/views/login_view.dart';
 import 'ui/views/main_view.dart';
@@ -43,7 +43,7 @@ class Router {
           builder: (_) => NewsFavoriteView(),
         );
       case RoutePaths.SearchFranchise:
-        ServiceMenuType serviceMenuType = settings.arguments;
+        ServiceType serviceMenuType = settings.arguments;
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.SearchFranchise),
           builder: (_) => SearchFranchiseView(serviceMenuType: serviceMenuType),
@@ -51,7 +51,7 @@ class Router {
       case RoutePaths.OrderStore:
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.OrderStore),
-          builder: (_) => OrderStore(),
+          builder: (_) => OrderFoodStore(),
         );
       default:
         return MaterialPageRoute(
