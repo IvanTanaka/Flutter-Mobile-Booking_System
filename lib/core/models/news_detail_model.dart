@@ -6,7 +6,7 @@ class NewsDetailModel {
   String imageUrl;
   String description;
   List<String> termsAndConditions;
-  List<BranchModel> branchs;
+  List<BranchModel> branches;
 
   NewsDetailModel({
     this.id,
@@ -14,7 +14,7 @@ class NewsDetailModel {
     this.imageUrl,
     this.description,
     this.termsAndConditions,
-    this.branchs,
+    this.branches,
   });
 
   factory NewsDetailModel.fromJson(Map<String, dynamic> json) => NewsDetailModel(
@@ -23,6 +23,6 @@ class NewsDetailModel {
     imageUrl: json["image_url"],
     description: json["description"],
     termsAndConditions: List<String>.from(json["terms_and_conditions"].map((x) => x)),
-    branchs: List<BranchModel>.from(json["branchs"].map((x) => BranchModel.fromJson(x))),
+    branches: List<BranchModel>.from(json["branchs"].map((x) => BranchModel.fromJson(x))),
   );
 }
