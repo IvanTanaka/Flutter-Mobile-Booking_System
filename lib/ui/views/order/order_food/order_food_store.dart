@@ -1,5 +1,6 @@
 import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/services/helper.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_store_view_model.dart';
@@ -57,16 +58,24 @@ class _OrderFoodStoreState extends State<OrderFoodStore> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Container(
-                    child: Text(Helper.formatDate(viewModel.orderDate,format: "dd MMM, yyyy",), style: TextStyle(
-                      color: SharedColors.txtAccentColor,
-                      fontSize: 24
-                    ),),
+                    child: Text(
+                      Helper.formatDate(
+                        viewModel.orderDate,
+                        format: "dd MMM, yyyy",
+                      ),
+                      style: TextStyle(
+                          color: SharedColors.txtAccentColor, fontSize: 24),
+                    ),
                   ),
                   Container(
-                    child: Text(Helper.formatDate(viewModel.orderDate,format: "HH:mm",), style: TextStyle(
-                        color: SharedColors.txtAccentColor,
-                        fontSize: 24
-                    ),),
+                    child: Text(
+                      Helper.formatDate(
+                        viewModel.orderDate,
+                        format: "HH:mm",
+                      ),
+                      style: TextStyle(
+                          color: SharedColors.txtAccentColor, fontSize: 24),
+                    ),
                   ),
                 ],
               )
@@ -84,22 +93,43 @@ class _OrderFoodStoreState extends State<OrderFoodStore> {
   }
 
   Future<void> chooseAppointmentTime(OrderFoodStoreViewModel viewModel) async {
-    DatePicker.showPicker(context, pickerModel: SharedPickerModel(
-      currentTime: viewModel.orderDate,
-      storeMin:TimeOfDay(hour: 00, minute: 30),
-      storeMax: TimeOfDay(hour: 23, minute: 00),
-    ),
-        onConfirm: (DateTime dateTime){
-          print("Tes ${dateTime.toString()}");
-          viewModel.orderDate = dateTime;
-        },
-        theme: DatePickerTheme(
+//    DatePicker.showDateTimePicker(context,
+//      minTime: viewModel.minOrderDate,
+//      maxTime: viewModel.maxOrderDate,
+//      onConfirm: (DateTime dateTime) {
+//        print("Tes ${dateTime.toString()}");
+//        viewModel.orderDate = dateTime;
+//      },
+//      theme: DatePickerTheme(
+//        itemStyle: TextStyle(color: SharedColors.accentColor),
+//        headerColor: SharedColors.primaryColor,
+//        doneStyle: TextStyle(
+//          color: SharedColors.txtAccentColor,
+//        ),
+//        cancelStyle: TextStyle(color: SharedColors.disabledColor),
+//      ),
+//    );
+
+    DatePicker.showPicker(
+      context,
+      pickerModel: SharedPickerModel(
+        currentTime: viewModel.orderDate,
+        storeMin: TimeOfDay(hour: 00, minute: 30),
+        storeMax: TimeOfDay(hour: 23, minute: 00),
+      ),
+      onConfirm: (DateTime dateTime) {
+        print("Tes ${dateTime.toString()}");
+        viewModel.orderDate = dateTime;
+      },
+      theme: DatePickerTheme(
         itemStyle: TextStyle(color: SharedColors.accentColor),
         headerColor: SharedColors.primaryColor,
         doneStyle: TextStyle(
           color: SharedColors.txtAccentColor,
         ),
-        cancelStyle: TextStyle(color: SharedColors.disabledColor)));
+        cancelStyle: TextStyle(color: SharedColors.disabledColor),
+      ),
+    );
   }
 
   Widget _buildStoreProduct() {

@@ -17,7 +17,8 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet.
   ///
-  static Future<DateTime> showDatePicker(BuildContext context, {
+  static Future<DateTime> showDatePicker(
+    BuildContext context, {
     bool showTitleActions: true,
     DateTime minTime,
     DateTime maxTime,
@@ -36,9 +37,7 @@ class DatePicker {
             locale: locale,
             theme: theme,
             barrierLabel:
-            MaterialLocalizations
-                .of(context)
-                .modalBarrierDismissLabel,
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel: DatePickerModel(
                 currentTime: currentTime,
                 maxTime: maxTime,
@@ -49,7 +48,8 @@ class DatePicker {
   ///
   /// Display time picker bottom sheet.
   ///
-  static Future<DateTime> showTimePicker(BuildContext context, {
+  static Future<DateTime> showTimePicker(
+    BuildContext context, {
     bool showTitleActions: true,
     bool showSecondsColumn: true,
     DateChangedCallback onChanged,
@@ -67,9 +67,7 @@ class DatePicker {
             locale: locale,
             theme: theme,
             barrierLabel:
-            MaterialLocalizations
-                .of(context)
-                .modalBarrierDismissLabel,
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel: TimePickerModel(
                 currentTime: currentTime,
                 locale: locale,
@@ -79,7 +77,8 @@ class DatePicker {
   ///
   /// Display date&time picker bottom sheet.
   ///
-  static Future<DateTime> showDateTimePicker(BuildContext context, {
+  static Future<DateTime> showDateTimePicker(
+    BuildContext context, {
     bool showTitleActions: true,
     DateTime minTime,
     DateTime maxTime,
@@ -98,9 +97,7 @@ class DatePicker {
             locale: locale,
             theme: theme,
             barrierLabel:
-            MaterialLocalizations
-                .of(context)
-                .modalBarrierDismissLabel,
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel: DateTimePickerModel(
                 currentTime: currentTime,
                 minTime: minTime,
@@ -111,7 +108,8 @@ class DatePicker {
   ///
   /// Display date picker bottom sheet witch custom picker model.
   ///
-  static Future<DateTime> showPicker(BuildContext context, {
+  static Future<DateTime> showPicker(
+    BuildContext context, {
     bool showTitleActions: true,
     DateChangedCallback onChanged,
     DateChangedCallback onConfirm,
@@ -128,9 +126,7 @@ class DatePicker {
             locale: locale,
             theme: theme,
             barrierLabel:
-            MaterialLocalizations
-                .of(context)
-                .modalBarrierDismissLabel,
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
             pickerModel: pickerModel));
   }
 }
@@ -145,8 +141,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     this.locale,
     RouteSettings settings,
     pickerModel,
-  })
-      : this.pickerModel = pickerModel ?? DatePickerModel(),
+  })  : this.pickerModel = pickerModel ?? DatePickerModel(),
         this.theme = theme ?? DatePickerTheme(),
         super(settings: settings);
 
@@ -201,11 +196,12 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
 }
 
 class _DatePickerComponent extends StatefulWidget {
-  _DatePickerComponent({Key key,
-    @required this.route,
-    this.onChanged,
-    this.locale,
-    this.pickerModel});
+  _DatePickerComponent(
+      {Key key,
+      @required this.route,
+      this.onChanged,
+      this.locale,
+      this.pickerModel});
 
   final DateChangedCallback onChanged;
 
@@ -232,58 +228,56 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   int get middleIndex {
     if (widget.pickerModel.currentLeftIndex() == 0) {
-      return (widget.pickerModel.currentMiddleIndex() < DateTime
-          .now()
-          .hour)
-          ? DateTime
-          .now()
-          .hour
+      this.widget.pickerModel.setMiddleIndex(
+          (widget.pickerModel.currentMiddleIndex() < DateTime.now().hour)
+              ? DateTime.now().hour
+              : widget.pickerModel.currentMiddleIndex());
+      return (widget.pickerModel.currentMiddleIndex() < DateTime.now().hour)
+          ? DateTime.now().hour
           : widget.pickerModel.currentMiddleIndex();
     }
+    this
+        .widget
+        .pickerModel
+        .setMiddleIndex(widget.pickerModel.currentMiddleIndex());
     return widget.pickerModel.currentMiddleIndex();
   }
 
   int get rightIndex {
     if (widget.pickerModel.currentLeftIndex() == 0) {
       if (widget.pickerModel.currentMiddleIndex() ==
-          widget.pickerModel
-              .storeMin()
-              .hour) {
+          widget.pickerModel.storeMin().hour) {
+        this.widget.pickerModel.setRightIndex((widget.pickerModel.currentRightIndex() <
+            widget.pickerModel.storeMin().minute)
+            ? widget.pickerModel.storeMin().minute
+            : widget.pickerModel.currentRightIndex());
         return (widget.pickerModel.currentRightIndex() <
-            widget.pickerModel
-                .storeMin()
-                .minute)
-            ? widget.pickerModel
-            .storeMin()
-            .minute
+                widget.pickerModel.storeMin().minute)
+            ? widget.pickerModel.storeMin().minute
             : widget.pickerModel.currentRightIndex();
       } else if (widget.pickerModel.currentMiddleIndex() ==
-          DateTime
-              .now()
-              .hour) {
-        return (widget.pickerModel.currentRightIndex() < DateTime
-            .now()
-            .minute)
-            ? DateTime
-            .now()
-            .minute
+          DateTime.now().hour) {
+        this.widget.pickerModel.setRightIndex((widget.pickerModel.currentRightIndex() < DateTime.now().minute)
+            ? DateTime.now().minute
+            : widget.pickerModel.currentRightIndex());
+        return (widget.pickerModel.currentRightIndex() < DateTime.now().minute)
+            ? DateTime.now().minute
             : widget.pickerModel.currentRightIndex();
       }
     } else {
       if (widget.pickerModel.currentMiddleIndex() ==
-          widget.pickerModel
-              .storeMin()
-              .hour) {
+          widget.pickerModel.storeMin().hour) {
+        this.widget.pickerModel.setRightIndex((widget.pickerModel.currentRightIndex() <
+            widget.pickerModel.storeMin().minute)
+            ? widget.pickerModel.storeMin().minute
+            : widget.pickerModel.currentRightIndex());
         return (widget.pickerModel.currentRightIndex() <
-            widget.pickerModel
-                .storeMin()
-                .minute)
-            ? widget.pickerModel
-            .storeMin()
-            .minute
+                widget.pickerModel.storeMin().minute)
+            ? widget.pickerModel.storeMin().minute
             : widget.pickerModel.currentRightIndex();
       }
     }
+    this.widget.pickerModel.setRightIndex(widget.pickerModel.currentRightIndex());
     return widget.pickerModel.currentRightIndex();
   }
 
@@ -292,7 +286,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     leftScrollCtrl = new FixedExtentScrollController(
         initialItem: widget.pickerModel.currentLeftIndex());
     middleScrollCtrl =
-    new FixedExtentScrollController(initialItem: middleIndex);
+        new FixedExtentScrollController(initialItem: middleIndex);
     rightScrollCtrl = new FixedExtentScrollController(initialItem: rightIndex);
   }
 
@@ -303,10 +297,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: AnimatedBuilder(
         animation: widget.route.animation,
         builder: (BuildContext context, Widget child) {
-          final double bottomPadding = MediaQuery
-              .of(context)
-              .padding
-              .bottom;
+          final double bottomPadding = MediaQuery.of(context).padding.bottom;
           return ClipRect(
             child: CustomSingleChildLayout(
               delegate: _BottomPickerLayout(widget.route.animation.value, theme,
@@ -345,7 +336,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return itemView;
   }
 
-  Widget _renderColumnView(ValueKey key,
+  Widget _renderColumnView(
+      ValueKey key,
       DatePickerTheme theme,
       StringAtIndexCallBack stringAtIndexCB,
       ScrollController scrollController,
@@ -409,18 +401,18 @@ class _DatePickerState extends State<_DatePickerComponent> {
           Container(
             child: widget.pickerModel.layoutProportions()[0] > 0
                 ? _renderColumnView(
-                ValueKey(widget.pickerModel.currentLeftIndex()),
-                theme,
-                widget.pickerModel.leftStringAtIndex,
-                leftScrollCtrl,
-                widget.pickerModel.layoutProportions()[0], (index) {
-              widget.pickerModel.setLeftIndex(index);
-            }, (index) {
-              setState(() {
-                refreshScrollOffset();
-                _notifyDateChanged();
-              });
-            })
+                    ValueKey(widget.pickerModel.currentLeftIndex()),
+                    theme,
+                    widget.pickerModel.leftStringAtIndex,
+                    leftScrollCtrl,
+                    widget.pickerModel.layoutProportions()[0], (index) {
+                    widget.pickerModel.setLeftIndex(index);
+                  }, (index) {
+                    setState(() {
+                      refreshScrollOffset();
+                      _notifyDateChanged();
+                    });
+                  })
                 : null,
           ),
           Text(
@@ -430,18 +422,18 @@ class _DatePickerState extends State<_DatePickerComponent> {
           Container(
             child: widget.pickerModel.layoutProportions()[1] > 0
                 ? _renderColumnView(
-                ValueKey(widget.pickerModel.currentLeftIndex()),
-                theme,
-                widget.pickerModel.middleStringAtIndex,
-                middleScrollCtrl,
-                widget.pickerModel.layoutProportions()[1], (index) {
-              widget.pickerModel.setMiddleIndex(index);
-            }, (index) {
-              setState(() {
-                refreshScrollOffset();
-                _notifyDateChanged();
-              });
-            })
+                    ValueKey(widget.pickerModel.currentLeftIndex()),
+                    theme,
+                    widget.pickerModel.middleStringAtIndex,
+                    middleScrollCtrl,
+                    widget.pickerModel.layoutProportions()[1], (index) {
+                    widget.pickerModel.setMiddleIndex(index);
+                  }, (index) {
+                    setState(() {
+                      refreshScrollOffset();
+                      _notifyDateChanged();
+                    });
+                  })
                 : null,
           ),
           Text(
@@ -451,20 +443,20 @@ class _DatePickerState extends State<_DatePickerComponent> {
           Container(
             child: widget.pickerModel.layoutProportions()[2] > 0
                 ? _renderColumnView(
-                ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
-                    widget.pickerModel.currentLeftIndex()),
-                theme,
-                widget.pickerModel.rightStringAtIndex,
-                rightScrollCtrl,
-                widget.pickerModel.layoutProportions()[2], (index) {
-              widget.pickerModel.setRightIndex(index);
-              _notifyDateChanged();
-            }, (index) {
-              setState(() {
-                refreshScrollOffset();
-                _notifyDateChanged();
-              });
-            })
+                    ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
+                        widget.pickerModel.currentLeftIndex()),
+                    theme,
+                    widget.pickerModel.rightStringAtIndex,
+                    rightScrollCtrl,
+                    widget.pickerModel.layoutProportions()[2], (index) {
+                    widget.pickerModel.setRightIndex(index);
+                    _notifyDateChanged();
+                  }, (index) {
+                    setState(() {
+                      refreshScrollOffset();
+                      _notifyDateChanged();
+                    });
+                  })
                 : null,
           ),
         ],
