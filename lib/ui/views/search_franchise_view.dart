@@ -241,7 +241,20 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
   }
 
   void _navigateToStorePage(String id) {
-    Navigator.pushNamed(context, RoutePaths.OrderStore);
+    switch(_viewModel.type){
+      case ServiceType.food:
+        Navigator.pushNamed(context, RoutePaths.OrderFoodStore);
+        break;
+      case ServiceType.barber:
+        // TODO: Handle this case.
+        break;
+      case ServiceType.karaoke:
+        // TODO: Handle this case.
+        break;
+      case ServiceType.sport:
+        // TODO: Handle this case.
+        break;
+    }
   }
 
   Widget _buildSearchBar() {

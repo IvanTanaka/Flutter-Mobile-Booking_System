@@ -10,6 +10,8 @@ import 'package:member_apps/ui/prototype_constant.dart';
 
 class StoreService{
 
+  DateTime orderDate;
+
   Api _api;
 
   StoreService({Api api}){

@@ -208,7 +208,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context,RoutePaths.OrderStore);
+                Navigator.pushNamed(context,RoutePaths.OrderFoodStore);
               },
               child: Container(
                   margin: EdgeInsets.only(top: 5, bottom: 10),
