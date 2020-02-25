@@ -10,7 +10,6 @@ import 'package:member_apps/ui/prototype_constant.dart';
 
 class StoreService{
 
-  DateTime orderDate;
 
   Api _api;
 
@@ -18,7 +17,7 @@ class StoreService{
     this._api =api;
   }
 
-  Future<List<SearchStoreModel>> getStoreByFilter({ServiceType type, String name, int page=1}) async{
+  Future<List<SearchStoreModel>> getStoresByFilter({ServiceType type, String name, int page=1}) async{
     String typeStr = "";
     switch(type){
       case ServiceType.food:
@@ -91,7 +90,7 @@ class StoreService{
 //    TODO: Uncomment This
 //    final response = await _api.get(
 //      url:
-//      "v1/store?()type=$typeStr${(name!=null)?"name=$name":""}page=$page",
+//      "v1/store?type=$typeStr${(name!=null)?"name=$name":""}page=$page",
 //    );
 //    final resDecoded = json.decode(response);
 //    if(resDecoded["code"]==NetworkCode.SUCCESS){

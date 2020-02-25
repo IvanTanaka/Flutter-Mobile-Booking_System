@@ -282,7 +282,6 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   void refreshScrollOffset() {
-//    print('refreshScrollOffset ${widget.pickerModel.currentRightIndex()}');
     leftScrollCtrl = new FixedExtentScrollController(
         initialItem: widget.pickerModel.currentLeftIndex());
     middleScrollCtrl =
@@ -319,7 +318,6 @@ class _DatePickerState extends State<_DatePickerComponent> {
   void _notifyDateChanged() {
     if (widget.onChanged != null) {
       widget.onChanged(widget.pickerModel.finalTime());
-      print(widget.pickerModel.finalTime());
     }
   }
 

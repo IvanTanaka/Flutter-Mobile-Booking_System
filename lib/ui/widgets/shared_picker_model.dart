@@ -15,7 +15,7 @@ class SharedPickerModel extends CommonPickerModel {
     this.currentTime = currentTime ?? DateTime.now();
     this.storeMinTime = storeMin;
     this.storeMaxTime = storeMax;
-    this.setLeftIndex(0);
+    this.setLeftIndex(this.currentTime.difference(DateTime.now()).inDays);
     this.setMiddleIndex(this.currentTime.hour);
     this.setRightIndex(this.currentTime.minute);
   }

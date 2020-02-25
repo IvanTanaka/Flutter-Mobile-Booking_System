@@ -57,7 +57,7 @@ class SearchFranchiseViewModel extends BaseViewModel {
   Future getStoreByName(String name) async {
     setBusy(true);
     page=1;
-    searchStoreModel = await _storeService.getStoreByFilter(type: type, name: name);
+    searchStoreModel = await _storeService.getStoresByFilter(type: type, name: name);
     setBusy(false);
   }
 
@@ -66,7 +66,7 @@ class SearchFranchiseViewModel extends BaseViewModel {
       listIsUpdate = true;
       notifyListeners();
       page++;
-      List<SearchStoreModel> tempList = await _storeService.getStoreByFilter(type: type, name: name,page: page);
+      List<SearchStoreModel> tempList = await _storeService.getStoresByFilter(type: type, name: name,page: page);
       listIsUpdate = false;
       searchStoreModel.addAll(tempList);
       setBusy(false);}
