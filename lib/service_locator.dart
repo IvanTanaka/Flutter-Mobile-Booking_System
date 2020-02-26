@@ -5,6 +5,7 @@ import 'package:member_apps/core/services/order_service.dart';
 import 'package:member_apps/core/services/product_service.dart';
 import 'package:member_apps/core/services/store_service.dart';
 import 'package:member_apps/core/viewmodels/views/home_view_model.dart';
+import 'package:member_apps/core/viewmodels/views/order/order_food_confirmation_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_store_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/search_franchise_view_model.dart';
 
@@ -46,5 +47,11 @@ void setupLocator() {
       productService: locator<ProductService>(),
       orderService: locator<OrderService>(),
     ),
+  );
+
+  locator.registerFactory<OrderFoodConfirmationViewModel>(
+      ()=>OrderFoodConfirmationViewModel(
+        orderService: locator<OrderService>(),
+      ),
   );
 }

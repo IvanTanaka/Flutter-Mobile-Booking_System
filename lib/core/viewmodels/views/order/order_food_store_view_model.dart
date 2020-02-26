@@ -1,3 +1,4 @@
+import 'package:member_apps/core/models/order_cart_model.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
 import 'package:member_apps/core/services/order_service.dart';
 import 'package:member_apps/core/services/product_service.dart';
@@ -18,6 +19,7 @@ class OrderFoodStoreViewModel extends BaseViewModel {
   }
 
   List<OrderStoreProductModel> orderStoreProducts = [];
+  List<OrderCartModel> carts = [];
   int page = 0;
 
   DateTime _orderDate;
@@ -36,6 +38,21 @@ class OrderFoodStoreViewModel extends BaseViewModel {
     page++;
     List<OrderStoreProductModel> tempModels = await _productService.getProductsByStoreId();
     orderStoreProducts.addAll(tempModels);
+    setBusy(false);
+  }
+
+  void refreshCarts(OrderStoreProductModel model){
+    carts.removeWhere((OrderCartModel cartModel){
+      return cartModel.id == model.id;
+    });
+    if(model.qty>0){
+      carts.add(OrderCartModel(id: model.id, qty: model.qty));
+    }
+    setBusy(false);
+  }
+
+  void continueOrder(){
+    _orderService.carts = carts;
     setBusy(false);
   }
 }

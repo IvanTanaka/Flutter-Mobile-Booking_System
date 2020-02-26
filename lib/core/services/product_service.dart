@@ -17,10 +17,10 @@ class ProductService{
   Future<List<OrderStoreProductModel>> getProductsByStoreId({String storeId, int page=1}) async{
 
 //    TODO: Comment This
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 1));
     return [
       OrderStoreProductModel(
-        id: "32333242",
+        id: "00000002",
         productName: "Nasi Ayam Hainan",
         description: "Ayam panggang + nasi wangi hainan",
         imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
@@ -28,7 +28,71 @@ class ProductService{
         discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "32333242",
+          id: "00000001",
+          productName: "Nasi Sapi Lada Hitam",
+          description: "Daging sapi dengan saus lada hitam + nasi",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 45000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000002",
+          productName: "Nasi Ayam Hainan",
+          description: "Ayam panggang + nasi wangi hainan",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 30000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000001",
+          productName: "Nasi Sapi Lada Hitam",
+          description: "Daging sapi dengan saus lada hitam + nasi",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 45000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000002",
+          productName: "Nasi Ayam Hainan",
+          description: "Ayam panggang + nasi wangi hainan",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 30000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000001",
+          productName: "Nasi Sapi Lada Hitam",
+          description: "Daging sapi dengan saus lada hitam + nasi",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 45000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000002",
+          productName: "Nasi Ayam Hainan",
+          description: "Ayam panggang + nasi wangi hainan",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 30000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000001",
+          productName: "Nasi Sapi Lada Hitam",
+          description: "Daging sapi dengan saus lada hitam + nasi",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 45000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000002",
+          productName: "Nasi Ayam Hainan",
+          description: "Ayam panggang + nasi wangi hainan",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 30000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000001",
           productName: "Nasi Sapi Lada Hitam",
           description: "Daging sapi dengan saus lada hitam + nasi",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,

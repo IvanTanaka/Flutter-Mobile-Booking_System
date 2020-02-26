@@ -3,6 +3,9 @@ import 'package:member_apps/ui/shared_colors.dart';
 
 class SharedButton extends StatefulWidget {
   final String text;
+  final String disabledText;
+  final Color  activeColor;
+  final Widget child;
   final Widget preWidget;
   final Widget posWidget;
   final Function onTap;
@@ -13,7 +16,10 @@ class SharedButton extends StatefulWidget {
 
   const SharedButton(
       {Key key,
-      this.text,
+      @required this.text,
+      this.disabledText,
+      this.child,
+      this.activeColor=SharedColors.primaryColor,
       this.preWidget,
       this.posWidget,
       this.onTap,
@@ -39,7 +45,7 @@ class _SharedButtonState extends State<SharedButton> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: (widget.isDisabled || widget.isLoading)
             ? SharedColors.btnDisabledColor
-            : SharedColors.primaryColor,
+            : widget.activeColor,
         onPressed:
             (widget.isDisabled || widget.isLoading) ? null : widget.onTap,
         child: (widget.isLoading)
@@ -48,7 +54,7 @@ class _SharedButtonState extends State<SharedButton> {
                   alignment: Alignment.center,
                   width: 20,
                   height: 20,
-                  child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(SharedColors.primaryColor),),
+                  child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(widget.activeColor),),
                 ),
             )
             : Container(
@@ -59,7 +65,7 @@ class _SharedButtonState extends State<SharedButton> {
                   children: <Widget>[
                     widget.preWidget ?? Container(),
                     Text(
-                      widget.text,
+                      (widget.isDisabled)?widget.disabledText??widget.text:widget.text,
                       style: TextStyle(color: SharedColors.btnTxtColor),
                     ),
                     widget.posWidget ?? Container()

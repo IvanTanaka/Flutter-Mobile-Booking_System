@@ -4,16 +4,17 @@ import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
-class OrderFoodConfirmation extends StatefulWidget {
+class StoreTop extends StatefulWidget {
   @override
-  _OrderFoodConfirmationState createState() => _OrderFoodConfirmationState();
+  _StoreTopState createState() => _StoreTopState();
 }
 
-class _OrderFoodConfirmationState extends State<OrderFoodConfirmation> {
+class _StoreTopState extends State<StoreTop> {
   @override
   Widget build(BuildContext context) {
     return Container();
   }
+
 
   Widget _buildStoreTop() {
     return Container(
@@ -143,5 +144,4 @@ class _OrderFoodConfirmationState extends State<OrderFoodConfirmation> {
       UrlLauncher.launch('tel:$phoneNumber');
     }
   }
-
 }

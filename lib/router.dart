@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
 import 'package:member_apps/ui/views/news/news_detail_view.dart';
 import 'package:member_apps/ui/views/news/news_favorite_view.dart';
-import 'package:member_apps/ui/views/order/order_food/order_food_store.dart';
+import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
+import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
 import 'package:member_apps/ui/views/search_franchise_view.dart';
 import 'ui/views/login_view.dart';
 import 'ui/views/main_view.dart';
@@ -16,6 +17,7 @@ class RoutePaths {
 
   static const String SearchFranchise = "/search/Franchise";
   static const String OrderFoodStore = "/order/food/store";
+  static const String OrderFoodConfirmation = "/order/food/confirmation";
 }
 
 class Router {
@@ -42,17 +44,25 @@ class Router {
           settings: RouteSettings(name: RoutePaths.NewsFavorite),
           builder: (_) => NewsFavoriteView(),
         );
+
       case RoutePaths.SearchFranchise:
         ServiceType serviceMenuType = settings.arguments;
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.SearchFranchise),
           builder: (_) => SearchFranchiseView(serviceMenuType: serviceMenuType),
         );
+
       case RoutePaths.OrderFoodStore:
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.OrderFoodStore),
-          builder: (_) => OrderFoodStore(),
+          builder: (_) => OrderFoodStoreView(),
         );
+      case RoutePaths.OrderFoodConfirmation:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.OrderFoodConfirmation),
+          builder: (_) => OrderFoodConfirmationView(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
