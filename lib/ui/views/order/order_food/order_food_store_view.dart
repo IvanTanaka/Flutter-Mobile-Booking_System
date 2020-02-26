@@ -137,154 +137,150 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
   Widget _buildStoreProduct(OrderFoodStoreViewModel viewModel) {
     return Container(
       child: ListView.separated(
-          itemCount: viewModel.orderStoreProducts.length,
+          itemCount: viewModel.orderStoreProducts.length+1,
           separatorBuilder: (BuildContext context, int index){
             return Divider();
           },
           itemBuilder: (BuildContext context, int index) {
-            return _buildStoreProductItem(viewModel, viewModel.orderStoreProducts[index]);
+            return index==viewModel.orderStoreProducts.length?Container(height: 100,):_buildStoreProductItem(viewModel, viewModel.orderStoreProducts[index]);
           }),
     );
   }
 
   Widget _buildStoreProductItem(OrderFoodStoreViewModel viewModel, OrderStoreProductModel model) {
-    return BaseWidget(
-      model: model,
-      builder: (BuildContext context, OrderStoreProductModel model, Widget child){
-        return Container(
-            height: 120,
-            child: Row(
+    return Container(
+      height: 120,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Image.network(
+              model.imagePath,
+              height: 20,
+              width: 20,
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Image.network(
-                    model.imagePath,
-                    height: 20,
-                    width: 20,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        child: Text(
+                          model.productName,
+                          style: Theme.of(context)
+                              .textTheme
+                              .body1
+                              .merge(TextStyle(fontSize: 18)),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(right: 10),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "${model.price}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .body2
+                                  .merge(TextStyle(fontSize: 20)),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(right: 10),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "${model.discountPrice}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .body1
+                                  .merge(TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  decoration:
+                                  TextDecoration.lineThrough)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              child: Text(
-                                model.productName,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .body1
-                                    .merge(TextStyle(fontSize: 18)),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  padding: EdgeInsets.only(right: 10),
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "${model.price}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .body2
-                                        .merge(TextStyle(fontSize: 20)),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(right: 10),
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "${model.discountPrice}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .body1
-                                        .merge(TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        decoration:
-                                        TextDecoration.lineThrough)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 5,
+                      child: ExtendedText(
+                        model.description,
+                        style: Theme.of(context).textTheme.caption,
+                        maxLines: 3,
+                        overFlowTextSpan: OverFlowTextSpan(
+                          text: " ...",
+                          style: TextStyle(color: Colors.black45),
+                        ),
                       ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 5,
-                            child: ExtendedText(
-                              model.description,
-                              style: Theme.of(context).textTheme.caption,
-                              maxLines: 3,
-                              overFlowTextSpan: OverFlowTextSpan(
-                                text: " ...",
-                                style: TextStyle(color: Colors.black45),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              child: Center(
-                                child: new Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    RawMaterialButton(
-                                      onPressed: () {
-                                        model.minusQty();
-                                        viewModel.refreshCarts(model);
-                                      },
-                                      child: new Icon(
-                                        FontAwesomeIcons.minus,
-                                        color: SharedColors.accentColor,
-                                        size: 14.0,
-                                      ),
-                                      shape: new CircleBorder(),
-                                      constraints: BoxConstraints(minHeight: 30, minWidth: 30),
-                                      elevation: 4,
-                                      fillColor: Colors.white,
-                                    ),
-                                    new Text("${model.qty}",
-                                        style: new TextStyle(fontSize: 16.0)),
-                                    RawMaterialButton(
-                                      onPressed: () {
-                                        model.addQty();
-                                        viewModel.refreshCarts(model);
-                                      },
-                                      child: new Icon(
-                                        FontAwesomeIcons.plus,
-                                        color: SharedColors.accentColor,
-                                        size: 14.0,
-                                      ),
-                                      shape: new CircleBorder(),
-                                      constraints: BoxConstraints(minHeight: 30, minWidth: 30),
-                                      elevation: 4,
-                                      fillColor: Colors.white,
-                                    ),
-                                  ],
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        child: Center(
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              RawMaterialButton(
+                                onPressed: () {
+                                  model.minusQty();
+                                  viewModel.refreshCarts(model);
+                                },
+                                child: new Icon(
+                                  FontAwesomeIcons.minus,
+                                  color: SharedColors.accentColor,
+                                  size: 14.0,
                                 ),
+                                shape: new CircleBorder(),
+                                constraints: BoxConstraints(minHeight: 30, minWidth: 30),
+                                elevation: 4,
+                                fillColor: Colors.white,
                               ),
-                            ),
-                          )
-                        ],
+                              new Text("${model.qty}",
+                                  style: new TextStyle(fontSize: 16.0)),
+                              RawMaterialButton(
+                                onPressed: () {
+                                  model.addQty();
+                                  viewModel.refreshCarts(model);
+                                },
+                                child: new Icon(
+                                  FontAwesomeIcons.plus,
+                                  color: SharedColors.accentColor,
+                                  size: 14.0,
+                                ),
+                                shape: new CircleBorder(),
+                                constraints: BoxConstraints(minHeight: 30, minWidth: 30),
+                                elevation: 4,
+                                fillColor: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ],
             ),
-          );
-      },);
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:member_apps/core/viewmodels/base_view_model.dart';
 
-class OrderStoreProductModel extends BaseViewModel{
+class OrderStoreProductModel{
   String id;
   String productName;
   String description;
@@ -11,19 +11,16 @@ class OrderStoreProductModel extends BaseViewModel{
 
   void addQty(){
     this.qty++;
-    setBusy(false);
   }
 
   void minusQty(){
     if(qty>0){
       this.qty--;
     }
-    setBusy(false);
   }
 
   void setQty(int qty){
     this.qty =qty;
-    setBusy(false);
   }
 
   OrderStoreProductModel(
