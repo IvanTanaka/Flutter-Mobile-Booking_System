@@ -4,6 +4,7 @@ import 'package:member_apps/core/constants/network_code.dart';
 import 'package:member_apps/core/constants/booking_service_menu_name.dart';
 import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
+import 'package:member_apps/core/models/order_store_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
 import 'package:member_apps/core/services/api.dart';
@@ -98,6 +99,29 @@ class StoreService{
 //      return List<SearchStoreModel>.from(resDecoded["result"]["data"].map((x) => SearchStoreModel.fromJson(x)));
 //    }else{
 //      return [];
+//    }
+  }
+
+  Future<OrderStoreModel> getOrderStoreByStoreId(String storeId) async {
+    return OrderStoreModel(
+      id: "010120",
+      franchiseName: "Coco Bop",
+      branchName: "Lippo",
+      address: PrototypeConstant.LOREM_IPSUM,
+      phoneNumber: "+6282272675309",
+      type: "food"
+    );
+
+//    TODO: Uncomment This
+//    final response = await _api.get(
+//      url:
+//      "v1/store/$storeId",
+//    );
+//    final resDecoded = json.decode(response);
+//    if(resDecoded["code"]==NetworkCode.SUCCESS){
+//      return OrderStoreModel.fromJson(resDecoded["result"]["data"]);
+//    }else{
+//      return OrderStoreModel();
 //    }
   }
 }
