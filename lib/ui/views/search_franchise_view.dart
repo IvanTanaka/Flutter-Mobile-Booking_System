@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
+import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
@@ -11,7 +12,7 @@ import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 
 class SearchFranchiseView extends StatefulWidget {
-  final ServiceType serviceMenuType;
+  final BookingServiceType serviceMenuType;
 
   const SearchFranchiseView({Key key, this.serviceMenuType}) : super(key: key);
 
@@ -108,7 +109,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
         }
       },
       child: Container(
-        margin: EdgeInsets.only(top: 5, bottom: 10),
+        margin: EdgeInsets.only(top: 5, bottom: 10, left: 5,right: 5),
         color: Colors.transparent,
         child: Container(
           child: Column(
@@ -242,16 +243,16 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
 
   void _navigateToStorePage(String id) {
     switch(_viewModel.type){
-      case ServiceType.food:
+      case BookingServiceType.food:
         Navigator.pushNamed(context, RoutePaths.OrderFoodStore);
         break;
-      case ServiceType.barber:
+      case BookingServiceType.barber:
         // TODO: Handle this case.
         break;
-      case ServiceType.karaoke:
+      case BookingServiceType.karaoke:
         // TODO: Handle this case.
         break;
-      case ServiceType.sport:
+      case BookingServiceType.sport:
         // TODO: Handle this case.
         break;
     }

@@ -19,6 +19,7 @@ class OrderFoodStoreViewModel extends BaseViewModel {
   }
 
   List<OrderStoreProductModel> orderStoreProducts = [];
+  List<OrderStoreProductModel> cartsProducts =[];
   List<OrderCartModel> carts = [];
   int page = 0;
 
@@ -42,6 +43,12 @@ class OrderFoodStoreViewModel extends BaseViewModel {
   }
 
   void refreshCarts(OrderStoreProductModel model){
+    cartsProducts.removeWhere((OrderStoreProductModel cartModel){
+      return cartModel.id == model.id;
+    });
+    if(model.qty>0){
+      cartsProducts.add(model);
+    }
     carts.removeWhere((OrderCartModel cartModel){
       return cartModel.id == model.id;
     });
@@ -53,6 +60,7 @@ class OrderFoodStoreViewModel extends BaseViewModel {
 
   void continueOrder(){
     _orderService.carts = carts;
+    _productService.carts = cartsProducts;
     setBusy(false);
   }
 }

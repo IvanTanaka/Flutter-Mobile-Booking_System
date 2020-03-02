@@ -1,9 +1,26 @@
+import 'package:member_apps/core/constants/booking_service_const.dart';
+import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 
 class SearchStoreModel {
   String id;
   String franchiseName;
-  String type;
+  String _type;
+
+  // ignore: missing_return
+  BookingServiceType get type {
+    switch (_type) {
+      case BookingServiceConst.KARAOKE:
+        return BookingServiceType.karaoke;
+      case BookingServiceConst.FOOD:
+        return BookingServiceType.food;
+      case BookingServiceConst.SPORT:
+        return BookingServiceType.sport;
+      case BookingServiceConst.BARBER:
+        return BookingServiceType.barber;
+    }
+  }
+
   List<BranchModel> branches;
 
   bool get haveBranches {
@@ -34,12 +51,9 @@ class SearchStoreModel {
     return "";
   }
 
-  SearchStoreModel({
-    this.id,
-    this.franchiseName,
-    this.type,
-    this.branches,
-  });
+  SearchStoreModel({this.id, this.franchiseName, this.branches, String type}) {
+    this._type = type;
+  }
 
   factory SearchStoreModel.fromJson(Map<String, dynamic> json) =>
       SearchStoreModel(

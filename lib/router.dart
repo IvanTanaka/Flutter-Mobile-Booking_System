@@ -5,6 +5,7 @@ import 'package:member_apps/ui/views/news/news_favorite_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
 import 'package:member_apps/ui/views/search_franchise_view.dart';
+import 'core/enumerations/booking_service_type.dart';
 import 'ui/views/login_view.dart';
 import 'ui/views/main_view.dart';
 
@@ -46,7 +47,7 @@ class Router {
         );
 
       case RoutePaths.SearchFranchise:
-        ServiceType serviceMenuType = settings.arguments;
+        BookingServiceType serviceMenuType = settings.arguments;
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.SearchFranchise),
           builder: (_) => SearchFranchiseView(serviceMenuType: serviceMenuType),

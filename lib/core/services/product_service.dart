@@ -7,8 +7,8 @@ import 'package:member_apps/ui/prototype_constant.dart';
 
 class ProductService{
 
-  DateTime orderDate;
   Api _api;
+  List<OrderStoreProductModel> carts;
 
   ProductService({Api api}){
     this._api =api;
@@ -20,7 +20,7 @@ class ProductService{
     await Future.delayed(Duration(seconds: 1));
     return [
       OrderStoreProductModel(
-        id: "00000002",
+        id: "00000001",
         productName: "Nasi Ayam Hainan",
         description: "Ayam panggang + nasi wangi hainan",
         imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
@@ -28,7 +28,7 @@ class ProductService{
         discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "00000001",
+          id: "00000002",
           productName: "Nasi Sapi Lada Hitam",
           description: "Daging sapi dengan saus lada hitam + nasi",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
@@ -36,15 +36,31 @@ class ProductService{
           discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "00000002",
-          productName: "Nasi Ayam Hainan",
-          description: "Ayam panggang + nasi wangi hainan",
+          id: "00000003",
+          productName: "Nasi Ayam Bakar",
+          description: "Ayam bakar + nasi putih",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
           price: 30000,
           discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "00000001",
+          id: "00000004",
+          productName: "Nasi Sapi Teriyaki",
+          description: "Daging sapi dengan saus teriyaki + nasi",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 45000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000005",
+          productName: "Nasi Ayam Salted Egg",
+          description: "",
+          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
+          price: 30000,
+          discountPrice: 50000
+      ),
+      OrderStoreProductModel(
+          id: "00000006",
           productName: "Nasi Sapi Lada Hitam",
           description: "Daging sapi dengan saus lada hitam + nasi",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
@@ -52,7 +68,7 @@ class ProductService{
           discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "00000002",
+          id: "00000007",
           productName: "Nasi Ayam Hainan",
           description: "Ayam panggang + nasi wangi hainan",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
@@ -60,7 +76,7 @@ class ProductService{
           discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "00000001",
+          id: "00000008",
           productName: "Nasi Sapi Lada Hitam",
           description: "Daging sapi dengan saus lada hitam + nasi",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
@@ -68,7 +84,7 @@ class ProductService{
           discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "00000002",
+          id: "00000009",
           productName: "Nasi Ayam Hainan",
           description: "Ayam panggang + nasi wangi hainan",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
@@ -76,23 +92,7 @@ class ProductService{
           discountPrice: 50000
       ),
       OrderStoreProductModel(
-          id: "00000001",
-          productName: "Nasi Sapi Lada Hitam",
-          description: "Daging sapi dengan saus lada hitam + nasi",
-          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
-          price: 45000,
-          discountPrice: 50000
-      ),
-      OrderStoreProductModel(
-          id: "00000002",
-          productName: "Nasi Ayam Hainan",
-          description: "Ayam panggang + nasi wangi hainan",
-          imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
-          price: 30000,
-          discountPrice: 50000
-      ),
-      OrderStoreProductModel(
-          id: "00000001",
+          id: "00000010",
           productName: "Nasi Sapi Lada Hitam",
           description: "Daging sapi dengan saus lada hitam + nasi",
           imagePath: PrototypeConstant.FRANCHISE_PROFILE_IMAGE,

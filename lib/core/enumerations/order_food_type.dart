@@ -1,0 +1,3 @@
+enum OrderFoodType{
+  takeAway, dineIn
+}

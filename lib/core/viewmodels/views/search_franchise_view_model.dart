@@ -1,3 +1,4 @@
+import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
@@ -6,7 +7,7 @@ import 'package:member_apps/core/viewmodels/base_view_model.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 
 class SearchFranchiseViewModel extends BaseViewModel {
-  ServiceType type;
+  BookingServiceType type;
   StoreService _storeService;
   bool listIsUpdate = false;
   int page=1;
@@ -21,16 +22,16 @@ class SearchFranchiseViewModel extends BaseViewModel {
   // ignore: missing_return
   String get searchPageTitle {
     switch (this.type) {
-      case ServiceType.food:
+      case BookingServiceType.food:
         return "Search Restaurant";
         break;
-      case ServiceType.barber:
+      case BookingServiceType.barber:
         return "Search Barbershop";
         break;
-      case ServiceType.karaoke:
+      case BookingServiceType.karaoke:
         return "Search Karaoke";
         break;
-      case ServiceType.sport:
+      case BookingServiceType.sport:
         return "Search Sport Field";
         break;
     }
@@ -39,16 +40,16 @@ class SearchFranchiseViewModel extends BaseViewModel {
   // ignore: missing_return
   String get searchPagePlaceholder {
     switch (this.type) {
-      case ServiceType.food:
+      case BookingServiceType.food:
         return "Search restaurant name";
         break;
-      case ServiceType.barber:
+      case BookingServiceType.barber:
         return "Search barbershop";
         break;
-      case ServiceType.karaoke:
+      case BookingServiceType.karaoke:
         return "Search karaoke place";
         break;
-      case ServiceType.sport:
+      case BookingServiceType.sport:
         return "Search court";
         break;
     }

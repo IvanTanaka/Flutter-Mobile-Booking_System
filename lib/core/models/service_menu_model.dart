@@ -1,23 +1,24 @@
-import 'package:member_apps/core/constants/service_menu_name.dart';
+import 'package:member_apps/core/constants/booking_service_menu_name.dart';
+import 'package:member_apps/core/enumerations/booking_service_type.dart';
 
 class ServiceMenuModel{
 
-  final ServiceType type;
+  final BookingServiceType type;
 
   // ignore: missing_return
   String get name{
     switch (this.type){
-      case ServiceType.food:
-        return ServiceMenuName.FOOD;
+      case BookingServiceType.food:
+        return BookingServiceMenuName.FOOD;
         break;
-      case ServiceType.barber:
-        return ServiceMenuName.BARBER;
+      case BookingServiceType.barber:
+        return BookingServiceMenuName.BARBER;
         break;
-      case ServiceType.karaoke:
-        return ServiceMenuName.KARAOKE;
+      case BookingServiceType.karaoke:
+        return BookingServiceMenuName.KARAOKE;
         break;
-      case ServiceType.sport:
-        return ServiceMenuName.SPORT;
+      case BookingServiceType.sport:
+        return BookingServiceMenuName.SPORT;
         break;
     }
   }
@@ -25,17 +26,17 @@ class ServiceMenuModel{
   // ignore: missing_return
   String get imagePath{
     switch (this.type){
-      case ServiceType.food:
+      case BookingServiceType.food:
         // TODO: Handle this case.
         return "";
         break;
-      case ServiceType.barber:
+      case BookingServiceType.barber:
         // TODO: Handle this case.
         break;
-      case ServiceType.karaoke:
+      case BookingServiceType.karaoke:
         // TODO: Handle this case.
         break;
-      case ServiceType.sport:
+      case BookingServiceType.sport:
         // TODO: Handle this case.
         break;
     }
@@ -45,6 +46,3 @@ class ServiceMenuModel{
 
 }
 
-enum ServiceType{
-  food, barber, karaoke, sport
-}

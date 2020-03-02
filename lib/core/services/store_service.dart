@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:member_apps/core/constants/network_code.dart';
-import 'package:member_apps/core/constants/service_menu_name.dart';
+import 'package:member_apps/core/constants/booking_service_menu_name.dart';
+import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
@@ -17,20 +18,20 @@ class StoreService{
     this._api =api;
   }
 
-  Future<List<SearchStoreModel>> getStoresByFilter({ServiceType type, String name, int page=1}) async{
+  Future<List<SearchStoreModel>> getStoresByFilter({BookingServiceType type, String name, int page=1}) async{
     String typeStr = "";
     switch(type){
-      case ServiceType.food:
-        typeStr = ServiceMenuName.FOOD;
+      case BookingServiceType.food:
+        typeStr = BookingServiceMenuName.FOOD;
         break;
-      case ServiceType.barber:
-        typeStr = ServiceMenuName.BARBER;
+      case BookingServiceType.barber:
+        typeStr = BookingServiceMenuName.BARBER;
         break;
-      case ServiceType.karaoke:
-        typeStr = ServiceMenuName.KARAOKE;
+      case BookingServiceType.karaoke:
+        typeStr = BookingServiceMenuName.KARAOKE;
         break;
-      case ServiceType.sport:
-        typeStr = ServiceMenuName.SPORT;
+      case BookingServiceType.sport:
+        typeStr = BookingServiceMenuName.SPORT;
         break;
     }
 //    TODO: Comment This

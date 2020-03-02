@@ -42,8 +42,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                 viewModel.continueOrder();
                 Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation);
               },
-              isDisabled: viewModel.orderDate==null,
-              disabledText: "Choose The Time",
+              txtFontSize: 20,
               text: "${viewModel.carts.length} items on cart - Continue",
             ),
           ),
@@ -57,82 +56,12 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
     return Container(
       child: Column(
         children: <Widget>[
-          _buildAppointmentContainer(viewModel),
           Expanded(child: _buildStoreProduct(viewModel)),
         ],
       ),
     );
   }
 
-  Widget _buildAppointmentContainer(OrderFoodStoreViewModel viewModel) {
-    return GestureDetector(
-      onTap: () async {
-        await chooseAppointmentTime(viewModel);
-      },
-      child: Container(
-        color: SharedColors.primaryColor,
-        height: 50,
-        width: double.infinity,
-        child: viewModel.orderDate != null
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    child: Text(
-                      Helper.formatDate(
-                        viewModel.orderDate,
-                        format: "EE, dd MMM yyyy",
-                      ),
-                      style: TextStyle(
-                          color: SharedColors.txtAccentColor, fontSize: 24),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      Helper.formatDate(
-                        viewModel.orderDate,
-                        format: "HH:mm",
-                      ),
-                      style: TextStyle(
-                          color: SharedColors.txtAccentColor, fontSize: 24),
-                    ),
-                  ),
-                ],
-              )
-            : Container(
-                alignment: Alignment.center,
-                child: Text(
-                  "Choose the time",
-                  style: TextStyle(
-                      color: SharedColors.txtAccentColor,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-      ),
-    );
-  }
-
-  Future<void> chooseAppointmentTime(OrderFoodStoreViewModel viewModel) async {
-    DatePicker.showPicker(
-      context,
-      pickerModel: SharedPickerModel(
-        currentTime: viewModel.orderDate,
-        storeMin: TimeOfDay(hour: 00, minute: 30),
-        storeMax: TimeOfDay(hour: 23, minute: 00),
-      ),
-      onConfirm: (DateTime dateTime) {
-        viewModel.orderDate = dateTime;
-      },
-      theme: DatePickerTheme(
-        itemStyle: TextStyle(color: SharedColors.accentColor),
-        headerColor: SharedColors.primaryColor,
-        doneStyle: TextStyle(
-          color: SharedColors.txtAccentColor,
-        ),
-        cancelStyle: TextStyle(color: SharedColors.disabledColor),
-      ),
-    );
-  }
 
   Widget _buildStoreProduct(OrderFoodStoreViewModel viewModel) {
     return Container(
@@ -150,6 +79,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
   Widget _buildStoreProductItem(OrderFoodStoreViewModel viewModel, OrderStoreProductModel model) {
     return Container(
       height: 120,
+      margin: EdgeInsets.symmetric(horizontal: 5),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -244,7 +174,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                                 },
                                 child: new Icon(
                                   FontAwesomeIcons.minus,
-                                  color: SharedColors.accentColor,
+                                  color: SharedColors.primaryColor,
                                   size: 14.0,
                                 ),
                                 shape: new CircleBorder(),
@@ -261,7 +191,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                                 },
                                 child: new Icon(
                                   FontAwesomeIcons.plus,
-                                  color: SharedColors.accentColor,
+                                  color: SharedColors.primaryColor,
                                   size: 14.0,
                                 ),
                                 shape: new CircleBorder(),

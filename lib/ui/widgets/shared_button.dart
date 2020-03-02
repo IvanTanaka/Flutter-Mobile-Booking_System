@@ -4,12 +4,13 @@ import 'package:member_apps/ui/shared_colors.dart';
 class SharedButton extends StatefulWidget {
   final String text;
   final String disabledText;
-  final Color  activeColor;
+  final Color activeColor;
   final Widget child;
   final Widget preWidget;
   final Widget posWidget;
   final Function onTap;
   final double height;
+  final double txtFontSize;
   final EdgeInsetsGeometry margin;
   final bool isDisabled;
   final bool isLoading;
@@ -19,11 +20,12 @@ class SharedButton extends StatefulWidget {
       @required this.text,
       this.disabledText,
       this.child,
-      this.activeColor=SharedColors.primaryColor,
+      this.activeColor = SharedColors.primaryColor,
       this.preWidget,
       this.posWidget,
       this.onTap,
       this.height = 50,
+      this.txtFontSize = 14,
       this.margin,
       this.isDisabled = false,
       this.isLoading = false})
@@ -50,13 +52,16 @@ class _SharedButtonState extends State<SharedButton> {
             (widget.isDisabled || widget.isLoading) ? null : widget.onTap,
         child: (widget.isLoading)
             ? Center(
-              child: Container(
+                child: Container(
                   alignment: Alignment.center,
                   width: 20,
                   height: 20,
-                  child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(widget.activeColor),),
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        new AlwaysStoppedAnimation<Color>(widget.activeColor),
+                  ),
                 ),
-            )
+              )
             : Container(
                 alignment: Alignment.center,
                 width: double.infinity,
@@ -65,8 +70,12 @@ class _SharedButtonState extends State<SharedButton> {
                   children: <Widget>[
                     widget.preWidget ?? Container(),
                     Text(
-                      (widget.isDisabled)?widget.disabledText??widget.text:widget.text,
-                      style: TextStyle(color: SharedColors.btnTxtColor),
+                      (widget.isDisabled)
+                          ? widget.disabledText ?? widget.text
+                          : widget.text,
+                      style: TextStyle(
+                          color: SharedColors.btnTxtColor,
+                          fontSize: widget.txtFontSize),
                     ),
                     widget.posWidget ?? Container()
                   ],
