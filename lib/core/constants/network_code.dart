@@ -1,3 +1,3 @@
 class NetworkCode{
-  static const SUCCESS = "200";
+  static const SUCCESS = 200;
 }

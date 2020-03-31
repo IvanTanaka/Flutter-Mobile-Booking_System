@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                 body1: TextStyle(
               color: SharedColors.txtColor,
             ))),
-        initialRoute: RoutePaths.Main,
+        initialRoute: RoutePaths.Login,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Router.generateRoute,
       ),

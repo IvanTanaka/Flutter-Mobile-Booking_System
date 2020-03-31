@@ -4,13 +4,15 @@ import 'package:member_apps/ui/views/news/news_detail_view.dart';
 import 'package:member_apps/ui/views/news/news_favorite_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
+import 'package:member_apps/ui/views/registration/register_view.dart';
 import 'package:member_apps/ui/views/search_franchise_view.dart';
 import 'core/enumerations/booking_service_type.dart';
-import 'ui/views/login_view.dart';
+import 'ui/views/registration/login_view.dart';
 import 'ui/views/main_view.dart';
 
 class RoutePaths {
   static const String Login = "/login";
+  static const String Register = "/register";
   static const String Main = "/";
 
   static const String NewsDetail = "/news/detail";
@@ -28,6 +30,11 @@ class Router {
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.Login),
           builder: (_) => LoginView(),
+        );
+      case RoutePaths.Register:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.Register),
+          builder: (_) => RegisterView(),
         );
       case RoutePaths.Main:
         return MaterialPageRoute(

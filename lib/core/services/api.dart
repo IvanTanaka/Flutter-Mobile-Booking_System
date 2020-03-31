@@ -10,7 +10,7 @@ enum RequestMethod { POST, GET }
 
 class Api {
   //TODO change the endpoint url
-  static const _endpoint = 'https://membee.com/api/';
+  static const _endpoint = 'http://10.0.2.2:8000/api/';
   static const int _timeoutDuration = 30000;
   static const int maxCallApi = 3;
 
