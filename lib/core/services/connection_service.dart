@@ -32,7 +32,7 @@ class ConnectionService {
     ConnectionStatus previousConnection = hasConnection;
 
     try {
-      final result = await InternetAddress.lookup('bahaso.com');
+      final result = await InternetAddress.lookup('http://10.0.2.2:8000');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         print("Connected");
         hasConnection = ConnectionStatus.CONNECTED;

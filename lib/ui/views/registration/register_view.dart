@@ -13,7 +13,6 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -43,6 +42,7 @@ class _RegisterViewState extends State<RegisterView> {
               ),
               _buildLogo(),
               _buildSubhead(),
+              _buildErrorMessage(viewModel),
               _buildNameField(viewModel),
               Container(
                 height: 10,
@@ -97,12 +97,38 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
+  Widget _buildErrorMessage(RegisterViewModel viewModel) {
+    return StreamBuilder<String>(
+      stream: viewModel.errorMessageStream,
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 5),
+            width: double.infinity,
+            height: 50,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(10),
+              color: SharedColors.errorColor,
+            ),
+            child: Text(snapshot.data, style: TextStyle(
+              color: SharedColors.txtAccentColor,
+            ),),
+          );
+        }
+        return Container();
+      },
+    );
+  }
+
   Widget _buildNameField(RegisterViewModel viewModel) {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: TextFormField(
-          validator: (String value){
+          validator: (String value) {
             return viewModel.validateName(value);
           },
           cursorColor: SharedColors.primaryColor,
@@ -126,7 +152,7 @@ class _RegisterViewState extends State<RegisterView> {
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: TextFormField(
-          validator: (String value){
+          validator: (String value) {
             return viewModel.validatePhoneNumber(value);
           },
           cursorColor: SharedColors.primaryColor,
@@ -150,7 +176,7 @@ class _RegisterViewState extends State<RegisterView> {
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: TextFormField(
-          validator: (String value){
+          validator: (String value) {
             return viewModel.validateEmail(value);
           },
           cursorColor: SharedColors.primaryColor,
@@ -175,7 +201,7 @@ class _RegisterViewState extends State<RegisterView> {
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: TextFormField(
-          validator: (String value){
+          validator: (String value) {
             return viewModel.validatePassword(value);
           },
           obscureText: true,
@@ -195,13 +221,15 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-
   Widget _buildConfirmPasswordField(RegisterViewModel viewModel) {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: TextFormField(
-          onChanged: (String value){
+          validator: (String value) {
+            return viewModel.validateConfirmPassword(value);
+          },
+          onChanged: (String value) {
             viewModel.confirmPassword = value;
           },
           obscureText: true,
@@ -214,7 +242,7 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             labelStyle: TextStyle(
 //              color:  SharedColors.primaryColor,
-            ),
+                ),
           ),
         ),
       ),
@@ -225,13 +253,15 @@ class _RegisterViewState extends State<RegisterView> {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: SharedButton(
-          isLoading: viewModel.busy,
+//          isLoading: viewModel.busy,
           text: "Submit",
           onTap: () async {
-            if(_formKey.currentState.validate()){
-              bool register = await viewModel.registerUser();
-              if(register){
-                Navigator.pushNamed(context, RoutePaths.Login);
+            if (_formKey.currentState.validate()) {
+              await viewModel.registerUser();
+              bool isLogin = await viewModel.isLogin;
+              if (isLogin) {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.pushReplacementNamed(context, RoutePaths.Main);
               }
             }
           },
@@ -244,8 +274,14 @@ class _RegisterViewState extends State<RegisterView> {
         Navigator.pushNamed(context, RoutePaths.Login);
       },
       child: Container(
-        child: Text(
-          "Sign in",
+        child: RichText(
+          text: TextSpan(
+            text: "Already have an account? ",
+            style: TextStyle(color: SharedColors.txtColor),
+            children: <TextSpan>[
+              TextSpan(text: 'Log in', style: TextStyle(color: SharedColors.linkColor)),
+            ],
+          ),
         ),
       ),
     );

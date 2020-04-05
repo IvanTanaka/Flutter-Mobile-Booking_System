@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class SharedColors{
   static const Color primaryColor = Color(0xFFFF7266);
   static const Color accentColor = Color(0xFF47ACFF);
+
   static const Color disabledColor = Color(0xFF292929);
+  static const Color errorColor = Color(0xEFF54242);
 
   static const Color scaffoldColor = Color(0xFFFFFFFF);
   static const Color txtColor = Color(0xFF292929);

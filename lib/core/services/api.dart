@@ -2,7 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:member_apps/core/constants/network_code.dart';
 import 'package:member_apps/core/constants/shared_preference_key.dart';
+import 'package:member_apps/core/services/auth_service.dart';
+import 'package:member_apps/core/services/navigation_service.dart';
+import 'package:member_apps/router.dart';
+import 'package:member_apps/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -48,6 +53,22 @@ class Api {
     Response<dynamic> responseApi;
 
     responseApi = await _dio.get(_endpoint+url);
+    try {
+      responseApi = await _dio.get(_endpoint+url);
+      _dioResponseStreamController.add(null);
+      if (responseApi != null) {
+        if (responseApi.data['code'] == NetworkCode.UNAUTHORIZED)
+          setSessionExpired();
+      }
+      return jsonEncode(responseApi.data);
+    } on DioError catch (dioError) {
+      responseApi = dioError.response;
+      if (responseApi != null) {
+        if (responseApi.data['code'] == NetworkCode.UNAUTHORIZED)
+          setSessionExpired();
+      }
+      return throw responseApi.data['message'];
+    }
     return jsonEncode(responseApi.data);
 
 
@@ -71,9 +92,31 @@ class Api {
 
     Response<dynamic> responseApi;
 
-    responseApi = await _dio.post(_endpoint+url,data: body);
+    try {
+      responseApi = await _dio.post(_endpoint+url,data: body);
+      _dioResponseStreamController.add(null);
+      if (responseApi != null) {
+        if (responseApi.data['code'] == NetworkCode.UNAUTHORIZED)
+          setSessionExpired();
+      }
+      return jsonEncode(responseApi.data);
+    } on DioError catch (dioError) {
+      responseApi = dioError.response;
+      if (responseApi != null) {
+        if (responseApi.data['code'] == NetworkCode.UNAUTHORIZED)
+          setSessionExpired();
+      }
+      return throw responseApi.data['message'];
+    }
     return jsonEncode(responseApi.data);
   }
 
+}
+
+
+setSessionExpired() async {
+  bool response = await locator<AuthService>().logout();
+  if (response)
+    locator<NavigationService>().navigateAndReplaceTo(RoutePaths.Login);
 }
 

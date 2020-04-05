@@ -3,11 +3,12 @@ import 'package:member_apps/core/services/api.dart';
 import 'package:member_apps/core/services/connection_service.dart';
 import 'package:member_apps/core/services/order_service.dart';
 import 'package:member_apps/core/services/product_service.dart';
-import 'package:member_apps/core/services/registration_service.dart';
+import 'package:member_apps/core/services/auth_service.dart';
 import 'package:member_apps/core/services/store_service.dart';
 import 'package:member_apps/core/viewmodels/views/home_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_confirmation_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_store_view_model.dart';
+import 'package:member_apps/core/viewmodels/views/registration/login_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/registration/register_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/search_franchise_view_model.dart';
 
@@ -17,8 +18,8 @@ void setupLocator() {
   locator.registerSingleton<Api>(Api());
   locator.registerSingleton<ConnectionService>(ConnectionService());
 
-  locator.registerLazySingleton<RegistrationService>(
-    () => RegistrationService(
+  locator.registerLazySingleton<AuthService>(
+    () => AuthService(
       api: locator<Api>(),
     ),
   );
@@ -43,8 +44,12 @@ void setupLocator() {
 
   locator.registerFactory<HomeViewModel>(() => HomeViewModel());
 
+  locator.registerFactory<LoginViewModel>(() => LoginViewModel(
+    registrationService: locator<AuthService>(),
+  ));
+
   locator.registerFactory<RegisterViewModel>(() => RegisterViewModel(
-    registrationService: locator<RegistrationService>(),
+    registrationService: locator<AuthService>(),
   ));
 
   locator.registerFactory<SearchFranchiseViewModel>(
