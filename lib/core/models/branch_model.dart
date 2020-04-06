@@ -13,7 +13,7 @@ class BranchModel {
 
   factory BranchModel.fromJson(Map<String, dynamic> json) => BranchModel(
         id: json["id"] == null ? null : json["id"],
-        branchName: json["branch_name"] == null ? null : json["branch_name"],
+        branchName: json["name"] == null ? null : json["name"],
         address: json["address"] == null ? null : json["address"],
         phoneNumber: json["phone_number"] == null ? null : json["phone_number"],
       );

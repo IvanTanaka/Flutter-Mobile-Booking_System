@@ -35,71 +35,71 @@ class StoreService{
         typeStr = BookingServiceMenuName.SPORT;
         break;
     }
-//    TODO: Comment This
-    await Future.delayed(Duration(seconds: 4));
-    return [
-      SearchStoreModel(
-        id: "23123131",
-        franchiseName: "Coco Bop",
-        branches: [
-          BranchModel(
-              branchName: "Coco Bop",
-              address: PrototypeConstant.LOREM_IPSUM,
-              phoneNumber: "+323 3232 32")
-        ],
-      ),
-      SearchStoreModel(
-        id: "321njkk2ni3",
-        franchiseName: "Mie Akhun",
-        branches: [
-          BranchModel(
-              branchName: "Cab. S. Parman",
-              address: PrototypeConstant.LOREM_IPSUM,
-              phoneNumber: "+62 9292929"),
-          BranchModel(
-            branchName: "Cab. Wahidin",
-            address: "Jl. Wahidin No 6",
-            phoneNumber: "020 20101010",
-          )
-        ],
-      ),
-      SearchStoreModel(
-        id: "23123131",
-        franchiseName: "Coco Bop",
-        branches: [
-          BranchModel(
-              branchName: "Coco Bop",
-              address: PrototypeConstant.LOREM_IPSUM,
-              phoneNumber: "+323 3232 32")
-        ],
-      ),
-      SearchStoreModel(
-        id: "321njkk2ni3",
-        franchiseName: "Mie Akhun",
-        branches: [
-          BranchModel(
-              branchName: "Cab. S. Parman",
-              address: PrototypeConstant.LOREM_IPSUM,
-              phoneNumber: "+62 9292929"),
-          BranchModel(
-            branchName: "Cab. Wahidin",
-            address: "Jl. Wahidin No 6",
-            phoneNumber: "020 20101010",
-          )
-        ],
-      ),
-    ];
-//    TODO: Uncomment This
-//    final response = await _api.get(
-//      url:
-//      "v1/store?type=$typeStr${(name!=null)?"name=$name":""}page=$page",
-//    );
-//    final resDecoded = json.decode(response);
-//    if(resDecoded["code"]==NetworkCode.SUCCESS){
-//      return List<SearchStoreModel>.from(resDecoded["result"]["data"].map((x) => SearchStoreModel.fromJson(x)));
-//    }else{
-//      return [];
-//    }
+////    TODO: Comment This
+//    await Future.delayed(Duration(seconds: 4));
+//    return [
+//      SearchStoreModel(
+//        id: "23123131",
+//        franchiseName: "Coco Bop",
+//        branches: [
+//          BranchModel(
+//              branchName: "Coco Bop",
+//              address: PrototypeConstant.LOREM_IPSUM,
+//              phoneNumber: "+323 3232 32")
+//        ],
+//      ),
+//      SearchStoreModel(
+//        id: "321njkk2ni3",
+//        franchiseName: "Mie Akhun",
+//        branches: [
+//          BranchModel(
+//              branchName: "Cab. S. Parman",
+//              address: PrototypeConstant.LOREM_IPSUM,
+//              phoneNumber: "+62 9292929"),
+//          BranchModel(
+//            branchName: "Cab. Wahidin",
+//            address: "Jl. Wahidin No 6",
+//            phoneNumber: "020 20101010",
+//          )
+//        ],
+//      ),
+//      SearchStoreModel(
+//        id: "23123131",
+//        franchiseName: "Coco Bop",
+//        branches: [
+//          BranchModel(
+//              branchName: "Coco Bop",
+//              address: PrototypeConstant.LOREM_IPSUM,
+//              phoneNumber: "+323 3232 32")
+//        ],
+//      ),
+//      SearchStoreModel(
+//        id: "321njkk2ni3",
+//        franchiseName: "Mie Akhun",
+//        branches: [
+//          BranchModel(
+//              branchName: "Cab. S. Parman",
+//              address: PrototypeConstant.LOREM_IPSUM,
+//              phoneNumber: "+62 9292929"),
+//          BranchModel(
+//            branchName: "Cab. Wahidin",
+//            address: "Jl. Wahidin No 6",
+//            phoneNumber: "020 20101010",
+//          )
+//        ],
+//      ),
+//    ];
+////    TODO: Uncomment This
+    final response = await _api.get(
+      url:
+      "v1/store?type=$typeStr${(name!=null)?"&name=$name":""}&page=$page",
+    );
+    final resDecoded = json.decode(response);
+    if(resDecoded["code"]==NetworkCode.SUCCESS){
+      return List<SearchStoreModel>.from(resDecoded["data"]["data"].map((x) => SearchStoreModel.fromJson(x)));
+    }else{
+      return [];
+    }
   }
 
   Future<OrderStoreModel> getOrderStoreByStoreId(String storeId) async {

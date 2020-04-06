@@ -59,11 +59,11 @@ class SearchStoreModel {
       SearchStoreModel(
         id: json["id"] == null ? null : json["id"],
         franchiseName:
-            json["franchise_name"] == null ? null : json["franchise_name"],
+            json["name"] == null ? null : json["name"],
         type: json["type"] == null ? null : json["type"],
-        branches: json["branchs"] == null
+        branches: json["branches"] == null
             ? null
             : List<BranchModel>.from(
-                json["branchs"].map((x) => BranchModel.fromJson(x))),
+                json["branches"].map((x) => BranchModel.fromJson(x))),
       );
 }

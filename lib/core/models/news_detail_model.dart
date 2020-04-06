@@ -27,9 +27,9 @@ class NewsDetailModel {
         termsAndConditions: json["terms_and_conditions"] == null
             ? null
             : List<String>.from(json["terms_and_conditions"].map((x) => x)),
-        branches: json["branchs"] == null
+        branches: json["branches"] == null
             ? null
             : List<BranchModel>.from(
-                json["branchs"].map((x) => BranchModel.fromJson(x))),
+                json["branches"].map((x) => BranchModel.fromJson(x))),
       );
 }
