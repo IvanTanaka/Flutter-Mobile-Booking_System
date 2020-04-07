@@ -61,9 +61,12 @@ class Router {
         );
 
       case RoutePaths.OrderFoodStore:
+        String storeId = settings.arguments;
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.OrderFoodStore),
-          builder: (_) => OrderFoodStoreView(),
+          builder: (_) => OrderFoodStoreView(
+            storeId: storeId
+          ),
         );
       case RoutePaths.OrderFoodConfirmation:
         return MaterialPageRoute(

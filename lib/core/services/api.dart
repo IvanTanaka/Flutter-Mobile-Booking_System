@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:member_apps/core/constants/network_code.dart';
+import 'package:member_apps/core/constants/network_config.dart';
 import 'package:member_apps/core/constants/shared_preference_key.dart';
 import 'package:member_apps/core/services/auth_service.dart';
 import 'package:member_apps/core/services/navigation_service.dart';
@@ -15,7 +16,7 @@ enum RequestMethod { POST, GET }
 
 class Api {
   //TODO change the endpoint url
-  static const _endpoint = 'http://10.0.2.2:8000/api/';
+  static const _endpoint = '${NetworkConfig.DOMAIN_URL}api/';
   static const int _timeoutDuration = 30000;
   static const int maxCallApi = 3;
 

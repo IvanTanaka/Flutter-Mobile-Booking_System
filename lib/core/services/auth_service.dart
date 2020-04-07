@@ -33,7 +33,7 @@ class AuthService {
     final resDecoded = json.decode(response);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      sharedPreferences.setString(SharedPreferenceKey.ACCESS_TOKEN, resDecoded["data"]["token"]);
+      sharedPreferences.setString(SharedPreferenceKey.ACCESS_TOKEN, resDecoded["result"]["token"]);
       return resDecoded["success"];
     } else {
       throw(resDecoded["message"]);
@@ -49,7 +49,7 @@ class AuthService {
     final resDecoded = json.decode(response);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      sharedPreferences.setString(SharedPreferenceKey.ACCESS_TOKEN, resDecoded["data"]["token"]);
+      sharedPreferences.setString(SharedPreferenceKey.ACCESS_TOKEN, resDecoded["result"]["token"]);
       return resDecoded["success"];
     } else {
        throw(resDecoded["message"]);
@@ -64,7 +64,7 @@ class AuthService {
     });
     final resDecoded = json.decode(response);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
-      return resDecoded["data"]["isLogin"];
+      return resDecoded["result"]["isLogin"];
     } else {
       return false;
     }

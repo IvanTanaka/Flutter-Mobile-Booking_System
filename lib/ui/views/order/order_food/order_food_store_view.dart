@@ -14,6 +14,10 @@ import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:member_apps/ui/widgets/shared_picker_model.dart';
 
 class OrderFoodStoreView extends StatefulWidget {
+  final String storeId;
+
+  OrderFoodStoreView({this.storeId});
+
   @override
   _OrderFoodStoreViewState createState() => _OrderFoodStoreViewState();
 }
@@ -24,7 +28,9 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
     return BaseWidget<OrderFoodStoreViewModel>(
       model: locator<OrderFoodStoreViewModel>(),
       onModelReady: (OrderFoodStoreViewModel viewModel) async {
-        await viewModel.getProducts();
+        await viewModel.getProducts(
+          storeId: widget.storeId
+        );
       },
       builder: (BuildContext context, OrderFoodStoreViewModel viewModel,
           Widget child) {
@@ -86,8 +92,6 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
             flex: 1,
             child: Image.network(
               model.imagePath,
-              height: 20,
-              width: 20,
             ),
           ),
           Expanded(

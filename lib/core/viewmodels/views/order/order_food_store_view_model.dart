@@ -34,10 +34,12 @@ class OrderFoodStoreViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future getProducts() async {
+  Future getProducts({String storeId}) async {
     setBusy(true);
     page++;
-    List<OrderStoreProductModel> tempModels = await _productService.getProductsByStoreId();
+    List<OrderStoreProductModel> tempModels = await _productService.getProductsByStoreId(
+      storeId: storeId
+    );
     orderStoreProducts.addAll(tempModels);
     setBusy(false);
   }

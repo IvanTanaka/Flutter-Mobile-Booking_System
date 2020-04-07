@@ -105,7 +105,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
     return GestureDetector(
       onTap: () {
         if (!model.haveBranches) {
-          _navigateToStorePage(model.id);
+          _navigateToStorePage(model.branchId);
         }
       },
       child: Container(
@@ -244,7 +244,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
   void _navigateToStorePage(String id) {
     switch(_viewModel.type){
       case BookingServiceType.food:
-        Navigator.pushNamed(context, RoutePaths.OrderFoodStore);
+        Navigator.pushNamed(context, RoutePaths.OrderFoodStore, arguments: id);
         break;
       case BookingServiceType.barber:
         // TODO: Handle this case.

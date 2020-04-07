@@ -1,10 +1,14 @@
-import 'package:member_apps/core/viewmodels/base_view_model.dart';
+import 'package:member_apps/core/constants/network_config.dart';
 
 class OrderStoreProductModel{
   String id;
   String productName;
   String description;
-  String imagePath;
+  String _image;
+  String get imagePath {
+    String domain = NetworkConfig.DOMAIN_URL;
+    return "$domain$_image";
+  }
   int price;
   int discountPrice;
   int qty;
@@ -27,20 +31,23 @@ class OrderStoreProductModel{
       {this.id,
       this.productName,
       this.description,
-      this.imagePath,
+      imagePath,
       this.price,
       this.discountPrice,
-      this.qty = 0});
+      this.qty = 0}){
+
+    this._image = "storage/images/menu/$imagePath";
+  }
 
   factory OrderStoreProductModel.fromJson(Map<String, dynamic> json) =>
       OrderStoreProductModel(
         id: json["id"] == null ? null : json["id"],
-        productName: json["product_name"] == null ? null : json["product_name"],
-        description: json["description"] == null ? null : json["description"],
+        productName: json["name"] == null ? null : json["name"],
+        description: json["description"] == null ? "" : json["description"],
         imagePath: json["image_path"] == null ? null : json["image_path"],
         price: json["price"] == null ? null : json["price"],
         discountPrice:
-            json["discount_price"] == null ? null : json["discount_price"],
+            json["discount_price"] == null ? 0 : json["discount_price"],
         qty: 0,
       );
 }
