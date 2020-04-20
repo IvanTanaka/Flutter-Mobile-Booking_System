@@ -68,6 +68,7 @@ void setupLocator() {
 
   locator.registerFactory<OrderFoodConfirmationViewModel>(
     () => OrderFoodConfirmationViewModel(
+      storeService: locator<StoreService>(),
       orderService: locator<OrderService>(),
       productService: locator<ProductService>(),
     ),

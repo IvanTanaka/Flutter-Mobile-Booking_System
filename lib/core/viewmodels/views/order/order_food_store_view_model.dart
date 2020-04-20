@@ -1,3 +1,4 @@
+import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/order_cart_model.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
 import 'package:member_apps/core/services/order_service.dart';
@@ -9,6 +10,7 @@ class OrderFoodStoreViewModel extends BaseViewModel {
   StoreService _storeService;
   ProductService _productService;
   OrderService _orderService;
+  BranchModel get branchModel => _storeService.branchModel;
 
   OrderFoodStoreViewModel({StoreService storeService, ProductService productService, OrderService orderService}) {
     this._storeService = storeService;
@@ -34,6 +36,12 @@ class OrderFoodStoreViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  Future<void> loadStore({String storeId}) async {
+    setBusy(true);
+    await _storeService.getBranchByStoreId(storeId);
+    setBusy(false);
+  }
+
   Future getProducts({String storeId}) async {
     setBusy(true);
     page++;
@@ -55,7 +63,7 @@ class OrderFoodStoreViewModel extends BaseViewModel {
       return cartModel.id == model.id;
     });
     if(model.qty>0){
-      carts.add(OrderCartModel(id: model.id, qty: model.qty));
+      carts.add(OrderCartModel(id: model.id, qty: model.qty, price: model.price));
     }
     setBusy(false);
   }

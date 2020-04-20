@@ -19,4 +19,26 @@ class OrderService{
     this._api =api;
   }
 
+  Future<void> submitOrder({String storeId, int total, int dineInQty, DateTime orderDate}) async {
+
+    print("QTY ${orderDate.toString()}");
+    List cartStr = [];
+    carts.forEach(($cart){
+      cartStr.add($cart.toJson());
+    });
+    final response = await _api.post(url: "v1/store/$storeId/order", body: {
+      "carts": cartStr,
+      "branch_id": storeId,
+      "total": total,
+      "people_count": dineInQty,
+      "reserve_time": orderDate.toString(),
+    });
+    final resDecoded = json.decode(response);
+    print(resDecoded["result"]);
+    if (resDecoded["code"] == NetworkCode.SUCCESS) {
+      return resDecoded["success"];
+    } else {
+      throw(resDecoded["message"]);
+    }
+  }
 }

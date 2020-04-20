@@ -70,7 +70,6 @@ class Api {
       }
       return throw responseApi.data['message'];
     }
-    return jsonEncode(responseApi.data);
 
 
   }
@@ -109,7 +108,6 @@ class Api {
       }
       return throw responseApi.data['message'];
     }
-    return jsonEncode(responseApi.data);
   }
 
 }

@@ -10,7 +10,7 @@ class OrderStoreProductModel{
     return "$domain$_image";
   }
   int price;
-  int discountPrice;
+//  int discountPrice;
   int qty;
 
   void addQty(){
@@ -33,7 +33,7 @@ class OrderStoreProductModel{
       this.description,
       imagePath,
       this.price,
-      this.discountPrice,
+//      this.discountPrice,
       this.qty = 0}){
 
     this._image = "storage/images/menu/$imagePath";
@@ -46,8 +46,6 @@ class OrderStoreProductModel{
         description: json["description"] == null ? "" : json["description"],
         imagePath: json["image_path"] == null ? null : json["image_path"],
         price: json["price"] == null ? null : json["price"],
-        discountPrice:
-            json["discount_price"] == null ? 0 : json["discount_price"],
         qty: 0,
       );
 }

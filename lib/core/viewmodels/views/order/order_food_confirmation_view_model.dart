@@ -1,16 +1,21 @@
 import 'package:member_apps/core/enumerations/order_food_type.dart';
+import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/order_cart_model.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
 import 'package:member_apps/core/services/helper.dart';
 import 'package:member_apps/core/services/order_service.dart';
 import 'package:member_apps/core/services/product_service.dart';
+import 'package:member_apps/core/services/store_service.dart';
 import 'package:member_apps/core/viewmodels/base_view_model.dart';
 
 class OrderFoodConfirmationViewModel extends BaseViewModel {
   OrderService _orderService;
   ProductService _productService;
+  StoreService _storeService;
+  BranchModel get branchModel => _storeService.branchModel;
 
-  OrderFoodConfirmationViewModel({OrderService orderService,ProductService productService}) {
+  OrderFoodConfirmationViewModel({StoreService storeService, OrderService orderService,ProductService productService}) {
+    this._storeService = storeService;
     this._orderService = orderService;
     this._productService = productService;
   }
@@ -56,7 +61,8 @@ class OrderFoodConfirmationViewModel extends BaseViewModel {
     });
     return subtotalPrice;
   }
-  int get taxOrderPrice => (subtotalOrderPrice*0.1).ceil();
+//  int get taxOrderPrice => (subtotalOrderPrice*0.1).ceil();
+  int get taxOrderPrice => 0;
   int get totalOrderPrice => (subtotalOrderPrice+taxOrderPrice);
 
   void refreshCarts(OrderStoreProductModel model){
@@ -72,6 +78,12 @@ class OrderFoodConfirmationViewModel extends BaseViewModel {
       }
       return cartModel.id == model.id && model.qty<=0;
     });
+    setBusy(false);
+  }
+
+  Future<void> submitOrder({String storeId}) async {
+    setBusy(true);
+    await _orderService.submitOrder(storeId: storeId, total: totalOrderPrice, dineInQty: dineInQty, orderDate:orderDate);
     setBusy(false);
   }
 }

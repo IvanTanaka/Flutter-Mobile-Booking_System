@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:member_apps/core/constants/network_code.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
 import 'package:member_apps/core/services/api.dart';
-import 'package:member_apps/ui/prototype_constant.dart';
 
 class ProductService{
 

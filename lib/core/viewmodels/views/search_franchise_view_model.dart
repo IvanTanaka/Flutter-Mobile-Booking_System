@@ -1,10 +1,7 @@
 import 'package:member_apps/core/enumerations/booking_service_type.dart';
-import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
-import 'package:member_apps/core/models/service_menu_model.dart';
 import 'package:member_apps/core/services/store_service.dart';
 import 'package:member_apps/core/viewmodels/base_view_model.dart';
-import 'package:member_apps/ui/prototype_constant.dart';
 
 class SearchFranchiseViewModel extends BaseViewModel {
   BookingServiceType type;

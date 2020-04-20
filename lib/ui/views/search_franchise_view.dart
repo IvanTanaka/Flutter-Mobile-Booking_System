@@ -4,7 +4,6 @@ import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
-import 'package:member_apps/core/models/service_menu_model.dart';
 import 'package:member_apps/core/viewmodels/views/search_franchise_view_model.dart';
 import 'package:member_apps/router.dart';
 import 'package:member_apps/service_locator.dart';
@@ -28,12 +27,6 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() async {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        await _viewModel.getMoreStoreByName(_searchController.text);
-      }
-    });
   }
 
   @override
@@ -162,7 +155,6 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
         ),
       ),
     );
-    ;
   }
 
   Widget _buildBranchContainer(BranchModel model) {
@@ -179,7 +171,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
             Container(
               padding: EdgeInsets.only(left: 22),
               child: Text(
-                model.branchName,
+                model.name,
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
               ),
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:member_apps/core/models/service_menu_model.dart';
 import 'package:member_apps/ui/views/news/news_detail_view.dart';
 import 'package:member_apps/ui/views/news/news_favorite_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
@@ -69,9 +68,12 @@ class Router {
           ),
         );
       case RoutePaths.OrderFoodConfirmation:
+        String storeId = settings.arguments;
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.OrderFoodConfirmation),
-          builder: (_) => OrderFoodConfirmationView(),
+          builder: (_) => OrderFoodConfirmationView(
+              storeId: storeId
+          ),
         );
 
       default:

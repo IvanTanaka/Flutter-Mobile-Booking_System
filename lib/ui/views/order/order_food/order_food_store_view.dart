@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
-import 'package:member_apps/core/services/helper.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_store_view_model.dart';
 import 'package:member_apps/router.dart';
 import 'package:member_apps/service_locator.dart';
-import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
-import 'package:member_apps/ui/widgets/library/date_picker/flutter_datetime_picker.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
-import 'package:member_apps/ui/widgets/shared_picker_model.dart';
+import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 
 class OrderFoodStoreView extends StatefulWidget {
   final String storeId;
@@ -28,17 +25,24 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
     return BaseWidget<OrderFoodStoreViewModel>(
       model: locator<OrderFoodStoreViewModel>(),
       onModelReady: (OrderFoodStoreViewModel viewModel) async {
+        await viewModel.loadStore(storeId: widget.storeId);
         await viewModel.getProducts(
           storeId: widget.storeId
         );
       },
       builder: (BuildContext context, OrderFoodStoreViewModel viewModel,
           Widget child) {
-        return Scaffold(
+        return viewModel.busy?Scaffold(
           appBar: AppBar(
               elevation: 1,
               backgroundColor: SharedColors.scaffoldColor,
-              title: Text("Coco Bop")),
+              title: Text("")),
+          body: SharedLoadingPage(),
+        ):Scaffold(
+          appBar: AppBar(
+              elevation: 1,
+              backgroundColor: SharedColors.scaffoldColor,
+              title: Text(viewModel.branchModel.franchiseName)),
 
           bottomSheet: Container(
             height: viewModel.carts.length>0?70:0,
@@ -46,7 +50,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
               onTap: (){
                 print("Continue Order");
                 viewModel.continueOrder();
-                Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation);
+                Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation, arguments: widget.storeId);
               },
               txtFontSize: 20,
               text: "${viewModel.carts.length} items on cart - Continue",
@@ -107,6 +111,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                     Expanded(
                       flex: 4,
                       child: Container(
+                        padding: EdgeInsets.only(left: 10),
                         child: Text(
                           model.productName,
                           style: Theme.of(context)
@@ -121,7 +126,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                       child: Column(
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.only(right: 15),
                             alignment: Alignment.centerRight,
                             child: Text(
                               "${model.price}",
@@ -131,20 +136,20 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                                   .merge(TextStyle(fontSize: 20)),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.only(right: 10),
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              "${model.discountPrice}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .body1
-                                  .merge(TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  decoration:
-                                  TextDecoration.lineThrough)),
-                            ),
-                          ),
+//                          Container(
+//                            padding: EdgeInsets.only(right: 10),
+//                            alignment: Alignment.centerRight,
+//                            child: Text(
+//                              "${model.discountPrice}",
+//                              style: Theme.of(context)
+//                                  .textTheme
+//                                  .body1
+//                                  .merge(TextStyle(
+//                                  fontWeight: FontWeight.w300,
+//                                  decoration:
+//                                  TextDecoration.lineThrough)),
+//                            ),
+//                          ),
                         ],
                       ),
                     )

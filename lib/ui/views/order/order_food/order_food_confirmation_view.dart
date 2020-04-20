@@ -1,18 +1,21 @@
-import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/enumerations/order_food_type.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
-import 'package:member_apps/core/services/helper.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_confirmation_view_model.dart';
 import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/library/date_picker/flutter_datetime_picker.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
+import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 import 'package:member_apps/ui/widgets/shared_picker_model.dart';
 
 class OrderFoodConfirmationView extends StatefulWidget {
+  final String storeId;
+
+  const OrderFoodConfirmationView({Key key, this.storeId}) : super(key: key);
+
   @override
   _OrderFoodConfirmationViewState createState() =>
       _OrderFoodConfirmationViewState();
@@ -25,16 +28,22 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
       model: locator<OrderFoodConfirmationViewModel>(),
       builder: (BuildContext context, OrderFoodConfirmationViewModel viewModel,
           Widget child) {
-        return Scaffold(
+        return viewModel.busy?Scaffold(
+          appBar: AppBar(
+              elevation: 1,
+              backgroundColor: SharedColors.scaffoldColor,
+              title: Text("")),
+          body: SharedLoadingPage(),
+        ):Scaffold(
           appBar: AppBar(
               elevation: 0,
               backgroundColor: SharedColors.scaffoldColor,
-              title: Text("Coco Bop")),
+              title: Text(viewModel.branchModel.franchiseName)),
           bottomSheet: Container(
             margin: EdgeInsets.symmetric(horizontal: 5),
             child: SharedButton(
-              onTap: () {
-                print("Submit Order");
+              onTap: () async {
+                await viewModel.submitOrder(storeId: widget.storeId);
               },
               isDisabled: viewModel.orderDate == null,
               disabledText: "Choose Your Order Time",
@@ -75,8 +84,8 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
       context,
       pickerModel: SharedPickerModel(
         currentTime: viewModel.orderDate,
-        storeMin: TimeOfDay(hour: 00, minute: 30),
-        storeMax: TimeOfDay(hour: 23, minute: 00),
+        storeMin: TimeOfDay(hour: viewModel.branchModel.openHour, minute: viewModel.branchModel.openMinute),
+        storeMax: TimeOfDay(hour: viewModel.branchModel.closeHour, minute: viewModel.branchModel.closeMinute),
       ),
       onConfirm: (DateTime dateTime) {
         viewModel.orderDate = dateTime;
