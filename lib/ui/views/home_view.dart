@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/models/service_menu_model.dart';
 import 'package:member_apps/core/viewmodels/views/home_view_model.dart';
@@ -8,6 +7,7 @@ import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/news/widgets/news_container.dart';
+import 'package:member_apps/ui/widgets/wallet/wallet_container.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -38,6 +38,9 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: BaseWidget<HomeViewModel>(
           model: locator<HomeViewModel>(),
+          onModelReady: (HomeViewModel viewModel) async {
+            await viewModel.loadNews();
+          },
           builder: (BuildContext context, HomeViewModel viewModel, Widget child){
             return _buildBody(viewModel);
           },
@@ -67,68 +70,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildWalletContainer(HomeViewModel viewModel) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(5),
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-              height: 50,
-              decoration: BoxDecoration(
-                color: SharedColors.accentColor,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-              ),
-              child: Container(
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      FontAwesomeIcons.wallet,
-                      size: 20,
-                      color: SharedColors.txtAccentColor,
-                    ),
-                    Container(
-                      width: 10,
-                    ),
-                    Text(
-                      "Balance",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: SharedColors.txtAccentColor),
-                    ),
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          "12.000",
-                          style: TextStyle(
-                              color: SharedColors.txtAccentColor,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: 4,
-            ),
-            Container(
-              height: 8,
-              decoration: BoxDecoration(
-                color: SharedColors.accentColor,
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+    return WalletContainer();
   }
 
   Widget _buildListService(HomeViewModel viewModel) {
@@ -204,14 +146,10 @@ class _HomeViewState extends State<HomeView> {
           ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 3,
+            itemCount: viewModel.news.length>3?3:viewModel.news.length,
             itemBuilder: (BuildContext context, int itemCount) {
               return NewsContainer(
-                franchiseName: "Golden Lamian",
-                franchiseProfileImage:
-                    PrototypeConstant.FRANCHISE_PROFILE_IMAGE,
-                newsImage: PrototypeConstant.NEWS_IMAGE_URL,
-                newsDescription: PrototypeConstant.LOREM_IPSUM,
+                newsModel: viewModel.news[itemCount],
               );
             },
           ),

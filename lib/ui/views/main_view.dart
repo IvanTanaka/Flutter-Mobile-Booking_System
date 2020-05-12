@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/home_view.dart';
+import 'package:member_apps/ui/views/topup/topup_home_view.dart';
 
 import 'news/news_view.dart';
 class MainView extends StatefulWidget {
@@ -60,6 +61,8 @@ class _MainViewState extends State<MainView> {
         return HomeView();
       case 2:
         return NewsView();
+      case 3:
+        return TopupHomeView();
       default:
         return Container(
           color: Colors.red,

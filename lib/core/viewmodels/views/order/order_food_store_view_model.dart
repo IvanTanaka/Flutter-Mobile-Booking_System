@@ -10,6 +10,7 @@ class OrderFoodStoreViewModel extends BaseViewModel {
   StoreService _storeService;
   ProductService _productService;
   OrderService _orderService;
+  bool listIsUpdate = false;
   BranchModel get branchModel => _storeService.branchModel;
 
   OrderFoodStoreViewModel({StoreService storeService, ProductService productService, OrderService orderService}) {
@@ -17,13 +18,13 @@ class OrderFoodStoreViewModel extends BaseViewModel {
     this._productService = productService;
     this._orderService = orderService;
 
-    page = 0;
+    _page = 0;
   }
 
   List<OrderStoreProductModel> orderStoreProducts = [];
   List<OrderStoreProductModel> cartsProducts =[];
   List<OrderCartModel> carts = [];
-  int page = 0;
+  int _page = 0;
 
   DateTime _orderDate;
   DateTime get orderDate => _orderDate;
@@ -43,13 +44,19 @@ class OrderFoodStoreViewModel extends BaseViewModel {
   }
 
   Future getProducts({String storeId}) async {
-    setBusy(true);
-    page++;
-    List<OrderStoreProductModel> tempModels = await _productService.getProductsByStoreId(
-      storeId: storeId
-    );
-    orderStoreProducts.addAll(tempModels);
-    setBusy(false);
+    if(!listIsUpdate) {
+      listIsUpdate = true;
+      setBusy(true);
+      _page++;
+      List<OrderStoreProductModel> tempModels = await _productService
+          .getProductsByStoreId(
+          storeId: storeId,
+          page: _page
+      );
+      listIsUpdate = false;
+      orderStoreProducts.addAll(tempModels);
+      setBusy(false);
+    }
   }
 
   void refreshCarts(OrderStoreProductModel model){

@@ -27,6 +27,12 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(() async {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        await _viewModel.getMoreStoreByName(_searchController.text);
+      }
+    });
   }
 
   @override

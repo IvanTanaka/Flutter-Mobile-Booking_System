@@ -1,3 +1,5 @@
+import 'package:member_apps/ui/prototype_constant.dart';
+
 class FranchiseModel {
   String id;
   String ownerId;
@@ -18,7 +20,7 @@ class FranchiseModel {
     ownerId: json["owner_id"] == null ? null : json["owner_id"],
     categoryId: json["category_id"],
     name: json["name"] == null ? null : json["name"],
-    imagePath: json["image_path"],
+    imagePath: json["image_path"] == null? PrototypeConstant.FRANCHISE_PROFILE_IMAGE:json["image_path"],
   );
 
   Map<String, dynamic> toJson() => {

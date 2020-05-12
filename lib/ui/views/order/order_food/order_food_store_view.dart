@@ -8,7 +8,6 @@ import 'package:member_apps/router.dart';
 import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
-import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 
 class OrderFoodStoreView extends StatefulWidget {
   final String storeId;
@@ -20,10 +19,31 @@ class OrderFoodStoreView extends StatefulWidget {
 }
 
 class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
+
+  ScrollController _scrollController = new ScrollController();
+  OrderFoodStoreViewModel _viewModel = locator<OrderFoodStoreViewModel>();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() async {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        await _viewModel.getProducts();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseWidget<OrderFoodStoreViewModel>(
-      model: locator<OrderFoodStoreViewModel>(),
+      model: _viewModel,
       onModelReady: (OrderFoodStoreViewModel viewModel) async {
         await viewModel.loadStore(storeId: widget.storeId);
         await viewModel.getProducts(
@@ -32,28 +52,21 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
       },
       builder: (BuildContext context, OrderFoodStoreViewModel viewModel,
           Widget child) {
-        return viewModel.busy?Scaffold(
+        return Scaffold(
           appBar: AppBar(
               elevation: 1,
               backgroundColor: SharedColors.scaffoldColor,
-              title: Text("")),
-          body: SharedLoadingPage(),
-        ):Scaffold(
-          appBar: AppBar(
-              elevation: 1,
-              backgroundColor: SharedColors.scaffoldColor,
-              title: Text(viewModel.branchModel.franchiseName)),
+              title: Text(viewModel.branchModel.franchiseName??"")),
 
           bottomSheet: Container(
             height: viewModel.carts.length>0?70:0,
             child: SharedButton(
               onTap: (){
-                print("Continue Order");
                 viewModel.continueOrder();
                 Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation, arguments: widget.storeId);
               },
               txtFontSize: 20,
-              text: "${viewModel.carts.length} items on cart - Continue",
+              text: "${viewModel.carts.length??0} items on cart - Continue",
             ),
           ),
           body: _buildBody(viewModel),
@@ -76,12 +89,13 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
   Widget _buildStoreProduct(OrderFoodStoreViewModel viewModel) {
     return Container(
       child: ListView.separated(
+          controller: _scrollController,
           itemCount: viewModel.orderStoreProducts.length+1,
           separatorBuilder: (BuildContext context, int index){
             return Divider();
           },
           itemBuilder: (BuildContext context, int index) {
-            return index==viewModel.orderStoreProducts.length?Container(height: 100,):_buildStoreProductItem(viewModel, viewModel.orderStoreProducts[index]);
+            return (index==viewModel.orderStoreProducts.length?Container(height: 100,):_buildStoreProductItem(viewModel, viewModel.orderStoreProducts[index]));
           }),
     );
   }

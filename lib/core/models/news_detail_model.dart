@@ -1,32 +1,39 @@
+import 'package:member_apps/core/constants/network_config.dart';
 import 'package:member_apps/core/models/branch_model.dart';
+import 'package:member_apps/core/models/franchise_model.dart';
 
 class NewsDetailModel {
   String id;
-  String franchiseName;
-  String imageUrl;
+  String franchiseId;
+  String _image;
+  String get imagePath {
+    String domain = NetworkConfig.DOMAIN_URL;
+    print("$domain$_image");
+    return "$domain$_image";
+  }
+  FranchiseModel franchise;
   String description;
-  List<String> termsAndConditions;
   List<BranchModel> branches;
 
   NewsDetailModel({
     this.id,
-    this.franchiseName,
-    this.imageUrl,
+    this.franchiseId,
+    imagePath,
     this.description,
-    this.termsAndConditions,
+    this.franchise,
     this.branches,
-  });
+  }){
+
+    this._image = "storage/images/news/$imagePath";
+  }
 
   factory NewsDetailModel.fromJson(Map<String, dynamic> json) =>
       NewsDetailModel(
         id: json["id"] == null ? null : json["id"],
-        franchiseName:
-            json["franchise_name"] == null ? null : json["franchise_name"],
-        imageUrl: json["image_url"] == null ? null : json["image_url"],
+        franchiseId: json["franchise_id"] == null ? null : json["franchise_id"],
+        imagePath: json["image_path"] == null ? null : json["image_path"],
         description: json["description"] == null ? null : json["description"],
-        termsAndConditions: json["terms_and_conditions"] == null
-            ? null
-            : List<String>.from(json["terms_and_conditions"].map((x) => x)),
+        franchise: json["franchise"] == null ? null : FranchiseModel.fromJson(json["franchise"]),
         branches: json["branches"] == null
             ? null
             : List<BranchModel>.from(

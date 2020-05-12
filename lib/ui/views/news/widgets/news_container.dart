@@ -1,25 +1,24 @@
 import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
+import 'package:member_apps/core/models/news_model.dart';
 import 'package:member_apps/router.dart';
 
 class NewsContainer extends StatefulWidget {
-  final String franchiseName;
-  final String franchiseProfileImage;
-  final String newsImage;
-  final String newsDescription;
+  final NewsModel newsModel;
 
-  const NewsContainer({Key key, this.franchiseName, this.franchiseProfileImage, this.newsImage, this.newsDescription}) : super(key: key);
+  const NewsContainer({Key key, this.newsModel}) : super(key: key);
 
   @override
   _NewsContainerState createState() => _NewsContainerState();
 }
 
 class _NewsContainerState extends State<NewsContainer> {
+  NewsModel get model => widget.newsModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, RoutePaths.NewsDetail);
+        Navigator.pushNamed(context, RoutePaths.NewsDetail, arguments: model.id);
       },
       child: Container(
         child: Column(
@@ -42,7 +41,7 @@ class _NewsContainerState extends State<NewsContainer> {
           Container(
             child: CircleAvatar(
               backgroundImage:
-              NetworkImage(widget.franchiseProfileImage),
+              NetworkImage(model.franchise.imagePath),
               radius: MediaQuery.of(context).size.width * (3 / 80),
             ),
           ),
@@ -51,7 +50,7 @@ class _NewsContainerState extends State<NewsContainer> {
           ),
           Container(
             child: Text(
-              widget.franchiseName,
+              model.franchise.name,
               style: Theme.of(context).textTheme.body2,
             ),
           )
@@ -69,7 +68,7 @@ class _NewsContainerState extends State<NewsContainer> {
         ),
       ),
       child: Image.network(
-        widget.newsImage,
+        model.imagePath,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.width,
       ),
@@ -86,7 +85,7 @@ class _NewsContainerState extends State<NewsContainer> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  widget.franchiseName,
+                  model.franchise.name,
                   style: Theme.of(context).textTheme.body2,
                 ),
               ],
@@ -98,7 +97,7 @@ class _NewsContainerState extends State<NewsContainer> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ExtendedText(
-                  widget.newsDescription,
+                  model.description,
                   maxLines: 2,
                   textAlign: TextAlign.justify,
                   overFlowTextSpan: OverFlowTextSpan(

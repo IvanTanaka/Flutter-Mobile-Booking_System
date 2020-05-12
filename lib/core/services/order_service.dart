@@ -34,7 +34,6 @@ class OrderService{
       "reserve_time": orderDate.toString(),
     });
     final resDecoded = json.decode(response);
-    print(resDecoded["result"]);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
       return resDecoded["success"];
     } else {

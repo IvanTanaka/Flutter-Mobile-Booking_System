@@ -139,6 +139,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.2"
+  flutter_masked_text:
+    dependency: "direct main"
+    description:
+      name: flutter_masked_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.0"
+  flutter_money_formatter:
+    dependency: "direct main"
+    description:
+      name: flutter_money_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -197,7 +211,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.1"
+    version: "0.15.8"
   logging:
     dependency: transitive
     description:
@@ -435,5 +449,5 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
-  dart: ">=2.5.0 <3.0.0"
+  dart: ">2.4.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.5 <2.0.0"
