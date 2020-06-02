@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:member_apps/core/constants/network_code.dart';
 import 'package:member_apps/core/models/order_cart_model.dart';
+import 'package:member_apps/core/models/order_model.dart';
 import 'package:member_apps/core/services/api.dart';
 
 class OrderService{
@@ -19,14 +20,12 @@ class OrderService{
     this._api =api;
   }
 
-  Future<void> submitOrder({String storeId, int total, int dineInQty, DateTime orderDate}) async {
-
-    print("QTY ${orderDate.toString()}");
+  Future<String> submitOrder({String storeId, int total, int dineInQty, DateTime orderDate}) async {
     List cartStr = [];
     carts.forEach(($cart){
       cartStr.add($cart.toJson());
     });
-    final response = await _api.post(url: "v1/store/$storeId/order", body: {
+    final response = await _api.post(url: "v1/order", body: {
       "carts": cartStr,
       "branch_id": storeId,
       "total": total,
@@ -35,9 +34,22 @@ class OrderService{
     });
     final resDecoded = json.decode(response);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
-      return resDecoded["success"];
+      print("ID ${resDecoded["result"]["id"]}");
+      return resDecoded["result"]["id"];
     } else {
       throw(resDecoded["message"]);
+    }
+  }
+
+  Future<OrderModel> loadOrderDetail({String id}) async {
+    final response = await _api.get(
+      url: "v1/order/$id",
+    );
+    final resDecoded = json.decode(response);
+    if (resDecoded["code"] == NetworkCode.SUCCESS) {
+      return OrderModel.fromJson(resDecoded['result']);
+    } else {
+      return OrderModel();
     }
   }
 }

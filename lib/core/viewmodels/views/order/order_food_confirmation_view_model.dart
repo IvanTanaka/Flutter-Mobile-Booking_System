@@ -13,6 +13,7 @@ class OrderFoodConfirmationViewModel extends BaseViewModel {
   ProductService _productService;
   StoreService _storeService;
   BranchModel get branchModel => _storeService.branchModel;
+  String orderId;
 
   OrderFoodConfirmationViewModel({StoreService storeService, OrderService orderService,ProductService productService}) {
     this._storeService = storeService;
@@ -83,7 +84,7 @@ class OrderFoodConfirmationViewModel extends BaseViewModel {
 
   Future<void> submitOrder({String storeId}) async {
     setBusy(true);
-    await _orderService.submitOrder(storeId: storeId, total: totalOrderPrice, dineInQty: dineInQty, orderDate:orderDate);
+    orderId = await _orderService.submitOrder(storeId: storeId, total: totalOrderPrice, dineInQty: dineInQty, orderDate:orderDate);
     setBusy(false);
   }
 }

@@ -18,7 +18,7 @@ class FranchiseModel {
   factory FranchiseModel.fromJson(Map<String, dynamic> json) => FranchiseModel(
     id: json["id"] == null ? null : json["id"],
     ownerId: json["owner_id"] == null ? null : json["owner_id"],
-    categoryId: json["category_id"],
+    categoryId: json["category_id"] == null ? null : json["category_id"],
     name: json["name"] == null ? null : json["name"],
     imagePath: json["image_path"] == null? PrototypeConstant.FRANCHISE_PROFILE_IMAGE:json["image_path"],
   );

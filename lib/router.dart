@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:member_apps/ui/views/news/news_detail_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
+import 'package:member_apps/ui/views/order/order_food/order_food_detail_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
 import 'package:member_apps/ui/views/registration/register_view.dart';
 import 'package:member_apps/ui/views/search_franchise_view.dart';
@@ -21,6 +22,7 @@ class RoutePaths {
   static const String SearchFranchise = "/search/franchise";
   static const String OrderFoodStore = "/order/food/store";
   static const String OrderFoodConfirmation = "/order/food/confirmation";
+  static const String OrderFoodDetail = "/order/food/detail";
 
   static const String Topup = "/topup";
   static const String TopupDetail = "/topup/detail";
@@ -76,6 +78,14 @@ class Router {
           settings: RouteSettings(name: RoutePaths.OrderFoodConfirmation),
           builder: (_) => OrderFoodConfirmationView(
               storeId: storeId
+          ),
+        );
+      case RoutePaths.OrderFoodDetail:
+        String orderId = settings.arguments;
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.OrderFoodDetail),
+          builder: (_) => OrderFoodDetailView(
+              orderId: orderId
           ),
         );
 

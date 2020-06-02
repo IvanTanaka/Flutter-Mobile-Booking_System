@@ -4,6 +4,7 @@ import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/enumerations/order_food_type.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_confirmation_view_model.dart';
+import 'package:member_apps/router.dart';
 import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/library/date_picker/flutter_datetime_picker.dart';
@@ -36,7 +37,7 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
           body: SharedLoadingPage(),
         ):Scaffold(
           appBar: AppBar(
-              elevation: 0,
+              elevation: 1,
               backgroundColor: SharedColors.scaffoldColor,
               title: Text(viewModel.branchModel.franchiseName)),
           bottomSheet: Container(
@@ -44,6 +45,8 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
             child: SharedButton(
               onTap: () async {
                 await viewModel.submitOrder(storeId: widget.storeId);
+                Navigator.popUntil(context, (route)=>route.isFirst);
+                Navigator.pushNamed(context, RoutePaths.OrderFoodDetail, arguments: viewModel.orderId);
               },
               isDisabled: viewModel.orderDate == null,
               disabledText: "Choose Your Order Time",
@@ -287,53 +290,53 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
     return Container(
       child: Column(
         children: <Widget>[
-          Container(
-            height: 10,
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    "Subtotal",
-                    style: Theme.of(context).textTheme.subhead,
-                  ),
-                ),
-                Container(
-                  child: Text(
-                    "${viewModel.subtotalOrderPrice}",
-                    style: Theme.of(context).textTheme.subhead,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    "Tax 10%",
-                    style: Theme.of(context).textTheme.subhead,
-                  ),
-                ),
-                Container(
-                  child: Text(
-                    "${viewModel.taxOrderPrice}",
-                    style: Theme.of(context).textTheme.subhead,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Divider(
-            height: 20,
-            color: Colors.black,
-          ),
+//          Container(
+//            height: 10,
+//          ),
+//          Container(
+//            margin: EdgeInsets.symmetric(horizontal: 10),
+//            child: Row(
+//              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//              children: <Widget>[
+//                Container(
+//                  child: Text(
+//                    "Subtotal",
+//                    style: Theme.of(context).textTheme.subhead,
+//                  ),
+//                ),
+//                Container(
+//                  child: Text(
+//                    "${viewModel.subtotalOrderPrice}",
+//                    style: Theme.of(context).textTheme.subhead,
+//                  ),
+//                )
+//              ],
+//            ),
+//          ),
+//          Container(
+//            margin: EdgeInsets.symmetric(horizontal: 10),
+//            child: Row(
+//              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//              children: <Widget>[
+//                Container(
+//                  child: Text(
+//                    "Tax 10%",
+//                    style: Theme.of(context).textTheme.subhead,
+//                  ),
+//                ),
+//                Container(
+//                  child: Text(
+//                    "${viewModel.taxOrderPrice}",
+//                    style: Theme.of(context).textTheme.subhead,
+//                  ),
+//                )
+//              ],
+//            ),
+//          ),
+//          Divider(
+//            height: 20,
+//            color: Colors.black,
+//          ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
@@ -342,7 +345,7 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
                 Container(
                   child: Text(
                     "Total",
-                    style: Theme.of(context).textTheme.subhead,
+                    style: Theme.of(context).textTheme.subhead.merge(TextStyle(fontWeight: FontWeight.w700)),
                   ),
                 ),
                 Container(
