@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/home_view.dart';
+import 'package:member_apps/ui/views/order/order_food/order_history_view.dart';
 import 'package:member_apps/ui/views/topup/topup_home_view.dart';
 
 import 'news/news_view.dart';
@@ -59,6 +60,8 @@ class _MainViewState extends State<MainView> {
     switch (_selectedPage){
       case 0:
         return HomeView();
+      case 1:
+        return OrderHistoryView();
       case 2:
         return NewsView();
       case 3:

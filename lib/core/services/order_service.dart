@@ -34,7 +34,7 @@ class OrderService{
     });
     final resDecoded = json.decode(response);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
-      print("ID ${resDecoded["result"]["id"]}");
+      orderDate = null;
       return resDecoded["result"]["id"];
     } else {
       throw(resDecoded["message"]);
@@ -50,6 +50,19 @@ class OrderService{
       return OrderModel.fromJson(resDecoded['result']);
     } else {
       return OrderModel();
+    }
+  }
+
+
+  Future<List<OrderModel>> loadOrders({int page=1}) async {
+    final response = await _api.get(
+      url: "v1/order?page=$page",
+    );
+    final resDecoded = json.decode(response);
+    if (resDecoded["code"] == NetworkCode.SUCCESS) {
+      return List<OrderModel>.from(resDecoded["result"]["data"].map((x) => OrderModel.fromJson(x)));
+    } else {
+      return [];
     }
   }
 }
