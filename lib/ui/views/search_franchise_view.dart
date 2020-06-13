@@ -11,7 +11,7 @@ import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 
 class SearchFranchiseView extends StatefulWidget {
-  final BookingServiceType serviceMenuType;
+  final BookingServiceCategory serviceMenuType;
 
   const SearchFranchiseView({Key key, this.serviceMenuType}) : super(key: key);
 
@@ -56,7 +56,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
               elevation: 1,
               backgroundColor: SharedColors.scaffoldColor,
               title: Text(
-                viewModel.searchPageTitle,
+                "Search Restaurant",
               ),
             ),
             body: _buildBody());
@@ -240,20 +240,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
   }
 
   void _navigateToStorePage(String id) {
-    switch(_viewModel.type){
-      case BookingServiceType.food:
-        Navigator.pushNamed(context, RoutePaths.OrderFoodStore, arguments: id);
-        break;
-      case BookingServiceType.barber:
-        // TODO: Handle this case.
-        break;
-      case BookingServiceType.karaoke:
-        // TODO: Handle this case.
-        break;
-      case BookingServiceType.sport:
-        // TODO: Handle this case.
-        break;
-    }
+    Navigator.pushNamed(context, RoutePaths.OrderFoodStore, arguments: id);
   }
 
   Widget _buildSearchBar() {
@@ -274,7 +261,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
           controller: _searchController,
           decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: _viewModel.searchPagePlaceholder,
+              hintText: "Search restaurant name",
               prefixIcon: Icon(Icons.search)),
         ),
       ),

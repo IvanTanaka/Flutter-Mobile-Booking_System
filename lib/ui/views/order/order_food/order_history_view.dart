@@ -43,7 +43,7 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
           elevation: 1,
           backgroundColor: SharedColors.scaffoldColor,
           title: Text(
-            "Activity",
+            "Order History",
           )),
       body: _buildBody(),
     );

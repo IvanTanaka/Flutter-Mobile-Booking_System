@@ -4,7 +4,7 @@ import 'package:member_apps/core/services/store_service.dart';
 import 'package:member_apps/core/viewmodels/base_view_model.dart';
 
 class SearchFranchiseViewModel extends BaseViewModel {
-  BookingServiceType type;
+  BookingServiceCategory type;
   StoreService _storeService;
   bool listIsUpdate = false;
   int page=1;
@@ -15,42 +15,6 @@ class SearchFranchiseViewModel extends BaseViewModel {
 
 
   List<SearchStoreModel> searchStoreModel = [];
-
-  // ignore: missing_return
-  String get searchPageTitle {
-    switch (this.type) {
-      case BookingServiceType.food:
-        return "Search Restaurant";
-        break;
-      case BookingServiceType.barber:
-        return "Search Barbershop";
-        break;
-      case BookingServiceType.karaoke:
-        return "Search Karaoke";
-        break;
-      case BookingServiceType.sport:
-        return "Search Sport Field";
-        break;
-    }
-  }
-
-  // ignore: missing_return
-  String get searchPagePlaceholder {
-    switch (this.type) {
-      case BookingServiceType.food:
-        return "Search restaurant name";
-        break;
-      case BookingServiceType.barber:
-        return "Search barbershop";
-        break;
-      case BookingServiceType.karaoke:
-        return "Search karaoke place";
-        break;
-      case BookingServiceType.sport:
-        return "Search court";
-        break;
-    }
-  }
 
   Future getStoreByName(String name) async {
     setBusy(true);

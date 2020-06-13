@@ -34,8 +34,8 @@ class _MainViewState extends State<MainView> {
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.compare_arrows),
-              title: Text('Activity'),
+              icon: Icon(Icons.history),
+              title: Text('History'),
             ),
             BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.newspaper),

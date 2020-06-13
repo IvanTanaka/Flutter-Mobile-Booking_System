@@ -5,21 +5,7 @@ import 'package:member_apps/core/models/branch_model.dart';
 class SearchStoreModel {
   String id;
   String franchiseName;
-  String _type;
 
-  // ignore: missing_return
-  BookingServiceType get type {
-    switch (_type) {
-      case BookingServiceConst.KARAOKE:
-        return BookingServiceType.karaoke;
-      case BookingServiceConst.FOOD:
-        return BookingServiceType.food;
-      case BookingServiceConst.SPORT:
-        return BookingServiceType.sport;
-      case BookingServiceConst.BARBER:
-        return BookingServiceType.barber;
-    }
-  }
 
   List<BranchModel> branches;
 
@@ -51,16 +37,13 @@ class SearchStoreModel {
     return "";
   }
 
-  SearchStoreModel({this.id, this.franchiseName, this.branches, String type}) {
-    this._type = type;
-  }
+  SearchStoreModel({this.id, this.franchiseName, this.branches});
 
   factory SearchStoreModel.fromJson(Map<String, dynamic> json) =>
       SearchStoreModel(
         id: json["id"] == null ? null : json["id"],
         franchiseName:
             json["name"] == null ? null : json["name"],
-        type: json["type"] == null ? null : json["type"],
         branches: json["branches"] == null
             ? null
             : List<BranchModel>.from(

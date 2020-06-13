@@ -58,7 +58,7 @@ class Router {
         );
 
       case RoutePaths.SearchFranchise:
-        BookingServiceType serviceMenuType = settings.arguments;
+        BookingServiceCategory serviceMenuType = settings.arguments;
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.SearchFranchise),
           builder: (_) => SearchFranchiseView(serviceMenuType: serviceMenuType),

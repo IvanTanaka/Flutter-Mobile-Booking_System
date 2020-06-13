@@ -3,22 +3,22 @@ import 'package:member_apps/core/enumerations/booking_service_type.dart';
 
 class ServiceMenuModel{
 
-  final BookingServiceType type;
+  final BookingServiceCategory type;
 
   // ignore: missing_return
   String get name{
     switch (this.type){
-      case BookingServiceType.food:
-        return BookingServiceMenuName.FOOD;
+      case BookingServiceCategory.fast_food:
+        return CategoryName.FAST_FOOD;
         break;
-      case BookingServiceType.barber:
-        return BookingServiceMenuName.BARBER;
+      case BookingServiceCategory.sea_food:
+        return CategoryName.SEA_FOOD;
         break;
-      case BookingServiceType.karaoke:
-        return BookingServiceMenuName.KARAOKE;
+      case BookingServiceCategory.salad:
+        return CategoryName.SALAD;
         break;
-      case BookingServiceType.sport:
-        return BookingServiceMenuName.SPORT;
+      case BookingServiceCategory.drinks:
+        return CategoryName.DRINKS;
         break;
     }
   }
@@ -26,18 +26,17 @@ class ServiceMenuModel{
   // ignore: missing_return
   String get imagePath{
     switch (this.type){
-      case BookingServiceType.food:
-        // TODO: Handle this case.
-        return "";
+      case BookingServiceCategory.fast_food:
+        return "assets/images/fast_food.png";
         break;
-      case BookingServiceType.barber:
-        // TODO: Handle this case.
+      case BookingServiceCategory.sea_food:
+        return "assets/images/sea_food.png";
         break;
-      case BookingServiceType.karaoke:
-        // TODO: Handle this case.
+      case BookingServiceCategory.salad:
+        return "assets/images/salad.png";
         break;
-      case BookingServiceType.sport:
-        // TODO: Handle this case.
+      case BookingServiceCategory.drinks:
+        return "assets/images/drinks.png";
         break;
     }
   }

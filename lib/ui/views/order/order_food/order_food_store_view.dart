@@ -56,7 +56,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
           appBar: AppBar(
               elevation: 1,
               backgroundColor: SharedColors.scaffoldColor,
-              title: Text(viewModel.branchModel.franchiseName??"")),
+              title: Text(viewModel.branchModel!=null?viewModel.branchModel.franchiseName:"")),
 
           bottomSheet: Container(
             height: viewModel.carts.length>0?70:0,
@@ -108,9 +108,9 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: Image.network(
+            child: model.imagePath != null?Image.network(
               model.imagePath,
-            ),
+            ):Image.asset("assets/images/empty_image.png"),
           ),
           Expanded(
             flex: 4,
@@ -169,65 +169,68 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                     )
                   ],
                 ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 5,
-                      child: ExtendedText(
-                        model.description,
-                        style: Theme.of(context).textTheme.caption,
-                        maxLines: 3,
-                        overFlowTextSpan: OverFlowTextSpan(
-                          text: " ...",
-                          style: TextStyle(color: Colors.black45),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        child: Center(
-                          child: new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              RawMaterialButton(
-                                onPressed: () {
-                                  model.minusQty();
-                                  viewModel.refreshCarts(model);
-                                },
-                                child: new Icon(
-                                  FontAwesomeIcons.minus,
-                                  color: SharedColors.primaryColor,
-                                  size: 14.0,
-                                ),
-                                shape: new CircleBorder(),
-                                constraints: BoxConstraints(minHeight: 30, minWidth: 30),
-                                elevation: 4,
-                                fillColor: Colors.white,
-                              ),
-                              new Text("${model.qty}",
-                                  style: new TextStyle(fontSize: 16.0)),
-                              RawMaterialButton(
-                                onPressed: () {
-                                  model.addQty();
-                                  viewModel.refreshCarts(model);
-                                },
-                                child: new Icon(
-                                  FontAwesomeIcons.plus,
-                                  color: SharedColors.primaryColor,
-                                  size: 14.0,
-                                ),
-                                shape: new CircleBorder(),
-                                constraints: BoxConstraints(minHeight: 30, minWidth: 30),
-                                elevation: 4,
-                                fillColor: Colors.white,
-                              ),
-                            ],
+                Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: ExtendedText(
+                          model.description,
+                          style: Theme.of(context).textTheme.caption,
+                          maxLines: 3,
+                          overFlowTextSpan: OverFlowTextSpan(
+                            text: " ...",
+                            style: TextStyle(color: Colors.black45),
                           ),
                         ),
                       ),
-                    )
-                  ],
+                      Expanded(
+                        flex: 4,
+                        child: Container(
+                          child: Center(
+                            child: new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                RawMaterialButton(
+                                  onPressed: () {
+                                    model.minusQty();
+                                    viewModel.refreshCarts(model);
+                                  },
+                                  child: new Icon(
+                                    FontAwesomeIcons.minus,
+                                    color: SharedColors.primaryColor,
+                                    size: 14.0,
+                                  ),
+                                  shape: new CircleBorder(),
+                                  constraints: BoxConstraints(minHeight: 30, minWidth: 30),
+                                  elevation: 4,
+                                  fillColor: Colors.white,
+                                ),
+                                new Text("${model.qty}",
+                                    style: new TextStyle(fontSize: 16.0)),
+                                RawMaterialButton(
+                                  onPressed: () {
+                                    model.addQty();
+                                    viewModel.refreshCarts(model);
+                                  },
+                                  child: new Icon(
+                                    FontAwesomeIcons.plus,
+                                    color: SharedColors.primaryColor,
+                                    size: 14.0,
+                                  ),
+                                  shape: new CircleBorder(),
+                                  constraints: BoxConstraints(minHeight: 30, minWidth: 30),
+                                  elevation: 4,
+                                  fillColor: Colors.white,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

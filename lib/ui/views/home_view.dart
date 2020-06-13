@@ -118,7 +118,7 @@ class _HomeViewState extends State<HomeView> {
               radius: 30,
               backgroundImage:
 //          TODO replace with AssetImage(serviceItemModel.imagePath)
-              NetworkImage(PrototypeConstant.FRANCHISE_PROFILE_IMAGE),
+              AssetImage(serviceMenuModel.imagePath),
             ),
             Text(
               serviceMenuModel.name,

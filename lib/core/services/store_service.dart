@@ -17,20 +17,20 @@ class StoreService{
     this._api =api;
   }
 
-  Future<List<SearchStoreModel>> getStoresByFilter({BookingServiceType type, String name, int page=1}) async{
+  Future<List<SearchStoreModel>> getStoresByFilter({BookingServiceCategory type, String name, int page=1}) async{
     String typeStr = "";
     switch(type){
-      case BookingServiceType.food:
-        typeStr = BookingServiceMenuName.FOOD;
+      case BookingServiceCategory.fast_food:
+        typeStr = CategoryName.FAST_FOOD;
         break;
-      case BookingServiceType.barber:
-        typeStr = BookingServiceMenuName.BARBER;
+      case BookingServiceCategory.sea_food:
+        typeStr = CategoryName.SEA_FOOD;
         break;
-      case BookingServiceType.karaoke:
-        typeStr = BookingServiceMenuName.KARAOKE;
+      case BookingServiceCategory.salad:
+        typeStr = CategoryName.SALAD;
         break;
-      case BookingServiceType.sport:
-        typeStr = BookingServiceMenuName.SPORT;
+      case BookingServiceCategory.drinks:
+        typeStr = CategoryName.DRINKS;
         break;
     }
     final response = await _api.get(

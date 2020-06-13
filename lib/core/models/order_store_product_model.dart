@@ -6,8 +6,10 @@ class OrderStoreProductModel{
   String description;
   String _image;
   String get imagePath {
-    String domain = NetworkConfig.DOMAIN_URL;
-    return "$domain$_image";
+    if(_image != null){
+      String domain = NetworkConfig.DOMAIN_URL;
+      return "$domain$_image";
+    }return null;
   }
   int price;
 //  int discountPrice;
@@ -36,7 +38,11 @@ class OrderStoreProductModel{
 //      this.discountPrice,
       this.qty = 0}){
 
-    this._image = "storage/images/menu/$imagePath";
+    if(imagePath != null){
+      this._image = "storage/images/menu/$imagePath";
+    }else{
+      _image = null;
+    }
   }
 
   factory OrderStoreProductModel.fromJson(Map<String, dynamic> json) =>

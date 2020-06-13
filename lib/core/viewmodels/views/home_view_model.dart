@@ -20,9 +20,9 @@ class HomeViewModel extends BaseViewModel {
   }
 
   List<ServiceMenuModel> serviceMenus = [
-    ServiceMenuModel(BookingServiceType.food),
-    ServiceMenuModel(BookingServiceType.barber),
-    ServiceMenuModel(BookingServiceType.karaoke),
-    ServiceMenuModel(BookingServiceType.sport),
+    ServiceMenuModel(BookingServiceCategory.fast_food),
+    ServiceMenuModel(BookingServiceCategory.sea_food),
+    ServiceMenuModel(BookingServiceCategory.salad),
+    ServiceMenuModel(BookingServiceCategory.drinks),
   ];
 }
