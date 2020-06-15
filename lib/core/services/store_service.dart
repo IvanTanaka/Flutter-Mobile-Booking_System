@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:member_apps/core/constants/network_code.dart';
-import 'package:member_apps/core/constants/booking_service_menu_name.dart';
+import 'package:member_apps/core/constants/category_name.dart';
 import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';

@@ -1,4 +1,4 @@
-import 'package:member_apps/core/constants/booking_service_menu_name.dart';
+import 'package:member_apps/core/constants/category_name.dart';
 import 'package:member_apps/core/enumerations/booking_service_type.dart';
 
 class ServiceMenuModel{

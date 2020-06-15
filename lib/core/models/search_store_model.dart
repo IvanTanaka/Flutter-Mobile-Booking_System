@@ -1,5 +1,3 @@
-import 'package:member_apps/core/constants/booking_service_const.dart';
-import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 
 class SearchStoreModel {
