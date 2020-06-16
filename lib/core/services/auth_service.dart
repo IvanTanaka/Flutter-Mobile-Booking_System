@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:member_apps/core/constants/network_code.dart';
 import 'package:member_apps/core/constants/shared_preference_key.dart';
+import 'package:member_apps/core/models/user_model.dart';
 import 'package:member_apps/core/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,6 +27,7 @@ class AuthService {
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.setString(SharedPreferenceKey.ACCESS_TOKEN, resDecoded["result"]["token"]);
+      sharedPreferences.setString(SharedPreferenceKey.USER, json.encode(resDecoded['result']));
       return resDecoded["success"];
     } else {
       throw(resDecoded["message"]);
@@ -42,6 +44,7 @@ class AuthService {
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.setString(SharedPreferenceKey.ACCESS_TOKEN, resDecoded["result"]["token"]);
+      sharedPreferences.setString(SharedPreferenceKey.USER, json.encode(resDecoded['result']));
       return resDecoded["success"];
     } else {
        throw(resDecoded["message"]);
@@ -60,6 +63,12 @@ class AuthService {
     } else {
       return false;
     }
+  }
+
+  Future<UserModel> loadUser() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    UserModel user = UserModel.fromJson(json.decode(sharedPreferences.getString(SharedPreferenceKey.USER)));
+    return user;
   }
 
   Future<bool> logout() async {

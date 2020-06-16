@@ -16,6 +16,7 @@ import 'package:member_apps/core/viewmodels/views/order/order_food_confirmation_
 import 'package:member_apps/core/viewmodels/views/order/order_food_detail_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_store_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_history_view_model.dart';
+import 'package:member_apps/core/viewmodels/views/profile_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/registration/login_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/registration/register_view_model.dart';
 import 'package:member_apps/core/viewmodels/views/search_franchise_view_model.dart';
@@ -174,6 +175,12 @@ void setupLocator() {
   locator.registerFactory<NewsDetailViewModel>(
         () => NewsDetailViewModel(
       newsService: locator<NewsService>(),
+    ),
+  );
+
+  locator.registerFactory<ProfileViewModel>(
+        () => ProfileViewModel(
+      authService: locator<AuthService>(),
     ),
   );
 

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/home_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_history_view.dart';
+import 'package:member_apps/ui/views/profile_view.dart';
 import 'package:member_apps/ui/views/topup/topup_home_view.dart';
 
 import 'news/news_view.dart';
@@ -66,9 +67,15 @@ class _MainViewState extends State<MainView> {
         return NewsView();
       case 3:
         return TopupHomeView();
+      case 4:
+        return ProfileView();
       default:
-        return Container(
-          color: Colors.red,
+        return Scaffold(
+          body: Center(
+            child: Container(
+              child: Text("Empty Page"),
+            ),
+          ),
         );
     }
   }
