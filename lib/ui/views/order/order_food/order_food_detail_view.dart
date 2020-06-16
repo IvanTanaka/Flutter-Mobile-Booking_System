@@ -10,6 +10,7 @@ import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:member_apps/ui/widgets/shared_loading_page.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class OrderFoodDetailView extends StatefulWidget {
   final String orderId;
@@ -21,6 +22,8 @@ class OrderFoodDetailView extends StatefulWidget {
 }
 
 class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
+  TextEditingController _rateCommentController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -348,12 +351,120 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
                   txtFontSize: 24,
                   onTap: () async {
                     await viewModel.finishOrder();
-                    Navigator.pushReplacementNamed(context, RoutePaths.OrderFoodDetail, arguments: widget.orderId);
+                    Navigator.pushReplacementNamed(
+                        context, RoutePaths.OrderFoodDetail,
+                        arguments: widget.orderId);
                   },
                 ),
               )
             ],
           ),
+        );
+
+      case OrderStatus.FINISHED:
+        return Column(
+          children: <Widget>[
+            Divider(
+              thickness: 1,
+            ),
+            (viewModel.orderModel.rate == null)
+                ? Container(
+                    height: 20,
+                  )
+                : Container(),
+            (viewModel.orderModel.rate == null)
+                ? Container(
+                    child: Text(
+                      "Give your rating",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  )
+                : Container(),
+            Container(
+              height: 20,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  (viewModel.orderModel.rate == null)
+                      ? Text(
+                          "1.0",
+                          style: TextStyle(fontSize: 18),
+                        )
+                      : Container(),
+                  SmoothStarRating(
+                    size: 50,
+                    isReadOnly: (viewModel.orderModel.rate != null),
+                    allowHalfRating: false,
+                    onRated: (value) {
+                      viewModel.star = value;
+                    },
+                    rating: (viewModel.orderModel.rate == null)
+                        ? 5
+                        : viewModel.orderModel.rate.stars.toDouble(),
+                    color: SharedColors.statusWaiting,
+                    borderColor: SharedColors.statusWaiting,
+                  ),
+                  (viewModel.orderModel.rate == null)
+                      ? Text(
+                          "5.0",
+                          style: TextStyle(fontSize: 18),
+                        )
+                      : Container(),
+                ],
+              ),
+            ),
+            (viewModel.orderModel.rate != null &&
+                    viewModel.orderModel.rate.comment == "")
+                ? Container()
+                : Container(
+                    decoration: BoxDecoration(
+                        color: SharedColors.accentColor,
+                        borderRadius: BorderRadius.circular(5)),
+                    margin: EdgeInsets.all(10),
+                    child: Card(
+                      elevation: 3,
+                      borderOnForeground: true,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: (viewModel.orderModel.rate == null)
+                            ? TextField(
+                                controller: _rateCommentController,
+                                maxLines: 8,
+                                decoration: InputDecoration.collapsed(
+                                    hintText: "Enter your comment here"),
+                              )
+                            : Container(
+                                width: double.infinity,
+                                padding: EdgeInsets.symmetric(vertical: 20),
+                                child: Text(viewModel.orderModel.rate.comment),
+                              ),
+                      ),
+                    ),
+                  ),
+            Container(
+              height: 10,
+            ),
+            (viewModel.orderModel.rate == null)
+                ? Container(
+                    margin: EdgeInsets.all(5),
+                    child: SharedButton(
+                      text: "Submit Rating",
+                      activeColor: SharedColors.accentColor,
+                      onTap: () async {
+                        await viewModel.submitRate(
+                            comment: _rateCommentController.text);
+                      },
+                    ),
+                  )
+                : Container(),
+            Container(
+              height: 50,
+            )
+          ],
         );
     }
     return Container();

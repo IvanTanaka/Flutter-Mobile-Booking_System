@@ -5,6 +5,7 @@ import 'package:member_apps/core/services/news_service.dart';
 import 'package:member_apps/core/services/order_service.dart';
 import 'package:member_apps/core/services/product_service.dart';
 import 'package:member_apps/core/services/auth_service.dart';
+import 'package:member_apps/core/services/rate_service.dart';
 import 'package:member_apps/core/services/store_service.dart';
 import 'package:member_apps/core/services/topup_service.dart';
 import 'package:member_apps/core/services/wallet_service.dart';
@@ -77,6 +78,12 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton<RateService>(
+      () => RateService(
+        api: locator<Api>(),
+      ),
+  );
+
 //=========================
 //  PAGE VIEWMODEL
 //=========================
@@ -123,6 +130,7 @@ void setupLocator() {
   locator.registerFactory<OrderFoodDetailViewModel>(
         () => OrderFoodDetailViewModel(
       orderService: locator<OrderService>(),
+      rateService: locator<RateService>(),
     ),
   );
 

@@ -4,6 +4,7 @@ import 'package:member_apps/core/enumerations/order_food_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/cashier_model.dart';
 import 'package:member_apps/core/models/order_detail_model.dart';
+import 'package:member_apps/core/models/rate_model.dart';
 import 'package:member_apps/core/services/helper.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 
@@ -22,7 +23,8 @@ class OrderModel {
       this.updatedAt,
       this.orderDetails,
       this.branch,
-      this.cashier});
+      this.cashier,
+      this.rate});
 
   String id;
   String customerId;
@@ -95,6 +97,7 @@ class OrderModel {
   List<OrderDetailModel> orderDetails;
   BranchModel branch;
   CashierModel cashier;
+  RateModel rate;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
       id: json["id"] == null ? null : json["id"],
@@ -120,6 +123,7 @@ class OrderModel {
               json["order_details"].map((x) => OrderDetailModel.fromJson(x))),
       branch:
           json["branch"] == null ? null : BranchModel.fromJson(json["branch"]),
-      cashier: json["cashier"] == null ? null : CashierModel.fromJson(json["cashier"])
+      cashier: json["cashier"] == null ? null : CashierModel.fromJson(json["cashier"]),
+      rate: json["rate"] == null ? null : RateModel.fromJson(json["rate"])
   );
 }
