@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/enumerations/order_food_type.dart';
 import 'package:member_apps/core/models/order_store_product_model.dart';
+import 'package:member_apps/core/services/helper.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_confirmation_view_model.dart';
 import 'package:member_apps/router.dart';
 import 'package:member_apps/service_locator.dart';
@@ -11,6 +12,7 @@ import 'package:member_apps/ui/widgets/library/date_picker/flutter_datetime_pick
 import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 import 'package:member_apps/ui/widgets/shared_picker_model.dart';
+import 'package:member_apps/ui/widgets/wallet/wallet_container.dart';
 
 class OrderFoodConfirmationView extends StatefulWidget {
   final String storeId;
@@ -48,8 +50,8 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
                 Navigator.popUntil(context, (route)=>route.isFirst);
                 Navigator.pushNamed(context, RoutePaths.OrderFoodDetail, arguments: viewModel.orderId);
               },
-              isDisabled: viewModel.orderDate == null,
-              disabledText: "Choose Your Order Time",
+              isDisabled: (viewModel.orderDate == null || viewModel.walletAmount < viewModel.totalOrderPrice),
+              disabledText: (viewModel.orderDate == null)?"Choose Your Order Time":"Wallet Balance Not Enough",
               isLoading: viewModel.busy,
               text: "Click to Submit Order",
               txtFontSize: 20,
@@ -74,8 +76,13 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
           ),
           _buildTotalPayment(viewModel),
           Container(
+            height: 10,
+          ),
+          WalletContainer(),
+          Container(
             height: 170,
           ),
+
         ],
       ),
     );
@@ -350,7 +357,7 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
                 ),
                 Container(
                   child: Text(
-                    "${viewModel.totalOrderPrice}",
+                    "${Helper.doubleToMoneyFormat(viewModel.totalOrderPrice.toDouble())}",
                     style: Theme.of(context)
                         .textTheme
                         .headline
@@ -397,7 +404,7 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
                       padding: EdgeInsets.only(right: 10),
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "${model.price * model.qty}",
+                        "${Helper.doubleToMoneyFormat((model.price * model.qty).toDouble())}",
                         style: Theme.of(context)
                             .textTheme
                             .body2

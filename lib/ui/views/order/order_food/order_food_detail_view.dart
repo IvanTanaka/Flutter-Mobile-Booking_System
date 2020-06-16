@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:member_apps/base_widget.dart';
+import 'package:member_apps/core/constants/order_status.dart';
 import 'package:member_apps/core/enumerations/order_food_type.dart';
 import 'package:member_apps/core/models/order_detail_model.dart';
 import 'package:member_apps/core/services/helper.dart';
 import 'package:member_apps/core/viewmodels/views/order/order_food_detail_view_model.dart';
+import 'package:member_apps/router.dart';
 import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/shared_colors.dart';
+import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 
 class OrderFoodDetailView extends StatefulWidget {
@@ -34,7 +37,13 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
         },
         builder: (BuildContext context, OrderFoodDetailViewModel viewModel,
             Widget child) {
-          return (viewModel.busy) ? SharedLoadingPage() : _buildBody(viewModel);
+          return WillPopScope(
+              onWillPop: () async {
+                return Future.value(true);
+              },
+              child: (viewModel.busy)
+                  ? SharedLoadingPage()
+                  : _buildBody(viewModel));
         },
       ),
     );
@@ -57,13 +66,17 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
             Container(
               height: 20,
             ),
-            Divider(),
+            Divider(
+              thickness: 1,
+            ),
             _buildBookingTime(viewModel),
             Container(
               height: 10,
             ),
             _buildOrderType(viewModel),
-            Divider(),
+            Divider(
+              thickness: 1,
+            ),
             Container(
               height: 20,
             ),
@@ -72,11 +85,7 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
               height: 20,
             ),
             _buildTotalPayment(viewModel),
-            Container(
-              child: Row(
-                children: <Widget>[Text("")],
-              ),
-            ),
+            _buildOrderFooter(viewModel),
           ],
         ),
       ),
@@ -91,8 +100,7 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            child:
-                Text("Order Time", style: Theme.of(context).textTheme.title),
+            child: Text("Order Time", style: Theme.of(context).textTheme.title),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -183,9 +191,10 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
   Widget _buildStatus(OrderFoodDetailViewModel viewModel) {
     return Container(
       child: Text(
-        viewModel.orderModel.status,
+        viewModel.orderModel.statusStr,
         style: TextStyle(
           color: (viewModel.statusColor),
+          fontWeight: FontWeight.w500,
           fontSize: 23,
         ),
       ),
@@ -282,5 +291,71 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
         ],
       ),
     );
+  }
+
+  Widget _buildOrderFooter(OrderFoodDetailViewModel viewModel) {
+    switch (viewModel.orderModel.status) {
+      case OrderStatus.WAITING:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: 50,
+            ),
+            GestureDetector(
+              onTap: () async {
+                await viewModel.cancelOrder();
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: double.infinity,
+                color: Colors.transparent,
+                alignment: Alignment.center,
+                child: Text(
+                  "Cancel Order",
+                  style: TextStyle(color: SharedColors.disabledColor),
+                ),
+              ),
+            ),
+          ],
+        );
+
+      case OrderStatus.ACCEPTED:
+        return Container(
+          margin: EdgeInsets.only(top: 50, left: 10, right: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 20,
+              ),
+              Container(
+                child: Text(
+                  "Show this to receive your order",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: SharedColors.primaryColor,
+                  ),
+                ),
+              ),
+              Container(
+                height: 10,
+              ),
+              Container(
+                child: SharedButton(
+                  text: "Finish this order",
+                  activeColor: SharedColors.statusSuccess,
+                  txtFontSize: 24,
+                  onTap: () async {
+                    await viewModel.finishOrder();
+                    Navigator.pushReplacementNamed(context, RoutePaths.OrderFoodDetail, arguments: widget.orderId);
+                  },
+                ),
+              )
+            ],
+          ),
+        );
+    }
+    return Container();
   }
 }

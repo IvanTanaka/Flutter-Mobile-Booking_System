@@ -35,7 +35,7 @@ class StoreService{
     }
     final response = await _api.get(
       url:
-      "v1/store?type=$typeStr${(name!=null)?"&name=$name":""}&page=$page",
+      "v1/store?category=$typeStr${(name!=null)?"&name=$name":""}&page=$page",
     );
     final resDecoded = json.decode(response);
     if(resDecoded["code"]==NetworkCode.SUCCESS){

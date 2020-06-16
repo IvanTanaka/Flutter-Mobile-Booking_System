@@ -7,9 +7,9 @@ import 'package:member_apps/core/services/helper.dart';
 class WalletService{
 
   Api _api;
-  int _walletAmount;
-  String get walletAmount {
-    return Helper.doubleToMoneyFormat(_walletAmount.toDouble());
+int walletAmount;
+  String get walletAmountFormatted {
+    return Helper.doubleToMoneyFormat(walletAmount.toDouble());
   }
 
   WalletService({Api api}){
@@ -23,8 +23,8 @@ class WalletService{
     );
     final resDecoded = json.decode(response);
     if(resDecoded["code"]==NetworkCode.SUCCESS){
-      _walletAmount = resDecoded['result']['amount'];
-      return walletAmount;
+      walletAmount = resDecoded['result']['amount'];
+      return walletAmountFormatted;
     }else{
       return "Error";
     }

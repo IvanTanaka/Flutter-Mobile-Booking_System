@@ -201,6 +201,8 @@ class _TopupDetailViewState extends State<TopupDetailView> {
           ),
         );
         break;
+        default:
+        return Container();
     }
   }
 }

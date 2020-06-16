@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:member_apps/core/constants/order_status.dart';
 import 'package:member_apps/core/enumerations/order_food_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/cashier_model.dart';
 import 'package:member_apps/core/models/order_detail_model.dart';
 import 'package:member_apps/core/services/helper.dart';
+import 'package:member_apps/ui/shared_colors.dart';
 
 class OrderModel {
   OrderModel(
@@ -27,6 +30,41 @@ class OrderModel {
   String cashierId;
   String franchiseId;
   String status;
+
+  String get statusStr{
+    switch (status){
+      case OrderStatus.ACCEPTED:
+        return "Accepted";
+      case OrderStatus.CANCELED:
+        return "Canceled";
+      case OrderStatus.DENIED:
+        return "Canceled";
+      case OrderStatus.NO_RESPONSE:
+        return "Canceled";
+      case OrderStatus.FINISHED:
+        return "Finished";
+      case OrderStatus.WAITING:
+        return "Waiting";
+      default:
+        return "";
+    }
+  }
+
+  Color get statusColor{
+    switch (status) {
+      case OrderStatus.CANCELED:
+      case OrderStatus.DENIED:
+      case OrderStatus.NO_RESPONSE:
+        return SharedColors.statusFailed;
+      case OrderStatus.FINISHED:
+        return SharedColors.statusSuccess;
+      case OrderStatus.ACCEPTED:
+      case OrderStatus.WAITING:
+        return SharedColors.statusWaiting;
+      default:
+        return SharedColors.txtColor;
+    }
+  }
   int total;
   String get formattedTotal{
     return Helper.doubleToMoneyFormat(total.toDouble());

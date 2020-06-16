@@ -41,6 +41,7 @@ class _TopupViewState extends State<TopupView> {
     return Container(
       height: 70,
       child: SharedButton(
+        activeColor: SharedColors.accentColor,
         isDisabled: viewModel.topupButtonIsDisabled,
         onTap: () async {
           await viewModel.topUp();

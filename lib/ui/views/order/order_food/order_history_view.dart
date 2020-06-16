@@ -68,7 +68,7 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
         controller: _scrollController,
         itemCount: viewModel.orders.length,
         separatorBuilder: (BuildContext context, int index){
-          return Divider();
+          return Divider(thickness: 1,);
         },
         itemBuilder: (BuildContext context, int itemCount) {
           return _buildOrderContainer(viewModel.orders[itemCount]);
@@ -103,7 +103,11 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
               ],
             ),
             Container(
-              child: Text(model.status),
+              child: Text(model.statusStr, style: TextStyle(
+                color: model.statusColor,
+                fontSize: 20,
+                fontWeight: FontWeight.w700
+              ),),
             )
           ],
         ),

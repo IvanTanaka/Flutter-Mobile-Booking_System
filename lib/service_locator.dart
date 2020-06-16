@@ -116,6 +116,7 @@ void setupLocator() {
       storeService: locator<StoreService>(),
       orderService: locator<OrderService>(),
       productService: locator<ProductService>(),
+      walletService: locator<WalletService>(),
     ),
   );
 
@@ -152,6 +153,7 @@ void setupLocator() {
   locator.registerFactory<TopupDetailViewModel>(
         () => TopupDetailViewModel(
       topupService: locator<TopupService>(),
+      walletService: locator<WalletService>(),
     ),
   );
 

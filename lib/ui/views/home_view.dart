@@ -7,6 +7,7 @@ import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/views/news/widgets/news_container.dart';
+import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:member_apps/ui/widgets/wallet/wallet_container.dart';
 
 class HomeView extends StatefulWidget {
@@ -37,13 +38,13 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       body: BaseWidget<HomeViewModel>(
-          model: locator<HomeViewModel>(),
-          onModelReady: (HomeViewModel viewModel) async {
-            await viewModel.loadNews();
-          },
-          builder: (BuildContext context, HomeViewModel viewModel, Widget child){
-            return _buildBody(viewModel);
-          },
+        model: locator<HomeViewModel>(),
+        onModelReady: (HomeViewModel viewModel) async {
+          await viewModel.loadNews();
+        },
+        builder: (BuildContext context, HomeViewModel viewModel, Widget child) {
+          return _buildBody(viewModel);
+        },
       ),
     );
   }
@@ -89,13 +90,31 @@ class _HomeViewState extends State<HomeView> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true, crossAxisCount: 4,
-                  // Generate 100 widgets that display their index in the List.
-                  children: List.generate(viewModel.serviceMenus.length, (index) {
-                    return _buildServiceMenu(serviceMenuModel: viewModel.serviceMenus[index]);
-                  }),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: GridView.count(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        crossAxisCount: 4,
+                        // Generate 100 widgets that display their index in the List.
+                        children: List.generate(viewModel.serviceMenus.length,
+                            (index) {
+                          return _buildServiceMenu(
+                              serviceMenuModel: viewModel.serviceMenus[index]);
+                        }),
+                      ),
+                    ),
+                    Divider(thickness: 2,),
+                    Container(
+                      child: SharedButton(
+                        text: "Browse Restaurant",
+                        onTap: () {
+                          Navigator.pushNamed(context, RoutePaths.SearchFranchise);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -105,10 +124,11 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildServiceMenu({ServiceMenuModel serviceMenuModel}){
+  Widget _buildServiceMenu({ServiceMenuModel serviceMenuModel}) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, RoutePaths.SearchFranchise, arguments: serviceMenuModel.type);
+      onTap: () {
+        Navigator.pushNamed(context, RoutePaths.SearchFranchise,
+            arguments: serviceMenuModel.type);
       },
       child: Center(
         child: Column(
@@ -117,8 +137,7 @@ class _HomeViewState extends State<HomeView> {
             CircleAvatar(
               radius: 30,
               backgroundImage:
-//          TODO replace with AssetImage(serviceItemModel.imagePath)
-              AssetImage(serviceMenuModel.imagePath),
+                  AssetImage(serviceMenuModel.imagePath),
             ),
             Text(
               serviceMenuModel.name,
@@ -131,7 +150,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildLatestNews(HomeViewModel viewModel) {
-    return Container(
+    return (viewModel.news.length >0)?Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -139,14 +158,17 @@ class _HomeViewState extends State<HomeView> {
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               "Latest News",
-              style: Theme.of(context).textTheme.subhead.merge(TextStyle(color: SharedColors.primaryColor)),
+              style: Theme.of(context)
+                  .textTheme
+                  .subhead
+                  .merge(TextStyle(color: SharedColors.primaryColor)),
             ),
           ),
           Divider(),
           ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: viewModel.news.length>3?3:viewModel.news.length,
+            itemCount: viewModel.news.length > 3 ? 3 : viewModel.news.length,
             itemBuilder: (BuildContext context, int itemCount) {
               return NewsContainer(
                 newsModel: viewModel.news[itemCount],
@@ -155,6 +177,6 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
-    );
+    ):Container();
   }
 }

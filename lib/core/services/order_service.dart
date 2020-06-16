@@ -34,7 +34,7 @@ class OrderService{
     });
     final resDecoded = json.decode(response);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {
-      orderDate = null;
+      this.orderDate = null;
       return resDecoded["result"]["id"];
     } else {
       throw(resDecoded["message"]);
@@ -63,6 +63,30 @@ class OrderService{
       return List<OrderModel>.from(resDecoded["result"]["data"].map((x) => OrderModel.fromJson(x)));
     } else {
       return [];
+    }
+  }
+
+  Future<OrderModel> cancelOrder({String id}) async {
+    final response = await _api.post(
+      url: "v1/order/$id/cancel",
+    );
+    final resDecoded = json.decode(response);
+    if (resDecoded["code"] == NetworkCode.SUCCESS) {
+      return OrderModel.fromJson(resDecoded['result']);
+    } else {
+      return OrderModel();
+    }
+  }
+
+  Future<OrderModel> finishOrder({String id}) async {
+    final response = await _api.post(
+      url: "v1/order/$id/finish",
+    );
+    final resDecoded = json.decode(response);
+    if (resDecoded["code"] == NetworkCode.SUCCESS) {
+      return OrderModel.fromJson(resDecoded['result']);
+    } else {
+      return OrderModel();
     }
   }
 }
