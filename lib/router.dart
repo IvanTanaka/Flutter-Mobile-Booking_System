@@ -8,7 +8,6 @@ import 'package:member_apps/ui/views/search_franchise_view.dart';
 import 'package:member_apps/ui/views/topup/topup_detail_view.dart';
 import 'package:member_apps/ui/views/topup/topup_history_view.dart';
 import 'package:member_apps/ui/views/topup/topup_view.dart';
-import 'core/enumerations/booking_service_type.dart';
 import 'ui/views/registration/login_view.dart';
 import 'ui/views/main_view.dart';
 
@@ -58,10 +57,10 @@ class Router {
         );
 
       case RoutePaths.SearchFranchise:
-        BookingServiceCategory serviceMenuType = settings.arguments;
+        String foodCategory = settings.arguments;
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.SearchFranchise),
-          builder: (_) => SearchFranchiseView(serviceMenuType: serviceMenuType),
+          builder: (_) => SearchFranchiseView(foodCategory: foodCategory),
         );
 
       case RoutePaths.OrderFoodStore:

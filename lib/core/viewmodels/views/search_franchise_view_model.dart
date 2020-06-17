@@ -1,10 +1,9 @@
-import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
 import 'package:member_apps/core/services/store_service.dart';
 import 'package:member_apps/core/viewmodels/base_view_model.dart';
 
 class SearchFranchiseViewModel extends BaseViewModel {
-  BookingServiceCategory type;
+  String food_category;
   StoreService _storeService;
   bool listIsUpdate = false;
   int page=1;
@@ -19,7 +18,7 @@ class SearchFranchiseViewModel extends BaseViewModel {
   Future getStoreByName(String name) async {
     setBusy(true);
     page=1;
-    searchStoreModel = await _storeService.getStoresByFilter(type: type, name: name);
+    searchStoreModel = await _storeService.getStoresByFilter(foodCategory: food_category, name: name);
     setBusy(false);
   }
 
@@ -28,7 +27,7 @@ class SearchFranchiseViewModel extends BaseViewModel {
       listIsUpdate = true;
       notifyListeners();
       page++;
-      List<SearchStoreModel> tempList = await _storeService.getStoresByFilter(type: type, name: name,page: page);
+      List<SearchStoreModel> tempList = await _storeService.getStoresByFilter(foodCategory: food_category, name: name,page: page);
       listIsUpdate = false;
       searchStoreModel.addAll(tempList);
       setBusy(false);}

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
-import 'package:member_apps/core/enumerations/booking_service_type.dart';
 import 'package:member_apps/core/models/branch_model.dart';
 import 'package:member_apps/core/models/search_store_model.dart';
 import 'package:member_apps/core/viewmodels/views/search_franchise_view_model.dart';
@@ -11,9 +10,9 @@ import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_loading_page.dart';
 
 class SearchFranchiseView extends StatefulWidget {
-  final BookingServiceCategory serviceMenuType;
+  final String foodCategory;
 
-  const SearchFranchiseView({Key key, this.serviceMenuType}) : super(key: key);
+  const SearchFranchiseView({Key key, this.foodCategory}) : super(key: key);
 
   @override
   _SearchFranchiseViewState createState() => _SearchFranchiseViewState();
@@ -46,7 +45,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
     return BaseWidget<SearchFranchiseViewModel>(
       model: _viewModel,
       onModelReady: (SearchFranchiseViewModel viewModel) {
-        viewModel.type = widget.serviceMenuType;
+        viewModel.food_category = widget.foodCategory;
         viewModel.searchStoreModel = [];
       },
       builder: (BuildContext context, SearchFranchiseViewModel viewModel,

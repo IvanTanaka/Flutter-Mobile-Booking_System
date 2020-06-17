@@ -1,23 +1,23 @@
 import 'package:member_apps/core/constants/category_name.dart';
-import 'package:member_apps/core/enumerations/booking_service_type.dart';
+import 'package:member_apps/core/constants/food_category.dart';
 
 class ServiceMenuModel{
 
-  final BookingServiceCategory type;
+  final String food_category;
 
   // ignore: missing_return
   String get name{
-    switch (this.type){
-      case BookingServiceCategory.fast_food:
+    switch (this.food_category){
+      case FoodCategory.FAST_FOOD:
         return CategoryName.FAST_FOOD;
         break;
-      case BookingServiceCategory.sea_food:
+      case FoodCategory.SEA_FOOD:
         return CategoryName.SEA_FOOD;
         break;
-      case BookingServiceCategory.salad:
+      case FoodCategory.SALAD:
         return CategoryName.SALAD;
         break;
-      case BookingServiceCategory.drinks:
+      case FoodCategory.DRINKS:
         return CategoryName.DRINKS;
         break;
     }
@@ -25,23 +25,23 @@ class ServiceMenuModel{
 
   // ignore: missing_return
   String get imagePath{
-    switch (this.type){
-      case BookingServiceCategory.fast_food:
+    switch (this.food_category){
+      case FoodCategory.FAST_FOOD:
         return "assets/images/fast_food.png";
         break;
-      case BookingServiceCategory.sea_food:
+      case FoodCategory.SEA_FOOD:
         return "assets/images/sea_food.png";
         break;
-      case BookingServiceCategory.salad:
+      case FoodCategory.SALAD:
         return "assets/images/salad.png";
         break;
-      case BookingServiceCategory.drinks:
+      case FoodCategory.DRINKS:
         return "assets/images/drinks.png";
         break;
     }
   }
 
-  ServiceMenuModel(this.type);
+  ServiceMenuModel(this.food_category);
 
 }
 

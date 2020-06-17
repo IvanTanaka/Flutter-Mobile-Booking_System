@@ -128,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, RoutePaths.SearchFranchise,
-            arguments: serviceMenuModel.type);
+            arguments: serviceMenuModel.food_category);
       },
       child: Center(
         child: Column(
