@@ -52,6 +52,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
       builder: (BuildContext context, SearchFranchiseViewModel viewModel,
           Widget child) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
             appBar: AppBar(
               elevation: 1,
               backgroundColor: SharedColors.scaffoldColor,
@@ -72,11 +73,38 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
             height: 50,
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: _buildSearchBar(),
-          ),
-          Expanded(
-              child:
-                  (_viewModel.busy) ? SharedLoadingPage() : _buildStoreList())
+          ), Expanded(
+                  child:
+                  (_viewModel.searchStoreModel.length == 0)
+                      ? _buildEmptyContainer()
+                      :(_viewModel.busy)
+                      ? SharedLoadingPage()
+                      : _buildStoreList())
         ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyContainer() {
+    return Center(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset("assets/images/search_empty.png"),
+            Container(
+              child: Text(
+                'Sorry, restaurant not found.',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: SharedColors.btnDisabledColor,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            Container(height: 120,),
+          ],
+        ),
       ),
     );
   }
@@ -89,7 +117,9 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
         return (index == _viewModel.searchStoreModel.length)
             ? Container(
                 height: 50,
-                child: (_viewModel.listIsUpdate)?SharedLoadingPage():Container(),
+                child: (_viewModel.listIsUpdate)
+                    ? SharedLoadingPage()
+                    : Container(),
               )
             : _buildStoreContainer(_viewModel.searchStoreModel[index]);
       },
@@ -108,7 +138,7 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
         }
       },
       child: Container(
-        margin: EdgeInsets.only(top: 5, bottom: 10, left: 5,right: 5),
+        margin: EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
         color: Colors.transparent,
         child: Container(
           child: Column(

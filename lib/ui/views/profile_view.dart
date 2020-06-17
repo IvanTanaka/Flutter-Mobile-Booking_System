@@ -46,13 +46,25 @@ class _ProfileViewState extends State<ProfileView> {
                     margin: EdgeInsets.all(10),
                     child: Row(
                       children: <Widget>[
-                        CircleAvatar(radius: 30,backgroundImage: AssetImage("assets/images/avatar-blank.png"),),
-                        Container(width: 10,),
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundImage:
+                              AssetImage("assets/images/avatar-blank.png"),
+                        ),
+                        Container(
+                          width: 10,
+                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             _buildName(viewModel),
+                            Container(
+                              height: 5,
+                            ),
                             _buildEmail(viewModel),
+                            Container(
+                              height: 3,
+                            ),
                             _buildPhoneNumber(viewModel),
                           ],
                         ),
@@ -60,9 +72,15 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   )
                 : Container(),
-            Divider(thickness: 1,),
-            WalletContainer(),
-            Container(height: 250,),
+            Divider(
+              thickness: 1,
+            ),
+            IgnorePointer(
+              child: WalletContainer(),
+            ),
+            Container(
+              height: 250,
+            ),
             Container(
               height: 10,
             ),
