@@ -457,6 +457,7 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
                       onTap: () async {
                         await viewModel.submitRate(
                             comment: _rateCommentController.text);
+                        Navigator.pushReplacementNamed(context, RoutePaths.OrderFoodDetail, arguments: widget.orderId);
                       },
                     ),
                   )

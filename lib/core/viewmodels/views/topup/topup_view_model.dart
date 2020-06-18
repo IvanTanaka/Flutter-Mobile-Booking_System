@@ -15,7 +15,7 @@ class TopupViewModel extends BaseViewModel {
 
   void validateTopUp(String value){
     _topupAmount = int.parse(value.substring(value.indexOf(" ")).replaceAll(".", ""));
-    topupButtonIsDisabled = _topupAmount<=10000;
+    topupButtonIsDisabled = _topupAmount<10000;
     setBusy(false);
   }
 
