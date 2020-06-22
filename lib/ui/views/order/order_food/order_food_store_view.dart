@@ -29,7 +29,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        await _viewModel.getProducts();
+        await _viewModel.getProducts(storeId: widget.storeId);
       }
     });
   }
