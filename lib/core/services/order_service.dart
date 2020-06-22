@@ -8,11 +8,7 @@ import 'package:member_apps/core/services/api.dart';
 class OrderService{
 
   DateTime orderDate;
-  List<OrderCartModel> _orderBody;
-  List<OrderCartModel> get carts => _orderBody;
-  set carts(List<OrderCartModel> carts){
-    this._orderBody = carts;
-  }
+  List<OrderCartModel> carts = [];
 
   Api _api;
 

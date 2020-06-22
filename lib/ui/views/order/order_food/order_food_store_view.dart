@@ -52,24 +52,31 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
       },
       builder: (BuildContext context, OrderFoodStoreViewModel viewModel,
           Widget child) {
-        return Scaffold(
-          appBar: AppBar(
-              elevation: 1,
-              backgroundColor: SharedColors.scaffoldColor,
-              title: Text(viewModel.branchModel!=null?viewModel.branchModel.franchiseName:"")),
+        return WillPopScope(
+          onWillPop: (){
+            viewModel.carts.clear();
+            viewModel.cartsProducts.clear();
+            return Future.value(true);
+          },
+          child: Scaffold(
+            appBar: AppBar(
+                elevation: 1,
+                backgroundColor: SharedColors.scaffoldColor,
+                title: Text(viewModel.branchModel!=null?viewModel.branchModel.franchiseName:"")),
 
-          bottomSheet: Container(
-            height: viewModel.carts.length>0?70:0,
-            child: SharedButton(
-              onTap: (){
-                viewModel.continueOrder();
-                Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation, arguments: widget.storeId);
-              },
-              txtFontSize: 20,
-              text: "${viewModel.carts.length??0} items on cart - Continue",
+            bottomSheet: Container(
+              height: viewModel.carts.length>0?70:0,
+              child: SharedButton(
+                onTap: (){
+                  viewModel.continueOrder();
+                  Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation, arguments: widget.storeId);
+                },
+                txtFontSize: 20,
+                text: "${viewModel.carts.length??0} items on cart - Continue",
+              ),
             ),
+            body: _buildBody(viewModel),
           ),
-          body: _buildBody(viewModel),
         );
       },
     );

@@ -95,7 +95,7 @@ class OrderFoodConfirmationViewModel extends BaseViewModel {
       }
       return storeProductModel.id == model.id && model.qty <= 0;
     });
-    carts.where((OrderCartModel cartModel) {
+    carts.removeWhere((OrderCartModel cartModel) {
       if (cartModel.id == model.id) {
         cartModel.qty = model.qty;
       }

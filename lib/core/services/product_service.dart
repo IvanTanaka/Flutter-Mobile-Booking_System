@@ -7,7 +7,7 @@ import 'package:member_apps/core/services/api.dart';
 class ProductService{
 
   Api _api;
-  List<OrderStoreProductModel> carts;
+  List<OrderStoreProductModel> carts = [];
 
   ProductService({Api api}){
     this._api =api;

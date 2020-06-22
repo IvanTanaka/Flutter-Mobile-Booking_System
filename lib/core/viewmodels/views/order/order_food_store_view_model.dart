@@ -22,8 +22,8 @@ class OrderFoodStoreViewModel extends BaseViewModel {
   }
 
   List<OrderStoreProductModel> orderStoreProducts = [];
-  List<OrderStoreProductModel> cartsProducts =[];
-  List<OrderCartModel> carts = [];
+  List<OrderStoreProductModel> get cartsProducts =>_productService.carts;
+  List<OrderCartModel> get carts => _orderService.carts;
   int _page = 0;
 
   DateTime _orderDate;
