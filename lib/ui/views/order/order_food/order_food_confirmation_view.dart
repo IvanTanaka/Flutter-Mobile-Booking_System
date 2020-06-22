@@ -50,8 +50,8 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
                 Navigator.popUntil(context, (route)=>route.isFirst);
                 Navigator.pushNamed(context, RoutePaths.OrderFoodDetail, arguments: viewModel.orderId);
               },
-              isDisabled: (viewModel.orderDate == null || viewModel.walletAmount < viewModel.totalOrderPrice),
-              disabledText: (viewModel.orderDate == null)?"Choose Your Order Time":"Wallet Balance Not Enough",
+              isDisabled: (viewModel.orderDate == null || viewModel.walletAmount < viewModel.totalOrderPrice || viewModel.orderDetail.length<=0),
+              disabledText: (viewModel.orderDate == null)?"Choose Your Order Time":(viewModel.walletAmount < viewModel.totalOrderPrice)?"Wallet Balance Not Enough":"Cart Is Empty, Nothing to Order. ",
               isLoading: viewModel.busy,
               text: "Click to Submit Order",
               txtFontSize: 20,

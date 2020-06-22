@@ -10,13 +10,13 @@ class OrderFoodDetailViewModel extends BaseViewModel {
   OrderService _orderService;
   RateService _rateService;
   OrderModel orderModel;
-  double star;
+  double star = 5.0;
 
   Color get statusColor {
     switch(orderModel.status){
+      case "accepted":
       case "waiting":
         return SharedColors.statusWaiting;
-      case "accepted":
       case "finished":
         return SharedColors.statusSuccess;
       case "canceled":
