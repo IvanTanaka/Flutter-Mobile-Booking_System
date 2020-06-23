@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/models/branch_model.dart';
@@ -154,6 +155,23 @@ class _SearchFranchiseViewState extends State<SearchFranchiseView> {
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                 ),
               ),
+              (model.ratingStars!=null)?Container(
+                margin: EdgeInsets.only(bottom: 5),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 15,
+                      ),
+                      child: Text(
+                        model.ratingStars,
+                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                      ),
+                    ),
+                    Icon(Icons.star, color: SharedColors.statusWaiting, size: 16,)
+                  ],
+                ),
+              ):Container(),
               (!model.haveBranches)
                   ? Container(
                       padding: EdgeInsets.only(left: 15, right: 15),

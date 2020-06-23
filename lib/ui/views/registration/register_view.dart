@@ -156,6 +156,7 @@ class _RegisterViewState extends State<RegisterView> {
             return viewModel.validatePhoneNumber(value);
           },
           cursorColor: SharedColors.primaryColor,
+          keyboardType: TextInputType.phone,
           decoration: InputDecoration(
             labelText: "Phone Number",
             prefixIcon: Icon(

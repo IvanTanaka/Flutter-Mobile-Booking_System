@@ -3,6 +3,7 @@ import 'package:member_apps/core/models/branch_model.dart';
 class SearchStoreModel {
   String id;
   String franchiseName;
+  String ratingStars;
 
 
   List<BranchModel> branches;
@@ -35,13 +36,15 @@ class SearchStoreModel {
     return "";
   }
 
-  SearchStoreModel({this.id, this.franchiseName, this.branches});
+  SearchStoreModel({this.id, this.franchiseName,this.ratingStars, this.branches});
 
   factory SearchStoreModel.fromJson(Map<String, dynamic> json) =>
       SearchStoreModel(
         id: json["id"] == null ? null : json["id"],
         franchiseName:
             json["name"] == null ? null : json["name"],
+        ratingStars:
+            json["rating_stars"] == null ? null : json["rating_stars"],
         branches: json["branches"] == null
             ? null
             : List<BranchModel>.from(

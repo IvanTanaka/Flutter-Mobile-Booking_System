@@ -111,6 +111,8 @@ class OrderFoodConfirmationViewModel extends BaseViewModel {
         total: totalOrderPrice,
         dineInQty: dineInQty,
         orderDate: orderDate);
+    orderDetail.clear();
+    carts.clear();
     setBusy(false);
   }
 }

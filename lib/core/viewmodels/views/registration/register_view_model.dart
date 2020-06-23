@@ -49,6 +49,10 @@ class RegisterViewModel extends BaseViewModel {
     if(value.length<=0){
       return "Phone number must not be empty";
     }
+    final phoneRegex = RegExp(r'\+?([ -]?\d+)+|\(\d+\)([ -]\d+)');
+    if(phoneRegex.stringMatch(value)!=value){
+      return "Please input a correct format";
+    }
     this.phoneNumber = value;
     return null;
   }
