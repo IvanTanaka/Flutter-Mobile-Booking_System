@@ -19,6 +19,7 @@ class OrderModel {
       this.total,
       this.peopleCount,
       this.reserveTime,
+      this.note,
       this.createdAt,
       this.updatedAt,
       this.orderDetails,
@@ -32,6 +33,7 @@ class OrderModel {
   String cashierId;
   String franchiseId;
   String status;
+  String note;
 
   String get statusStr{
     switch (status){
@@ -111,6 +113,9 @@ class OrderModel {
       reserveTime: json["reserve_time"] == null
           ? null
           : DateTime.parse(json["reserve_time"]),
+      note: json["note"] == null
+          ? null
+          : json["note"],
       createdAt: json["created_at"] == null
           ? null
           : DateTime.parse(json["created_at"]),

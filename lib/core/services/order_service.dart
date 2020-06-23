@@ -16,7 +16,7 @@ class OrderService{
     this._api =api;
   }
 
-  Future<String> submitOrder({String storeId, int total, int dineInQty, DateTime orderDate}) async {
+  Future<String> submitOrder({String note, String storeId, int total, int dineInQty, DateTime orderDate}) async {
     List cartStr = [];
     carts.forEach(($cart){
       cartStr.add($cart.toJson());
@@ -27,6 +27,7 @@ class OrderService{
       "total": total,
       "people_count": dineInQty,
       "reserve_time": orderDate.toString(),
+      "note": note,
     });
     final resDecoded = json.decode(response);
     if (resDecoded["code"] == NetworkCode.SUCCESS) {

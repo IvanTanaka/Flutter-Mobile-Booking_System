@@ -104,9 +104,10 @@ class OrderFoodConfirmationViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<void> submitOrder({String storeId}) async {
+  Future<void> submitOrder({String storeId, String note}) async {
     setBusy(true);
     orderId = await _orderService.submitOrder(
+        note: note,
         storeId: storeId,
         total: totalOrderPrice,
         dineInQty: dineInQty,

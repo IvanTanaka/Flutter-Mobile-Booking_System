@@ -25,6 +25,9 @@ class OrderFoodConfirmationView extends StatefulWidget {
 }
 
 class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
+
+  TextEditingController _noteController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BaseWidget<OrderFoodConfirmationViewModel>(
@@ -46,7 +49,7 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
             margin: EdgeInsets.symmetric(horizontal: 5),
             child: SharedButton(
               onTap: () async {
-                await viewModel.submitOrder(storeId: widget.storeId);
+                await viewModel.submitOrder(storeId: widget.storeId, note: _noteController.text);
                 Navigator.popUntil(context, (route)=>route.isFirst);
                 Navigator.pushNamed(context, RoutePaths.OrderFoodDetail, arguments: viewModel.orderId);
               },
@@ -78,12 +81,37 @@ class _OrderFoodConfirmationViewState extends State<OrderFoodConfirmationView> {
           Container(
             height: 10,
           ),
+          _buildNote(viewModel),
           WalletContainer(),
           Container(
             height: 170,
           ),
 
         ],
+      ),
+    );
+  }
+  Widget _buildNote(OrderFoodConfirmationViewModel viewModel){
+    return Container(
+      decoration: BoxDecoration(
+          color: SharedColors.primaryColor,
+          borderRadius: BorderRadius.circular(5)),
+      margin: EdgeInsets.all(10),
+      child: Card(
+        elevation: 3,
+        borderOnForeground: true,
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: TextField(
+            controller: _noteController,
+            maxLines: 2,
+            decoration: InputDecoration.collapsed(
+                hintText: "Note to seller...",
+
+            ),
+          )
+        )
       ),
     );
   }

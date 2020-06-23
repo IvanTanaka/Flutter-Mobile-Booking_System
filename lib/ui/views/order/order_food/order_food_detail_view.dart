@@ -88,9 +88,46 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
               height: 20,
             ),
             _buildTotalPayment(viewModel),
+            (viewModel.orderModel.note != null)?_buildOrderNote(viewModel):Container(),
             _buildOrderFooter(viewModel),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildOrderNote(OrderFoodDetailViewModel viewModel) {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Divider(
+            thickness: 1,
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  'Note to Seller',
+                  style: Theme.of(context).textTheme.title.merge(
+                        TextStyle(
+                          color: SharedColors.primaryColor,
+                        ),
+                      ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Text(viewModel.orderModel.note,style: TextStyle(fontSize: 16),),
+          ),
+          Divider(
+            thickness: 1,
+          ),
+        ],
       ),
     );
   }
@@ -457,7 +494,9 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
                       onTap: () async {
                         await viewModel.submitRate(
                             comment: _rateCommentController.text);
-                        Navigator.pushReplacementNamed(context, RoutePaths.OrderFoodDetail, arguments: widget.orderId);
+                        Navigator.pushReplacementNamed(
+                            context, RoutePaths.OrderFoodDetail,
+                            arguments: widget.orderId);
                       },
                     ),
                   )
