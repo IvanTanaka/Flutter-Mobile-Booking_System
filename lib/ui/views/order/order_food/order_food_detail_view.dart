@@ -67,6 +67,10 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
             ),
             _buildStatus(viewModel),
             Container(
+              height: 10,
+            ),
+            _buildCode(viewModel),
+            Container(
               height: 20,
             ),
             Divider(
@@ -236,6 +240,19 @@ class _OrderFoodDetailViewState extends State<OrderFoodDetailView> {
           color: (viewModel.statusColor),
           fontWeight: FontWeight.w500,
           fontSize: 23,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCode(OrderFoodDetailViewModel viewModel) {
+    return Container(
+      child: Text(
+        viewModel.orderModel.orderCode,
+        style: TextStyle(
+          color: SharedColors.accentColor,
+          fontWeight: FontWeight.w700,
+          fontSize: 30,
         ),
       ),
     );

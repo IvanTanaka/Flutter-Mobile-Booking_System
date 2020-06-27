@@ -11,6 +11,7 @@ import 'package:member_apps/ui/shared_colors.dart';
 class OrderModel {
   OrderModel(
       {this.id,
+      this.orderCode,
       this.customerId,
       this.branchId,
       this.cashierId,
@@ -28,6 +29,7 @@ class OrderModel {
       this.rate});
 
   String id;
+  String orderCode;
   String customerId;
   String branchId;
   String cashierId;
@@ -103,6 +105,7 @@ class OrderModel {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
       id: json["id"] == null ? null : json["id"],
+      orderCode: json["order_code"] == null ? null : json["order_code"],
       customerId: json["customer_id"] == null ? null : json["customer_id"],
       branchId: json["branch_id"] == null ? null : json["branch_id"],
       cashierId: json["cashier_id"],

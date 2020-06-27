@@ -39,6 +39,7 @@ dependencies:
   flutter_money_formatter: ^0.8.2
   flutter_masked_text: ^0.8.0
   smooth_star_rating: 1.1.1
+  clipboard_manager: ^0.0.1
 
 
 dev_dependencies:

@@ -1,3 +1,4 @@
+import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:member_apps/base_widget.dart';
 import 'package:member_apps/core/constants/top_up_status.dart';
@@ -111,7 +112,6 @@ class _TopupDetailViewState extends State<TopupDetailView> {
                     fontSize: 24,
                   ),
                 ),
-
               ],
             ),
           ),
@@ -119,16 +119,31 @@ class _TopupDetailViewState extends State<TopupDetailView> {
             thickness: 2,
             height: 35,
           ),
-          Container(
-            child: Text(
-              viewModel.topupModel.vaNumber,
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  color: SharedColors.accentColor),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: SelectableText(
+                  viewModel.topupModel.vaNumber,
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700,
+                      color: SharedColors.accentColor),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: GestureDetector(
+                  onTap: (){
+                    ClipboardManager.copyToClipBoard(viewModel.topupModel.vaNumber);
+                  },
+                  child: Container(
+                    child: Icon(Icons.content_copy),
+                  ),
+                ),
+              )
+            ],
           ),
-
           Divider(
             thickness: 2,
             height: 35,
@@ -139,7 +154,7 @@ class _TopupDetailViewState extends State<TopupDetailView> {
   }
 
   Widget _buildTopUpStatus(TopupDetailViewModel viewModel) {
-    switch (viewModel.topupModel.status){
+    switch (viewModel.topupModel.status) {
       case TopUpStatus.FAILED:
         return Container(
           width: double.infinity,
@@ -148,13 +163,16 @@ class _TopupDetailViewState extends State<TopupDetailView> {
             children: <Widget>[
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 120, vertical: 50),
-                  child: Image.asset("assets/images/failed_icon.png",)
-              ),
+                  child: Image.asset(
+                    "assets/images/failed_icon.png",
+                  )),
               Container(
                 child: Text(
                   "FAILED",
-                  style: TextStyle(fontSize: 48, color: SharedColors.statusFailed,
-                  fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 48,
+                      color: SharedColors.statusFailed,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ],
@@ -168,11 +186,16 @@ class _TopupDetailViewState extends State<TopupDetailView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(height: 20,),
+              Container(
+                height: 20,
+              ),
               Container(
                 child: Text(
                   "Waiting for Transfer",
-                  style: TextStyle(fontSize: 30, color: SharedColors.statusWaiting, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: SharedColors.statusWaiting,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ],
@@ -188,12 +211,15 @@ class _TopupDetailViewState extends State<TopupDetailView> {
             children: <Widget>[
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 120, vertical: 50),
-                  child: Image.asset("assets/images/success_icon.png",)
-              ),
+                  child: Image.asset(
+                    "assets/images/success_icon.png",
+                  )),
               Container(
                 child: Text(
                   "SUCCESS",
-                  style: TextStyle(fontSize: 48, color: SharedColors.statusSuccess,
+                  style: TextStyle(
+                      fontSize: 48,
+                      color: SharedColors.statusSuccess,
                       fontWeight: FontWeight.w500),
                 ),
               ),
@@ -201,7 +227,7 @@ class _TopupDetailViewState extends State<TopupDetailView> {
           ),
         );
         break;
-        default:
+      default:
         return Container();
     }
   }
