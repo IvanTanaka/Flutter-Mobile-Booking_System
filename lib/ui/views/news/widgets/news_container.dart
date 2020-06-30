@@ -78,6 +78,7 @@ class _NewsContainerState extends State<NewsContainer> {
   Widget _buildNewsDescription() {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -99,7 +100,7 @@ class _NewsContainerState extends State<NewsContainer> {
                 ExtendedText(
                   model.description,
                   maxLines: 2,
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.start,
                   overFlowTextSpan: OverFlowTextSpan(
                     text: " ... more",
                     style: TextStyle(color: Colors.black45),

@@ -8,7 +8,6 @@ class NewsDetailModel {
   String _image;
   String get imagePath {
     String domain = NetworkConfig.DOMAIN_URL;
-    print("$domain$_image");
     return "$domain$_image";
   }
   FranchiseModel franchise;

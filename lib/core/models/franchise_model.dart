@@ -1,3 +1,4 @@
+import 'package:member_apps/core/constants/network_config.dart';
 import 'package:member_apps/ui/prototype_constant.dart';
 
 class FranchiseModel {
@@ -20,7 +21,7 @@ class FranchiseModel {
     ownerId: json["owner_id"] == null ? null : json["owner_id"],
     categoryId: json["category_id"] == null ? null : json["category_id"],
     name: json["name"] == null ? null : json["name"],
-    imagePath: json["image_path"] == null? PrototypeConstant.FRANCHISE_PROFILE_IMAGE:json["image_path"],
+    imagePath: json["image_path"] == null? PrototypeConstant.FRANCHISE_PROFILE_IMAGE:NetworkConfig.DOMAIN_URL+"storage/images/"+json["id"]+"/"+json["image_path"],
   );
 
   Map<String, dynamic> toJson() => {
