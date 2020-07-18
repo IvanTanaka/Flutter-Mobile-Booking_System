@@ -1,4 +1,5 @@
 import 'package:member_apps/core/constants/network_config.dart';
+import 'package:member_apps/core/services/helper.dart';
 
 class OrderStoreProductModel{
   String id;
@@ -14,6 +15,10 @@ class OrderStoreProductModel{
   int price;
 //  int discountPrice;
   int qty;
+
+  String get formattedPrice{
+    return Helper.doubleToMoneyFormat(price.toDouble());
+  }
 
   void addQty(){
     this.qty++;

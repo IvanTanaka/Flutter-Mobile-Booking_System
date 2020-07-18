@@ -150,7 +150,7 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                             padding: EdgeInsets.only(right: 15),
                             alignment: Alignment.centerRight,
                             child: Text(
-                              "${model.price}",
+                              "${model.formattedPrice}",
                               style: Theme.of(context)
                                   .textTheme
                                   .body2
