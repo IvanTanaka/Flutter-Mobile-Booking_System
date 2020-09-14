@@ -32,7 +32,7 @@ class SharedColors {
 
   static const Color btnTxtColor = Color(0xFFFFFFFF);
 
-  static const Color btnDisabledColor = Color(0xFFAEAEAE);
+  static const Color btnDisabledColor = Color(0xFFAEAEAE  );
 
   static const Color statusWaiting = Color(0xFFFCBA03);
   static const Color statusSuccess = Color(0xFF36BF00);

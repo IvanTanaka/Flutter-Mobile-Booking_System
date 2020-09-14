@@ -4,6 +4,7 @@ import 'package:member_apps/core/viewmodels/views/registration/register_view_mod
 import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
+import 'package:member_apps/ui/widgets/shared_text_form_field.dart';
 
 import '../../../router.dart';
 
@@ -113,9 +114,12 @@ class _RegisterViewState extends State<RegisterView> {
               borderRadius: BorderRadius.circular(10),
               color: SharedColors.errorColor,
             ),
-            child: Text(snapshot.data, style: TextStyle(
-              color: SharedColors.txtAccentColor,
-            ),),
+            child: Text(
+              snapshot.data,
+              style: TextStyle(
+                color: SharedColors.txtAccentColor,
+              ),
+            ),
           );
         }
         return Container();
@@ -127,21 +131,11 @@ class _RegisterViewState extends State<RegisterView> {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        child: TextFormField(
+        child: SharedTextFormField(
           validator: (String value) {
             return viewModel.validateName(value);
           },
-          cursorColor: SharedColors.primaryColor,
-          decoration: InputDecoration(
-            labelText: "Name",
-            prefixIcon: Icon(
-              Icons.person,
-//              color:  SharedColors.primaryColor,
-            ),
-            labelStyle: TextStyle(
-//              color:  SharedColors.primaryColor,
-                ),
-          ),
+          hintText: "Name",
         ),
       ),
     );
@@ -280,7 +274,9 @@ class _RegisterViewState extends State<RegisterView> {
             text: "Already have an account? ",
             style: TextStyle(color: SharedColors.txtColor),
             children: <TextSpan>[
-              TextSpan(text: 'Log in', style: TextStyle(color: SharedColors.linkColor)),
+              TextSpan(
+                  text: 'Log in',
+                  style: TextStyle(color: SharedColors.linkColor)),
             ],
           ),
         ),
