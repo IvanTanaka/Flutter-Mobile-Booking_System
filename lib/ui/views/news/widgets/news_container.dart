@@ -101,9 +101,11 @@ class _NewsContainerState extends State<NewsContainer> {
                   model.description,
                   maxLines: 2,
                   textAlign: TextAlign.start,
-                  overFlowTextSpan: OverFlowTextSpan(
-                    text: " ... more",
-                    style: TextStyle(color: Colors.black45),
+                  overflowWidget: TextOverflowWidget(
+                    child: Text(
+                      " ... more",
+                      style: TextStyle(color: Colors.black45),
+                    ),
                   ),
                 ),
               ],

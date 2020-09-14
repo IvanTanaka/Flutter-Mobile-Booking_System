@@ -19,7 +19,6 @@ class OrderFoodStoreView extends StatefulWidget {
 }
 
 class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
-
   ScrollController _scrollController = new ScrollController();
   OrderFoodStoreViewModel _viewModel = locator<OrderFoodStoreViewModel>();
 
@@ -46,14 +45,12 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
       model: _viewModel,
       onModelReady: (OrderFoodStoreViewModel viewModel) async {
         await viewModel.loadStore(storeId: widget.storeId);
-        await viewModel.getProducts(
-          storeId: widget.storeId
-        );
+        await viewModel.getProducts(storeId: widget.storeId);
       },
       builder: (BuildContext context, OrderFoodStoreViewModel viewModel,
           Widget child) {
         return WillPopScope(
-          onWillPop: (){
+          onWillPop: () {
             viewModel.carts.clear();
             viewModel.cartsProducts.clear();
             return Future.value(true);
@@ -62,17 +59,19 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
             appBar: AppBar(
                 elevation: 1,
                 backgroundColor: SharedColors.scaffoldColor,
-                title: Text(viewModel.branchModel!=null?viewModel.branchModel.franchiseName:"")),
-
+                title: Text(viewModel.branchModel != null
+                    ? viewModel.branchModel.franchiseName
+                    : "")),
             bottomSheet: Container(
-              height: viewModel.carts.length>0?70:0,
+              height: viewModel.carts.length > 0 ? 70 : 0,
               child: SharedButton(
-                onTap: (){
+                onTap: () {
                   viewModel.continueOrder();
-                  Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation, arguments: widget.storeId);
+                  Navigator.pushNamed(context, RoutePaths.OrderFoodConfirmation,
+                      arguments: widget.storeId);
                 },
                 txtFontSize: 20,
-                text: "${viewModel.carts.length??0} items on cart - Continue",
+                text: "${viewModel.carts.length ?? 0} items on cart - Continue",
               ),
             ),
             body: _buildBody(viewModel),
@@ -92,22 +91,27 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
     );
   }
 
-
   Widget _buildStoreProduct(OrderFoodStoreViewModel viewModel) {
     return Container(
       child: ListView.separated(
           controller: _scrollController,
-          itemCount: viewModel.orderStoreProducts.length+1,
-          separatorBuilder: (BuildContext context, int index){
+          itemCount: viewModel.orderStoreProducts.length + 1,
+          separatorBuilder: (BuildContext context, int index) {
             return Divider();
           },
           itemBuilder: (BuildContext context, int index) {
-            return (index==viewModel.orderStoreProducts.length?Container(height: 100,):_buildStoreProductItem(viewModel, viewModel.orderStoreProducts[index]));
+            return (index == viewModel.orderStoreProducts.length
+                ? Container(
+                    height: 100,
+                  )
+                : _buildStoreProductItem(
+                    viewModel, viewModel.orderStoreProducts[index]));
           }),
     );
   }
 
-  Widget _buildStoreProductItem(OrderFoodStoreViewModel viewModel, OrderStoreProductModel model) {
+  Widget _buildStoreProductItem(
+      OrderFoodStoreViewModel viewModel, OrderStoreProductModel model) {
     return Container(
       height: 120,
       margin: EdgeInsets.symmetric(horizontal: 5),
@@ -115,9 +119,11 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: model.imagePath != null?Image.network(
-              model.imagePath,
-            ):Image.asset("assets/images/empty_image.png"),
+            child: model.imagePath != null
+                ? Image.network(
+                    model.imagePath,
+                  )
+                : Image.asset("assets/images/empty_image.png"),
           ),
           Expanded(
             flex: 4,
@@ -186,9 +192,11 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                           model.description,
                           style: Theme.of(context).textTheme.caption,
                           maxLines: 3,
-                          overFlowTextSpan: OverFlowTextSpan(
-                            text: " ...",
-                            style: TextStyle(color: Colors.black45),
+                          overflowWidget: TextOverflowWidget(
+                            child: Text(
+                              " ...",
+                              style: TextStyle(color: Colors.black45),
+                            ),
                           ),
                         ),
                       ),
@@ -210,7 +218,8 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                                     size: 14.0,
                                   ),
                                   shape: new CircleBorder(),
-                                  constraints: BoxConstraints(minHeight: 30, minWidth: 30),
+                                  constraints: BoxConstraints(
+                                      minHeight: 30, minWidth: 30),
                                   elevation: 4,
                                   fillColor: Colors.white,
                                 ),
@@ -227,7 +236,8 @@ class _OrderFoodStoreViewState extends State<OrderFoodStoreView> {
                                     size: 14.0,
                                   ),
                                   shape: new CircleBorder(),
-                                  constraints: BoxConstraints(minHeight: 30, minWidth: 30),
+                                  constraints: BoxConstraints(
+                                      minHeight: 30, minWidth: 30),
                                   elevation: 4,
                                   fillColor: Colors.white,
                                 ),
