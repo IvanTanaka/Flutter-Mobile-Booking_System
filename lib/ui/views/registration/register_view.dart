@@ -30,71 +30,82 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   Widget _buildBody(RegisterViewModel viewModel) {
-    return Container(
-      alignment: Alignment.center,
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                height: 50,
-              ),
-              _buildLogo(),
-              _buildSubhead(),
-              _buildErrorMessage(viewModel),
-              _buildNameField(viewModel),
-              Container(
-                height: 10,
-              ),
-              _buildPhoneNumberField(viewModel),
-              Container(
-                height: 10,
-              ),
-              _buildEmailField(viewModel),
-              Container(
-                height: 10,
-              ),
-              _buildPasswordField(viewModel),
-              Container(
-                height: 10,
-              ),
-              _buildConfirmPasswordField(viewModel),
-              Container(
-                height: 50,
-              ),
-              _buildSubmitButton(viewModel),
-              Container(
-                height: 10,
-              ),
-              _buildRLoginButton(),
-              Container(
-                height: 50,
-              ),
-            ],
-          ),
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: Image.asset("assets/images/background_registration.png"),
         ),
-      ),
-    );
-  }
-
-  Widget _buildLogo() {
-    return Text(
-      "membee",
-      style: Theme.of(context).textTheme.headline.merge(
-            TextStyle(
-              color: SharedColors.primaryColor,
-              fontWeight: FontWeight.bold,
+        Container(
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 50,
+                  ),
+                  _buildSubhead(),
+                  _buildErrorMessage(viewModel),
+                  Container(
+                    height: 25,
+                  ),
+                  _buildEmailField(viewModel),
+                  Container(
+                    height: 20,
+                  ),
+                  _buildNameField(viewModel),
+                  Container(
+                    height: 20,
+                  ),
+                  _buildPhoneNumberField(viewModel),
+                  Container(
+                    height: 20,
+                  ),
+                  _buildPasswordField(viewModel),
+                  Container(
+                    height: 20,
+                  ),
+                  _buildConfirmPasswordField(viewModel),
+                  Container(
+                    height: 40,
+                  ),
+                  _buildSubmitButton(viewModel),
+                  Container(
+                    height: 16,
+                  ),
+                  _buildDividerLabel(),
+                  Container(
+                    height: 16,
+                  ),
+                  _buildGoogleSignInButton(viewModel),
+                  Container(
+                    height: 35,
+                  ),
+                  _buildLoginLink(),
+                  Container(
+                    height: 50,
+                  ),
+                ],
+              ),
             ),
           ),
+        ),
+      ],
     );
   }
 
   Widget _buildSubhead() {
     return Text(
-      "Sign Up",
-      style: Theme.of(context).textTheme.subhead,
+      "Create Account",
+      style: TextStyle(
+        fontSize: 30,
+        fontWeight: FontWeight.w700,
+        color: SharedColors.primaryOrangeColor,
+      ),
     );
   }
 
@@ -145,22 +156,11 @@ class _RegisterViewState extends State<RegisterView> {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        child: TextFormField(
+        child: SharedTextFormField(
           validator: (String value) {
             return viewModel.validatePhoneNumber(value);
           },
-          cursorColor: SharedColors.primaryColor,
-          keyboardType: TextInputType.phone,
-          decoration: InputDecoration(
-            labelText: "Phone Number",
-            prefixIcon: Icon(
-              Icons.smartphone,
-//              color:  SharedColors.primaryColor,
-            ),
-            labelStyle: TextStyle(
-//              color:  SharedColors.primaryColor,
-                ),
-          ),
+          hintText: "Phone Number",
         ),
       ),
     );
@@ -170,22 +170,11 @@ class _RegisterViewState extends State<RegisterView> {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        child: TextFormField(
+        child: SharedTextFormField(
           validator: (String value) {
             return viewModel.validateEmail(value);
           },
-          cursorColor: SharedColors.primaryColor,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            labelText: "Email",
-            prefixIcon: Icon(
-              Icons.email,
-//              color:  SharedColors.primaryColor,
-            ),
-            labelStyle: TextStyle(
-//              color:  SharedColors.primaryColor,
-                ),
-          ),
+          hintText: "Email",
         ),
       ),
     );
@@ -195,22 +184,12 @@ class _RegisterViewState extends State<RegisterView> {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        child: TextFormField(
+        child: SharedTextFormField(
           validator: (String value) {
             return viewModel.validatePassword(value);
           },
           obscureText: true,
-          cursorColor: SharedColors.primaryColor,
-          decoration: InputDecoration(
-            labelText: "Password",
-            prefixIcon: Icon(
-              Icons.lock,
-//              color:  SharedColors.primaryColor,
-            ),
-            labelStyle: TextStyle(
-//              color:  SharedColors.primaryColor,
-                ),
-          ),
+          hintText: "Password",
         ),
       ),
     );
@@ -220,7 +199,7 @@ class _RegisterViewState extends State<RegisterView> {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        child: TextFormField(
+        child: SharedTextFormField(
           validator: (String value) {
             return viewModel.validateConfirmPassword(value);
           },
@@ -228,17 +207,7 @@ class _RegisterViewState extends State<RegisterView> {
             viewModel.confirmPassword = value;
           },
           obscureText: true,
-          cursorColor: SharedColors.primaryColor,
-          decoration: InputDecoration(
-            labelText: "Confirm Password",
-            prefixIcon: Icon(
-              Icons.lock,
-//              color:  SharedColors.primaryColor,
-            ),
-            labelStyle: TextStyle(
-//              color:  SharedColors.primaryColor,
-                ),
-          ),
+          hintText: "Confirm Password",
         ),
       ),
     );
@@ -263,7 +232,70 @@ class _RegisterViewState extends State<RegisterView> {
         ));
   }
 
-  Widget _buildRLoginButton() {
+  Widget _buildDividerLabel() {
+    return Container(
+      width: double.infinity,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          new Container(
+            width: 60,
+            child: Divider(
+              color: Colors.black,
+              height: 0.5,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Text("or"),
+          ),
+          Container(
+            width: 60,
+            child: Divider(
+              color: Colors.black,
+              height: 0.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGoogleSignInButton(RegisterViewModel viewModel) {
+    return Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: SharedButton(
+//          isLoading: viewModel.busy,
+          activeColor: SharedColors.whiteColor,
+          textColor: SharedColors.blackColor,
+          preWidget: Row(
+            children: [
+              Image.asset(
+                "assets/images/google_icon.png",
+                height: 20,
+                width: 20,
+              ),
+              Container(
+                width: 10,
+              )
+            ],
+          ),
+          text: "Sign up with Google",
+          onTap: () async {
+            if (_formKey.currentState.validate()) {
+              await viewModel.registerUser();
+              bool isLogin = await viewModel.isLogin;
+              if (isLogin) {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.pushReplacementNamed(context, RoutePaths.Main);
+              }
+            }
+          },
+        ));
+  }
+
+  Widget _buildLoginLink() {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, RoutePaths.Login);
@@ -272,11 +304,19 @@ class _RegisterViewState extends State<RegisterView> {
         child: RichText(
           text: TextSpan(
             text: "Already have an account? ",
-            style: TextStyle(color: SharedColors.txtColor),
+            style: TextStyle(
+                color: SharedColors.blackColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 13),
             children: <TextSpan>[
               TextSpan(
-                  text: 'Log in',
-                  style: TextStyle(color: SharedColors.linkColor)),
+                text: 'Log in',
+                style: TextStyle(
+                  color: SharedColors.primaryOrangeColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
             ],
           ),
         ),
