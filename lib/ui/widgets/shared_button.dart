@@ -15,6 +15,7 @@ class SharedButton extends StatefulWidget {
   final EdgeInsetsGeometry margin;
   final bool isDisabled;
   final bool isLoading;
+  final bool isGoogle;
 
   const SharedButton({
     Key key,
@@ -28,6 +29,7 @@ class SharedButton extends StatefulWidget {
     this.height = 50,
     this.txtFontSize = 18,
     this.margin,
+    this.isGoogle = false,
     this.isDisabled = false,
     this.isLoading = false,
     this.textColor = SharedColors.btnTxtColor,
@@ -46,7 +48,7 @@ class _SharedButtonState extends State<SharedButton> {
         borderRadius: BorderRadius.all(Radius.circular(30.5)),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: SharedColors.transparentOrangeColor,
+            color: widget.isGoogle?SharedColors.transparentGrayColor:SharedColors.transparentOrangeColor,
             blurRadius: 40,
             offset: Offset(0, 0),
           ),

@@ -267,6 +267,7 @@ class _RegisterViewState extends State<RegisterView> {
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: SharedButton(
 //          isLoading: viewModel.busy,
+          isGoogle: true,
           activeColor: SharedColors.whiteColor,
           textColor: SharedColors.blackColor,
           preWidget: Row(
