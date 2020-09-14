@@ -4,8 +4,10 @@ import 'package:member_apps/ui/shared_colors.dart';
 class SharedTextFormField extends StatefulWidget {
   final Function(String) validator;
   final String hintText;
+  final bool obscureText;
+  final ChangedCallback onChanged;
 
-  const SharedTextFormField({Key key, this.validator, this.hintText}) : super(key: key);
+  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged}) : super(key: key);
 
 
   @override
@@ -21,10 +23,14 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
         return widget.validator(value);
       },
       cursorColor: SharedColors.primaryColor,
+      obscureText: widget.obscureText,
+      onChanged: (String value){
+        widget.onChanged(value);
+      },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(left: 27),
+        contentPadding: EdgeInsets.only(left: 27, top: 20,bottom: 13),
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: SharedColors.primaryOrangeColor, fontWeight: FontWeight.w700),
+        hintStyle: TextStyle(color: SharedColors.primaryOrangeColor, fontWeight: FontWeight.w700, fontSize: 18),
         filled: true,
         fillColor: Colors.white70,
         errorBorder: OutlineInputBorder(
@@ -55,3 +61,5 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
     );
   }
 }
+
+typedef ChangedCallback = void Function(String value);

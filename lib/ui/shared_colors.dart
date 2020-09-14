@@ -11,7 +11,7 @@ class SharedColors {
   static const Color primaryOrangeColor = Color(0xFFEB8C57);
   static const Color darkOrangeColor = Color(0xFFD26F38);
   static const Color lightOrangeColor = Color(0xFFF2AA81);
-  static const Color transparentOrangeColor = Color(0x1AF2AA81);
+  static const Color transparentOrangeColor = Color(0x4DF2AA81);
 
   static const Color blackColor = Color(0xFF000000);
   static const Color whiteColor = Color(0xFFFFFFFF);
