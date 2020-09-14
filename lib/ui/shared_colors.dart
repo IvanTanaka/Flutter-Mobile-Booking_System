@@ -17,6 +17,7 @@ class SharedColors {
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color white2Color = Color(0xFFF4F4F4);
   static const Color grayColor = Color(0xFF636363);
+  static const Color transparentGrayColor = Color(0x1A636363);
 
 //  OLD COLOR
   static const Color primaryColor = Color(0xFFFF7266);
