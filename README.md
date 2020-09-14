@@ -1,16 +1,14 @@
-# member_apps
+# Membee
+Membee is a system for making a reservation. It is created with the thought of helping office worker and student to order a food in their short lunchbreak.
 
-A membering application.
+## Membee Application
+Membee Application, is an application for user to make a reservation in every store that had registered in membee web.
+Features:
+ - Make an Order
+ - Top Up
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technology
+Technology used in this development :
+ - Flutter
+ - Provider
+ - Dependency Injection (Get_it)
