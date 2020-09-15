@@ -43,53 +43,47 @@ class _LoginViewState extends State<LoginView> {
           child: new Image.asset(
             _backgroundLayout,
             fit: BoxFit.fill,
-            ),
-            height: double.infinity,
-            width: double.infinity,
           ),
+          height: double.infinity,
+          width: double.infinity,
+        ),
         Container(
           alignment: Alignment.center,
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    child: _buildLogo(),
-                  ),
-                  _buildErrorMessage(viewModel),
-                  Container(
-                    child: _buildEmailField(viewModel),
-                    margin: EdgeInsets.only(top: 80),
-                  ),
-                  _buildPasswordField(viewModel),
-                  Container(
-                    child: _buildForgetPassword(),
-                    alignment: Alignment.centerRight,
-                    margin: EdgeInsets.only(bottom: 50, right: 20, top: 20),
-                  ),
-                  Container(
-                    child: _buildLoginButton(viewModel),
-                    margin: EdgeInsets.only(bottom: 50),
-                  ),
-                  Container(
-                    child: _buildDividerLabel(),
-                    margin: EdgeInsets.only(bottom: 50),
-                  ),
-                  Container(
-                    child: _buildGoogleSignInButton(viewModel),
-                  ),
-                  Container(
-                    child: _buildRegisterButton(),
-                    margin: EdgeInsets.only(top: 40),
-                    alignment: AlignmentDirectional.bottomCenter,
-                  )
-                ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _buildErrorMessage(viewModel),
+              Container(
+                child: _buildLogo(),
               ),
-            ),
+              Container(
+                child: _buildEmailField(viewModel),
+                margin: EdgeInsets.only(top: 80),
+              ),
+              _buildPasswordField(viewModel),
+              Container(
+                child: _buildForgetPassword(),
+                alignment: Alignment.centerRight,
+                margin: EdgeInsets.only(bottom: 50, right: 20, top: 20),
+              ),
+              Container(
+                child: _buildLoginButton(viewModel),
+                margin: EdgeInsets.only(bottom: 50),
+              ),
+              Container(
+                child: _buildDividerLabel(),
+                margin: EdgeInsets.only(bottom: 50),
+              ),
+              Container(
+                child: _buildGoogleSignInButton(viewModel),
+              ),
+              Container(
+                child: _buildRegisterButton(),
+                margin: EdgeInsets.only(top: 90),
+              )
+            ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -225,8 +219,9 @@ class _LoginViewState extends State<LoginView> {
             children: <TextSpan>[
               TextSpan(
                   text: ' Register',
-                  style: TextStyle(color: SharedColors.primaryColor,fontWeight: FontWeight.bold)
-                  ),
+                  style: TextStyle(
+                      color: SharedColors.primaryColor,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
         ),
@@ -241,12 +236,14 @@ class _LoginViewState extends State<LoginView> {
         child: RichText(
           text: TextSpan(
             text: "Forgot Password?",
-            style: TextStyle(color: SharedColors.primaryColor, fontWeight: FontWeight.bold ),
+            style: TextStyle(
+                color: SharedColors.primaryColor, fontWeight: FontWeight.bold),
           ),
         ),
       ),
     );
   }
+
   Widget _buildGoogleSignInButton(LoginViewModel viewModel) {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
@@ -281,6 +278,4 @@ class _LoginViewState extends State<LoginView> {
           },
         ));
   }
-  
 }
-
