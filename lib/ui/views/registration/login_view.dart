@@ -186,6 +186,7 @@ class _LoginViewState extends State<LoginView> {
           validator: (String value) {
             return viewModel.validatePassword(value);
           },
+          obscureText: true,
           hintText: "Password",
         ),
       ),
