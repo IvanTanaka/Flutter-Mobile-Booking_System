@@ -4,6 +4,7 @@ import 'package:member_apps/core/viewmodels/views/registration/login_view_model.
 import 'package:member_apps/service_locator.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
+import 'package:member_apps/ui/widgets/shared_text_form_field.dart';
 
 import '../../../router.dart';
 
@@ -76,6 +77,11 @@ class _LoginViewState extends State<LoginView> {
               Container(
                 child: _buildGoogleSignInButton(viewModel),
               ),
+              Container(
+                child: _buildRegisterButton(),
+                margin: EdgeInsets.only(top: 40),
+                alignment: AlignmentDirectional.bottomCenter,
+              )
             ],
           ),
         )
@@ -158,23 +164,11 @@ class _LoginViewState extends State<LoginView> {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
       child: Container(
-        child: TextFormField(
+        child: SharedTextFormField(
           validator: (String value) {
             return viewModel.validateEmail(value);
           },
-          cursorColor: SharedColors.primaryColor,
-          decoration: InputDecoration(
-            labelText: "Email",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-            prefixIcon: Icon(
-              Icons.email,
-//              color:  SharedColors.primaryColor,
-            ),
-            labelStyle: TextStyle(
-//              color:  SharedColors.primaryColor,
-                ),
-          ),
+          hintText: "Email",
         ),
       ),
     );
@@ -184,24 +178,11 @@ class _LoginViewState extends State<LoginView> {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
-        child: TextFormField(
+        child: SharedTextFormField(
           validator: (String value) {
             return viewModel.validatePassword(value);
           },
-          obscureText: true,
-          cursorColor: SharedColors.primaryColor,
-          decoration: InputDecoration(
-            labelText: "Password",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-            prefixIcon: Icon(
-              Icons.lock,
-//              color:  SharedColors.primaryColor,
-            ),
-            labelStyle: TextStyle(
-//              color:  SharedColors.primaryColor,
-                ),
-          ),
+          hintText: "Password",
         ),
       ),
     );
@@ -293,5 +274,6 @@ class _LoginViewState extends State<LoginView> {
           },
         ));
   }
+  
 }
 
