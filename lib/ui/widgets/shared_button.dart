@@ -48,7 +48,9 @@ class _SharedButtonState extends State<SharedButton> {
         borderRadius: BorderRadius.all(Radius.circular(30.5)),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: widget.isGoogle?SharedColors.transparentGrayColor:SharedColors.transparentOrangeColor,
+            color: widget.isGoogle
+                ? SharedColors.transparentGrayColor
+                : SharedColors.transparentOrangeColor,
             blurRadius: 40,
             offset: Offset(0, 0),
           ),

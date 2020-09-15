@@ -283,6 +283,7 @@ class _RegisterViewState extends State<RegisterView> {
             ],
           ),
           text: "Sign up with Google",
+          txtFontSize: 15,
           onTap: () async {
             if (_formKey.currentState.validate()) {
               await viewModel.registerUser();
