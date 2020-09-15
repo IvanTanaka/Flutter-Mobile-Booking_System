@@ -49,39 +49,44 @@ class _LoginViewState extends State<LoginView> {
         ),
         Container(
           alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildErrorMessage(viewModel),
-              Container(
-                child: _buildLogo(),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildErrorMessage(viewModel),
+                  Container(
+                    child: _buildLogo(),
+                  ),
+                  Container(
+                    child: _buildEmailField(viewModel),
+                    margin: EdgeInsets.only(top: 80),
+                  ),
+                  _buildPasswordField(viewModel),
+                  Container(
+                    child: _buildForgetPassword(),
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(bottom: 50, right: 20, top: 20),
+                  ),
+                  Container(
+                    child: _buildLoginButton(viewModel),
+                    margin: EdgeInsets.only(bottom: 50),
+                  ),
+                  Container(
+                    child: _buildDividerLabel(),
+                    margin: EdgeInsets.only(bottom: 50),
+                  ),
+                  Container(
+                    child: _buildGoogleSignInButton(viewModel),
+                  ),
+                  Container(
+                    child: _buildRegisterButton(),
+                    margin: EdgeInsets.only(top: 90),
+                  )
+                ],
               ),
-              Container(
-                child: _buildEmailField(viewModel),
-                margin: EdgeInsets.only(top: 80),
-              ),
-              _buildPasswordField(viewModel),
-              Container(
-                child: _buildForgetPassword(),
-                alignment: Alignment.centerRight,
-                margin: EdgeInsets.only(bottom: 50, right: 20, top: 20),
-              ),
-              Container(
-                child: _buildLoginButton(viewModel),
-                margin: EdgeInsets.only(bottom: 50),
-              ),
-              Container(
-                child: _buildDividerLabel(),
-                margin: EdgeInsets.only(bottom: 50),
-              ),
-              Container(
-                child: _buildGoogleSignInButton(viewModel),
-              ),
-              Container(
-                child: _buildRegisterButton(),
-                margin: EdgeInsets.only(top: 90),
-              )
-            ],
+            ),
           ),
         ),
       ],
