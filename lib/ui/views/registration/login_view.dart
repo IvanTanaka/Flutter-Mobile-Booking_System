@@ -91,7 +91,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildLogo() {
     return Text(
-      "MEMBEE",
+      "Welcome back",
       style: Theme.of(context).textTheme.headline.merge(
             TextStyle(
                 color: SharedColors.primaryColor,
@@ -219,8 +219,9 @@ class _LoginViewState extends State<LoginView> {
             style: TextStyle(color: SharedColors.txtColor),
             children: <TextSpan>[
               TextSpan(
-                  text: ' Click to register',
-                  style: TextStyle(color: SharedColors.linkColor)),
+                  text: ' Register',
+                  style: TextStyle(color: SharedColors.primaryColor,fontWeight: FontWeight.bold)
+                  ),
             ],
           ),
         ),
@@ -235,7 +236,7 @@ class _LoginViewState extends State<LoginView> {
         child: RichText(
           text: TextSpan(
             text: "Forgot Password?",
-            style: TextStyle(color: SharedColors.primaryColor),
+            style: TextStyle(color: SharedColors.primaryColor, fontWeight: FontWeight.bold ),
           ),
         ),
       ),
