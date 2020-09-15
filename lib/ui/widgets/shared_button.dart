@@ -17,21 +17,23 @@ class SharedButton extends StatefulWidget {
   final bool isLoading;
   final bool isGoogle;
 
-  const SharedButton(
-      {Key key,
-      @required this.text,
-      this.disabledText,
-      this.child,
-      this.activeColor = SharedColors.primaryColor,
-      this.preWidget,
-      this.posWidget,
-      this.onTap,
-      this.height = 50,
-      this.txtFontSize = 17,
-      this.margin,
-      this.isDisabled = false,
-      this.isLoading = false, this.textColor, this.isGoogle})
-      : super(key: key);
+  const SharedButton({
+    Key key,
+    @required this.text,
+    this.disabledText,
+    this.child,
+    this.activeColor = SharedColors.primaryOrangeColor,
+    this.preWidget,
+    this.posWidget,
+    this.onTap,
+    this.height = 50,
+    this.txtFontSize = 18,
+    this.margin,
+    this.isGoogle = false,
+    this.isDisabled = false,
+    this.isLoading = false,
+    this.textColor = SharedColors.btnTxtColor,
+  }) : super(key: key);
 
   @override
   _SharedButtonState createState() => _SharedButtonState();
@@ -41,13 +43,23 @@ class _SharedButtonState extends State<SharedButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      width: 180.0,
-      margin:
-          widget.margin ?? EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      child: RaisedButton(
-        elevation: (widget.isDisabled || widget.isLoading) ? 0 : 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+      height: 54,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(30.5)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: widget.isGoogle
+                ? SharedColors.transparentGrayColor
+                : SharedColors.transparentOrangeColor,
+            blurRadius: 40,
+            offset: Offset(0, 0),
+          ),
+        ],
+      ),
+      child: FlatButton(
+//        elevation: (widget.isDisabled || widget.isLoading) ? 0 : 3,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.5)),
         color: (widget.isDisabled || widget.isLoading)
             ? SharedColors.btnDisabledColor
             : widget.activeColor,
@@ -77,9 +89,9 @@ class _SharedButtonState extends State<SharedButton> {
                           ? widget.disabledText ?? widget.text
                           : widget.text,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                          color: SharedColors.btnTxtColor,
-                          fontSize: widget.txtFontSize),
+                          color: widget.textColor,
+                          fontSize: widget.txtFontSize,
+                          fontWeight: FontWeight.w700),
                     ),
                     widget.posWidget ?? Container()
                   ],
