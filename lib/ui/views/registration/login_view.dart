@@ -280,7 +280,8 @@ class _LoginViewState extends State<LoginView> {
               )
             ],
           ),
-          text: "Sign up with Google",
+          text: "Log in with Google",
+          txtFontSize: 15,
           onTap: () async {
             if (_formKey.currentState.validate()) {
               await viewModel.loginUser();
