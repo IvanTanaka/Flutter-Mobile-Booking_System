@@ -35,7 +35,8 @@ class _RegisterViewState extends State<RegisterView> {
         Container(
           width: double.infinity,
           height: double.infinity,
-          child: Image.asset("assets/images/background_registration.png"),
+          child: Image.asset("assets/images/background_registration.png",
+            fit: BoxFit.fill,),
         ),
         Container(
           alignment: Alignment.center,

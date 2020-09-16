@@ -43,10 +43,10 @@ class _LoginViewState extends State<LoginView> {
           child: new Image.asset(
             _backgroundLayout,
             fit: BoxFit.fill,
-            ),
-            height: double.infinity,
-            width: double.infinity,
           ),
+          height: double.infinity,
+          width: double.infinity,
+        ),
         Container(
           alignment: Alignment.center,
           child: SingleChildScrollView(
@@ -55,10 +55,10 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  _buildErrorMessage(viewModel),
                   Container(
                     child: _buildLogo(),
                   ),
-                  _buildErrorMessage(viewModel),
                   Container(
                     child: _buildEmailField(viewModel),
                     margin: EdgeInsets.only(top: 80),
@@ -82,14 +82,13 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   Container(
                     child: _buildRegisterButton(),
-                    margin: EdgeInsets.only(top: 40),
-                    alignment: AlignmentDirectional.bottomCenter,
+                    margin: EdgeInsets.only(top: 90),
                   )
                 ],
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -187,6 +186,7 @@ class _LoginViewState extends State<LoginView> {
           validator: (String value) {
             return viewModel.validatePassword(value);
           },
+          obscureText: true,
           hintText: "Password",
         ),
       ),
@@ -225,8 +225,9 @@ class _LoginViewState extends State<LoginView> {
             children: <TextSpan>[
               TextSpan(
                   text: ' Register',
-                  style: TextStyle(color: SharedColors.primaryColor,fontWeight: FontWeight.bold)
-                  ),
+                  style: TextStyle(
+                      color: SharedColors.primaryColor,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
         ),
@@ -241,12 +242,14 @@ class _LoginViewState extends State<LoginView> {
         child: RichText(
           text: TextSpan(
             text: "Forgot Password?",
-            style: TextStyle(color: SharedColors.primaryColor, fontWeight: FontWeight.bold ),
+            style: TextStyle(
+                color: SharedColors.primaryColor, fontWeight: FontWeight.bold),
           ),
         ),
       ),
     );
   }
+
   Widget _buildGoogleSignInButton(LoginViewModel viewModel) {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
@@ -281,6 +284,4 @@ class _LoginViewState extends State<LoginView> {
           },
         ));
   }
-  
 }
-
