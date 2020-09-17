@@ -16,6 +16,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final _backgroundLayout = "assets/images/backgroundlogin-01.png";
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,6 +180,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildPasswordField(LoginViewModel viewModel) {
+    void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
@@ -186,12 +192,14 @@ class _LoginViewState extends State<LoginView> {
           validator: (String value) {
             return viewModel.validatePassword(value);
           },
-          obscureText: true,
+          obscureText: _obscureText,
           hintText: "Password",
         ),
       ),
+  
     );
   }
+
 
   Widget _buildLoginButton(LoginViewModel viewModel) {
     return Container(

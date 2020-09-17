@@ -27,6 +27,8 @@ class LoginViewModel extends BaseViewModel {
     return null;
   }
 
+  
+
   String validatePassword(String value){
     if(value.length<=0){
       return "Password must not be empty";
