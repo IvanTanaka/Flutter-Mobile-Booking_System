@@ -34,7 +34,4 @@ void main() {
     expect(result, errorPasswordNotEmpty);
   });
 
-  test('Login User using valid email and password expected pass', () {
-    viewModel.loginUser();
-  });
 }
