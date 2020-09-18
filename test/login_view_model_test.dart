@@ -13,7 +13,6 @@ void main() {
   String errorNotValid = 'Email is not valid';
   String errorEmailNotEmpty = 'Email must not be empty';
   String errorPasswordNotEmpty = 'Password must not be empty';
-
   String empty = '';
   test('Validating email using right email structure expected pass', () {
     var result = viewModel.validateEmail(email);
@@ -40,10 +39,18 @@ void main() {
     expect(result, errorPasswordNotEmpty);
   });
 
-  test('Login user using mockito', () async {
+  test('Login user using mockito, expected true', () async {
     var futureBool = true;
-    when(client.login(email: email,password: randomString)).thenAnswer((_) async => futureBool);
-    var result = await client.login(email: email,password: randomString);
+    when(client.login(email: email, password: randomString))
+        .thenAnswer((_) async => futureBool);
+    var result = await client.login(email: email, password: randomString);
+    expect(result, futureBool);
+  });
+  test('Login user using mockito, error expected', () async {
+    var futureBool = null;
+    when(client.login(email: email, password: randomString))
+        .thenAnswer((_) async => futureBool);
+    var result = await client.login(email: randomString, password: empty);
     expect(result, futureBool);
   });
 }
