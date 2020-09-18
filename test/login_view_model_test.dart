@@ -14,9 +14,10 @@ void main() {
   String errorEmailNotEmpty = 'Email must not be empty';
   String errorPasswordNotEmpty = 'Password must not be empty';
   String empty = '';
+  var noError = null;
   test('Validating email using right email structure expected pass', () {
     var result = viewModel.validateEmail(email);
-    expect(result, null);
+    expect(result, noError);
   });
 
   test('Validating email using wrong email structure expected error', () {
@@ -31,7 +32,7 @@ void main() {
 
   test('Validating password using random string expected pass', () {
     var result = viewModel.validatePassword(randomString);
-    expect(result, null);
+    expect(result, noError);
   });
 
   test('Validating password using empty string expected error', () {
