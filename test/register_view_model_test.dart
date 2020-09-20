@@ -46,8 +46,21 @@ void main() {
     var result = viewModel.validatePassword(empty);
     expect(result, errorPasswordNotEmpty);
   });
-  test('Validating password on register, expected error password must be 6 characters',() {
+  test(
+      'Validating password on register, expected error password must be 6 characters',
+      () {
     var result = viewModel.validatePassword(password5Chara);
     expect(result, errorPasswordMustBeSix);
+  });
+
+//command
+  test('Registering user using mockito,expected pass', () async {
+    var futureBool = true;
+    when(client.register(
+            email: dummyEmail, password: randomString, name: randomString, phoneNumber: empty))
+        .thenAnswer((_) async => futureBool);
+    var result = await client.register(
+        email: dummyEmail, password: randomString, name: randomString,phoneNumber: empty);
+    expect(result, futureBool);
   });
 }
