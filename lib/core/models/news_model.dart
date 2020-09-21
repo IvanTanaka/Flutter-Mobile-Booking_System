@@ -19,7 +19,7 @@ class NewsModel {
     this.id,
     this.franchiseId,
     imagePath,
-    this.description,
+    this.description, 
     this.franchise,
   }){
 

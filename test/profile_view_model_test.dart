@@ -10,7 +10,7 @@ class MockClient extends Mock implements AuthService {}
 void main() {
   final client = MockClient();
   var user =
-      '{ "name" : "Vincent", "email" : "123@gmail.com", "phonenumber" : "081720740127"  }';
+      '{ "name" : "Vincent", "email" : "123@gmail.com", "phonenumber" : "081720740127" }';
   UserModel um = UserModel.fromJson(jsonDecode(user));
   test('Mock login user, expected return user', () async {
     when(client.loadUser()).thenAnswer((_) async => um);
