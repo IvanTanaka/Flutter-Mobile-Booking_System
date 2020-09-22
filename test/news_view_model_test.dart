@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:member_apps/core/models/franchise_model.dart';
 import 'package:member_apps/core/models/news_model.dart';
 import 'package:member_apps/core/services/news_service.dart';
@@ -18,9 +16,9 @@ void main() {
     "franchise": FranchiseModel().toJson()
   };
   List<NewsModel> nm = [NewsModel.fromJson(news)];
-  test('Test news load function , expected news', () async {
+  test('Testing loadnews function on news viewmodel', () async {
     when(client.loadNews()).thenAnswer((_) async => nm);
     var result = await client.loadNews();
-    expect(result[0].description, nm[0].description);
+    expect(result[0], nm[0]);
   });
 }
