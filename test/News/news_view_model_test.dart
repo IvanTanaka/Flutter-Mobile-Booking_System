@@ -19,6 +19,6 @@ void main() {
   test('Testing loadnews function on news viewmodel', () async {
     when(client.loadNews()).thenAnswer((_) async => nm);
     var result = await client.loadNews();
-    expect(result[0], nm[0]);
+    expect(result[0].description, nm[0].description);
   });
 }
