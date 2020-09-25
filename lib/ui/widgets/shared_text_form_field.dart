@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 
 class SharedTextFormField extends StatefulWidget {
-  final Function(String) validator;
   final String hintText;
+  final String validateValue;
   final bool obscureText;
   final ChangedCallback onChanged;
+  final Function(String) validator;
 
-  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged}) : super(key: key);
+  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged, this.validateValue}) : super(key: key);
 
 
   @override
@@ -20,7 +21,8 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (String value) {
-        return widget.validator(value);
+          String errorMessage = widget.validator(value);
+        return errorMessage;
       },
       cursorColor: SharedColors.primaryColor,
       obscureText: widget.obscureText,
@@ -63,3 +65,4 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
 }
 
 typedef ChangedCallback = void Function(String value);
+typedef ValidatorCallback = void Function(String value);
