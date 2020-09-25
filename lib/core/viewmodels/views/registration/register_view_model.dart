@@ -49,7 +49,8 @@ class RegisterViewModel extends BaseViewModel {
     if(value.length<=0){
       return "Phone number must not be empty";
     }
-    final phoneRegex = RegExp(r'\+?([ -]?\d+)+|\(\d+\)([ -]\d+)');
+//    final phoneRegex = RegExp(r'\+?([ -]?\d+)+|\(\d+\)([ -]\d+)');
+    final phoneRegex = RegExp(r'(\+62)+([ -]?\d)+|(\(061\))+([ -]?\d)+');
     if(phoneRegex.stringMatch(value)!=value){
       return "Please input a correct format";
     }

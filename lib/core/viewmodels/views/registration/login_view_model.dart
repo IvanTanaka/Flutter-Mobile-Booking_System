@@ -7,6 +7,7 @@ class LoginViewModel extends BaseViewModel {
   AuthService _authService;
   String email;
   String password;
+  String emailErrorMessage, passwordErrorMessage;
 
   BehaviorSubject<String> _errorMessageController = BehaviorSubject<String>();
   Stream<String> get errorMessageStream => _errorMessageController.stream;
