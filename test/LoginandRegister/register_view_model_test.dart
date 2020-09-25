@@ -57,10 +57,18 @@ void main() {
   test('Registering user using mockito,expected pass', () async {
     var futureBool = true;
     when(client.register(
-            email: dummyEmail, password: randomString, name: randomString, phoneNumber: empty))
+            email: dummyEmail,
+            password: randomString,
+            name: randomString,
+            phoneNumber: empty))
         .thenAnswer((_) async => futureBool);
     var result = await client.register(
-        email: dummyEmail, password: randomString, name: randomString,phoneNumber: empty);
+        email: dummyEmail,
+        password: randomString,
+        name: randomString,
+        phoneNumber: empty);
     expect(result, futureBool);
+    var errorresult = await client.register();
+    AssertionError(errorresult);
   });
 }
