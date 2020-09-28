@@ -48,10 +48,10 @@ void main() {
     expect(result, futureBool);
   });
   test('Login user using mockito, error expected', () async {
-    var futureBool = null;
+    var futureBool = true;
     when(client.login(email: email, password: randomString))
         .thenAnswer((_) async => futureBool);
     var result = await client.login(email: randomString, password: empty);
-    expect(result, futureBool);
+    expect(result, isNull);
   });
 }

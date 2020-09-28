@@ -11,8 +11,8 @@ void main() {
   String dummyEmail = 'abc@gmail.com';
   String randomString = 'adsasdas';
   String password5Chara = 'asdfg';
+  String phoneNumber = '0813740182';
   String empty = '';
-  var noError = null;
   String expectedEmpty = 'Email must not be empty';
   String expectedNotValid = 'Email is not valid';
   String expectedNameEmpty = 'Name must not be empty';
@@ -20,7 +20,7 @@ void main() {
   String errorPasswordMustBeSix = 'Password must be at least 6 characters';
   test('Validating email on register, expected pass', () {
     var result = viewModel.validateEmail(dummyEmail);
-    expect(result, noError);
+    expect(result, isNull);
   });
   test('Validating email on register, expected error email empty', () {
     var result = viewModel.validateEmail(empty);
@@ -32,7 +32,7 @@ void main() {
   });
   test('Validating name on register , expected pass', () {
     var result = viewModel.validateName(randomString);
-    expect(result, noError);
+    expect(result, isNull);
   });
   test('Validating name on register, expected error name empty', () {
     var result = viewModel.validateName(empty);
@@ -40,7 +40,7 @@ void main() {
   });
   test('Validating password on register , expected pass', () {
     var result = viewModel.validatePassword(randomString);
-    expect(result, noError);
+    expect(result, isNull);
   });
   test('Validating password on register, expected error password empty', () {
     var result = viewModel.validatePassword(empty);
@@ -60,15 +60,30 @@ void main() {
             email: dummyEmail,
             password: randomString,
             name: randomString,
-            phoneNumber: empty))
+            phoneNumber: phoneNumber))
+        .thenAnswer((_) async => futureBool);
+    var result = await client.register(
+        email: dummyEmail,
+        password: randomString,
+        name: randomString,
+        phoneNumber: phoneNumber);
+    expect(result, futureBool);
+  });
+
+  test('Registering user using mockito without expected var, expected error',
+      () async {
+        var futureBool = true;
+    when(client.register(
+            email: dummyEmail,
+            password: randomString,
+            name: randomString,
+            phoneNumber: phoneNumber))
         .thenAnswer((_) async => futureBool);
     var result = await client.register(
         email: dummyEmail,
         password: randomString,
         name: randomString,
         phoneNumber: empty);
-    expect(result, futureBool);
-    var errorresult = await client.register();
-    AssertionError(errorresult);
-  });
+    expect(result, isNull);
+      });
 }
