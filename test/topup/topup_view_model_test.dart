@@ -27,9 +27,9 @@ void main() {
     expect(result.amount, tpup.amount);
   });
 
-  // test("description", () async {
-  //   viewModel.validateTopUp("100.000");
-  //   var result = viewModel.topupButtonIsDisabled;
-  //   expect(result, true);
-  // });
+  test('testing top up method using no amount, expected error', () async {
+    when(client.topUp(amount: amount)).thenAnswer((_) async => tpup);
+    var result = await client.topUp(amount: null);
+    expect(result, isNull);
+  });
 }
