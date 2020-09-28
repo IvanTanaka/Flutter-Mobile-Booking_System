@@ -181,10 +181,7 @@ class _LoginViewState extends State<LoginView> {
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: SharedTextFormField(
-          validator: (String value) {
-            viewModel.validatePassword(value);
-          },
-          validateValue: viewModel.passwordErrorMessage,
+          validator: (String value) => viewModel.validatePassword(value),
           obscureText: true,
           hintText: "Password",
         ),

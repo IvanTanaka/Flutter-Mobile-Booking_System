@@ -3,12 +3,11 @@ import 'package:member_apps/ui/shared_colors.dart';
 
 class SharedTextFormField extends StatefulWidget {
   final String hintText;
-  final String validateValue;
   final bool obscureText;
   final ChangedCallback onChanged;
   final Function(String) validator;
 
-  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged, this.validateValue}) : super(key: key);
+  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged}) : super(key: key);
 
 
   @override
