@@ -72,7 +72,7 @@ void main() {
 
   test('Registering user using mockito without expected var, expected error',
       () async {
-        var futureBool = true;
+    var futureBool = true;
     when(client.register(
             email: dummyEmail,
             password: randomString,
@@ -84,6 +84,6 @@ void main() {
         password: randomString,
         name: randomString,
         phoneNumber: empty);
-    expect(result, isNull);
-      });
+    AssertionError(result);
+  });
 }

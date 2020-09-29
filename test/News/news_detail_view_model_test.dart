@@ -11,8 +11,8 @@ void main() {
   final client = MockClient();
   final franchise = FranchiseModel();
   final branchModel = BranchModel();
-  var dummyNews = "123";
-  var newsDetail = {
+  var dummyNewsId = "123";
+  var newsDetailJson = {
     "id": "123",
     "franchiseId": "123asd",
     "imagePath": "storage/images/news/imagePath",
@@ -21,16 +21,16 @@ void main() {
     "branches": [branchModel.toJson()]
   };
 
-  NewsDetailModel newsDetailModel = NewsDetailModel.fromJson(newsDetail);
+  NewsDetailModel newsDetailModel = NewsDetailModel.fromJson(newsDetailJson);
   test("testing news detail function, expected return news detail", () async {
-    when(client.loadNewsDetail(newsId: dummyNews))
+    when(client.loadNewsDetail(newsId: dummyNewsId))
         .thenAnswer((_) async => newsDetailModel);
-    var result = await client.loadNewsDetail(newsId: dummyNews);
+    var result = await client.loadNewsDetail(newsId: dummyNewsId);
     expect(result.id, newsDetailModel.id);
   });
 
   test("testing news detail function, expected return error", () async {
-    when(client.loadNewsDetail(newsId: dummyNews))
+    when(client.loadNewsDetail(newsId: dummyNewsId))
         .thenAnswer((_) async => newsDetailModel);
     var result = await client.loadNewsDetail(newsId: null);
     AssertionError(result);

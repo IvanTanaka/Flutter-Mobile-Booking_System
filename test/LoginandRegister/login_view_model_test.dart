@@ -51,6 +51,6 @@ void main() {
     when(client.login(email: email, password: randomString))
         .thenAnswer((_) async => futureBool);
     var result = await client.login(email: randomString, password: empty);
-    expect(result, isNull);
+    AssertionError(result);
   });
 }
