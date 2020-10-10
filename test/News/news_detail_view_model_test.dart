@@ -11,7 +11,7 @@ void main() {
   final client = MockClient();
   final franchise = FranchiseModel();
   final branchModel = BranchModel();
-  var dummyNewsId = "123";
+  var dummyNewsId = "123asdasd";
   var newsDetailJson = {
     "id": "123",
     "franchiseId": "123asd",
