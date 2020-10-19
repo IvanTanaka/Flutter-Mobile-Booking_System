@@ -16,7 +16,9 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final _backgroundLayout = "assets/images/backgroundlogin-01.png";
-  bool _obscureText = true;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,6 +172,7 @@ class _LoginViewState extends State<LoginView> {
       margin: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
       child: Container(
         child: SharedTextFormField(
+          controller: emailController,
           validator: (String value) => viewModel.validateEmail(value),
           hintText: "Email",
         ),
@@ -187,10 +190,8 @@ class _LoginViewState extends State<LoginView> {
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
         child: SharedTextFormField(
-          validator: (String value) {
-            viewModel.validatePassword(value);
-          },
-          validateValue: viewModel.passwordErrorMessage,
+          controller: passwordController,
+          validator: (String value) => viewModel.validatePassword(value),
           obscureText: true,
           hintText: "Password",
         ),
