@@ -22,11 +22,7 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
     return TextFormField(
       controller: widget.controller,
       validator: (String value) {
-        print("VALUE : "+value);
-        String errorMessage;
-        setState(() {
-          errorMessage = widget.validator(value);
-        });
+        String errorMessage = widget.validator(value);
         return errorMessage;
       },
       cursorColor: SharedColors.primaryColor,
