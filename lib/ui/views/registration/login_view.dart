@@ -18,6 +18,7 @@ class _LoginViewState extends State<LoginView> {
   final _backgroundLayout = "assets/images/backgroundlogin-01.png";
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
