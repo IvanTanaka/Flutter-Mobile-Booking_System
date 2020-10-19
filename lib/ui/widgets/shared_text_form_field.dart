@@ -4,10 +4,11 @@ import 'package:member_apps/ui/shared_colors.dart';
 class SharedTextFormField extends StatefulWidget {
   final String hintText;
   final bool obscureText;
-  final ChangedCallback onChanged;
+  final Function(String) onChanged;
   final Function(String) validator;
+  final TextEditingController controller;
 
-  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged}) : super(key: key);
+  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged, this.controller}) : super(key: key);
 
 
   @override
@@ -19,8 +20,13 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       validator: (String value) {
-          String errorMessage = widget.validator(value);
+        print("VALUE : "+value);
+        String errorMessage;
+        setState(() {
+          errorMessage = widget.validator(value);
+        });
         return errorMessage;
       },
       cursorColor: SharedColors.primaryColor,
@@ -36,7 +42,7 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
         fillColor: Colors.white70,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          borderSide: BorderSide(color: SharedColors.primaryOrangeColor, width: 1),
+          borderSide: BorderSide(color: SharedColors.errorColor, width: 1),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
@@ -62,6 +68,3 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
     );
   }
 }
-
-typedef ChangedCallback = void Function(String value);
-typedef ValidatorCallback = void Function(String value);
