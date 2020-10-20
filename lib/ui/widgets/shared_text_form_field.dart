@@ -35,7 +35,7 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
         contentPadding: EdgeInsets.only(left: 27, top: 20,bottom: 13),
         hintText: widget.hintText,
         suffixIcon: widget.suffixIcon,
-        hintStyle: TextStyle(color: SharedColors.primaryOrangeColor, fontWeight: FontWeight.w700, fontSize: 18),
+        hintStyle: TextStyle(color: SharedColors.blackColor, fontWeight: FontWeight.w700, fontSize: 18),
         filled: true,
         fillColor: Colors.white70,
         errorBorder: OutlineInputBorder(

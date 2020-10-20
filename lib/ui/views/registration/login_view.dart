@@ -66,28 +66,27 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   Container(
                     child: _buildEmailField(viewModel),
-                    margin: EdgeInsets.only(top: 80),
                   ),
                   _buildPasswordField(viewModel),
                   Container(
                     child: _buildForgetPassword(),
                     alignment: Alignment.centerRight,
-                    margin: EdgeInsets.only(bottom: 50, right: 20, top: 20),
+                    margin: EdgeInsets.only(bottom: 39, right: 47, top: 35),
                   ),
                   Container(
                     child: _buildLoginButton(viewModel),
-                    margin: EdgeInsets.only(bottom: 50),
+                    margin: EdgeInsets.only(bottom: 43,left: 107,right: 106),
                   ),
                   Container(
                     child: _buildDividerLabel(),
-                    margin: EdgeInsets.only(bottom: 50),
+                    margin: EdgeInsets.only(bottom: 15),
                   ),
                   Container(
                     child: _buildGoogleSignInButton(viewModel),
                   ),
                   Container(
                     child: _buildRegisterButton(),
-                    margin: EdgeInsets.only(top: 90),
+                    margin: EdgeInsets.only(top: 39),
                   )
                 ],
               ),
@@ -100,15 +99,16 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildLogo() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0,0,0,0),
+      padding: const EdgeInsets.fromLTRB(163,106,164,0),
       child: Text(
-        "Welcome back",
+        "Log In",
         style: Theme.of(context).textTheme.headline.merge(
-              TextStyle(
-                  color: SharedColors.primaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30),
-            ),
+          TextStyle(
+              color: SharedColors.primaryColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 30
+          ),
+        ),
       ),
     );
   }
@@ -174,7 +174,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildEmailField(LoginViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+      margin: EdgeInsets.only(left: 48, right: 47, bottom: 20, top: 100),
       child: Container(
         child: SharedTextFormField(
           controller: emailController,
@@ -192,7 +192,7 @@ class _LoginViewState extends State<LoginView> {
       });
     }
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      margin: EdgeInsets.only(left: 48, right: 47, bottom: 0, top: 15),
       child: Container(
         child: SharedTextFormField(
           controller: passwordController,
@@ -218,7 +218,6 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildLoginButton(LoginViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
       child: SharedButton(
         text: "LOG IN",
         onTap: () async {
@@ -275,7 +274,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildGoogleSignInButton(LoginViewModel viewModel) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.only(left: 107,right: 106),
         child: SharedButton(
 //          isLoading: viewModel.busy,
           isGoogle: true,
