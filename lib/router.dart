@@ -9,12 +9,15 @@ import 'package:member_apps/ui/views/topup/topup_detail_view.dart';
 import 'package:member_apps/ui/views/topup/topup_history_view.dart';
 import 'package:member_apps/ui/views/topup/topup_view.dart';
 import 'ui/views/registration/login_view.dart';
+import 'package:member_apps/ui/views/notification/notification_view.dart';
 import 'ui/views/main_view.dart';
 
 class RoutePaths {
   static const String Login = "/login";
   static const String Register = "/register";
   static const String Main = "/home";
+
+  static const String Notification = "/notification";
 
   static const String NewsDetail = "/news/detail";
 
@@ -45,6 +48,12 @@ class Router {
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.Main),
           builder: (_) => MainView(),
+        );
+
+      case RoutePaths.Notification:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.Notification),
+          builder: (_) => NotificationView(),
         );
 
       case RoutePaths.NewsDetail:
