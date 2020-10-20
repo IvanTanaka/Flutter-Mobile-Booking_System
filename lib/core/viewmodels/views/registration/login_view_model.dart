@@ -19,7 +19,7 @@ class LoginViewModel extends BaseViewModel {
   String validateEmail(String value){
     bool validEmail =  RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
     if(value.length<=0){
-      return "Email must not be empty";
+      return "Please enter your email";
     }
     if(!validEmail){
       return "Email is not valid";
@@ -32,7 +32,7 @@ class LoginViewModel extends BaseViewModel {
 
   String validatePassword(String value){
     if(value.length<=0){
-      return "Password must not be empty";
+      return "Password enter your password";
     }
     this.password = value;
     return null;

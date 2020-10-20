@@ -6,9 +6,10 @@ class SharedTextFormField extends StatefulWidget {
   final bool obscureText;
   final Function(String) onChanged;
   final Function(String) validator;
+  final Widget suffixIcon;
   final TextEditingController controller;
 
-  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.obscureText =false, this.onChanged, this.controller}) : super(key: key);
+  const SharedTextFormField({Key key, this.validator, this.hintText = "", this.suffixIcon,  this.obscureText =false, this.onChanged, this.controller}) : super(key: key);
 
 
   @override
@@ -33,6 +34,7 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(left: 27, top: 20,bottom: 13),
         hintText: widget.hintText,
+        suffixIcon: widget.suffixIcon,
         hintStyle: TextStyle(color: SharedColors.primaryOrangeColor, fontWeight: FontWeight.w700, fontSize: 18),
         filled: true,
         fillColor: Colors.white70,

@@ -23,6 +23,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: BaseWidget<LoginViewModel>(
         model: locator<LoginViewModel>(),
         onModelReady: (LoginViewModel viewModel) async {
@@ -98,14 +99,17 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildLogo() {
-    return Text(
-      "Welcome back",
-      style: Theme.of(context).textTheme.headline.merge(
-            TextStyle(
-                color: SharedColors.primaryColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 30),
-          ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0,0,0,0),
+      child: Text(
+        "Welcome back",
+        style: Theme.of(context).textTheme.headline.merge(
+              TextStyle(
+                  color: SharedColors.primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
+      ),
     );
   }
 
@@ -193,8 +197,18 @@ class _LoginViewState extends State<LoginView> {
         child: SharedTextFormField(
           controller: passwordController,
           validator: (String value) => viewModel.validatePassword(value),
-          obscureText: true,
+          obscureText: _obscureText,
           hintText: "Password",
+          suffixIcon: IconButton(
+            icon: Icon(
+              // Based on passwordVisible state choose the icon
+              _obscureText
+                  ? Icons.visibility
+                  : Icons.visibility_off,
+              color: SharedColors.primaryOrangeColor,
+            ),
+            onPressed: _toggle,
+          ),
         ),
       ),
   
