@@ -32,7 +32,7 @@ class LoginViewModel extends BaseViewModel {
 
   String validatePassword(String value){
     if(value.length<=0){
-      return "Password enter your password";
+      return "Please enter your password";
     }
     this.password = value;
     return null;

@@ -187,10 +187,10 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildPasswordField(LoginViewModel viewModel) {
     void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
+      setState(() {
+        _obscureText = !_obscureText;
+      });
+    }
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Container(
