@@ -15,6 +15,11 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController phoneNumberController = new TextEditingController();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -47,32 +52,27 @@ class _RegisterViewState extends State<RegisterView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    height: 50,
+                    height: 40,
                   ),
                   _buildSubhead(),
-                  _buildErrorMessage(viewModel),
                   Container(
-                    height: 25,
+                    height: 55,
                   ),
                   _buildEmailField(viewModel),
                   Container(
-                    height: 20,
+                    height: 14,
                   ),
                   _buildNameField(viewModel),
                   Container(
-                    height: 20,
+                    height: 14,
                   ),
                   _buildPhoneNumberField(viewModel),
                   Container(
-                    height: 20,
+                    height: 14,
                   ),
                   _buildPasswordField(viewModel),
                   Container(
-                    height: 20,
-                  ),
-                  _buildConfirmPasswordField(viewModel),
-                  Container(
-                    height: 40,
+                    height: 15,
                   ),
                   _buildSubmitButton(viewModel),
                   Container(
@@ -88,7 +88,7 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   _buildLoginLink(),
                   Container(
-                    height: 50,
+                    height: 30,
                   ),
                 ],
               ),
@@ -110,43 +110,42 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  Widget _buildErrorMessage(RegisterViewModel viewModel) {
-    return StreamBuilder<String>(
-      stream: viewModel.errorMessageStream,
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-        if (snapshot.hasData) {
-          return Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.symmetric(vertical: 5),
-            width: double.infinity,
-            height: 50,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(10),
-              color: SharedColors.errorColor,
-            ),
-            child: Text(
-              snapshot.data,
-              style: TextStyle(
-                color: SharedColors.txtAccentColor,
-              ),
-            ),
-          );
-        }
-        return Container();
-      },
-    );
-  }
+//  Widget _buildErrorMessage(RegisterViewModel viewModel) {
+//    return StreamBuilder<String>(
+//      stream: viewModel.errorMessageStream,
+//      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+//        if (snapshot.hasData) {
+//          return Container(
+//            alignment: Alignment.center,
+//            margin: EdgeInsets.all(10),
+//            padding: EdgeInsets.symmetric(vertical: 5),
+//            width: double.infinity,
+//            height: 50,
+//            decoration: BoxDecoration(
+//              border: Border.all(color: Colors.transparent),
+//              borderRadius: BorderRadius.circular(10),
+//              color: SharedColors.errorColor,
+//            ),
+//            child: Text(
+//              snapshot.data,
+//              style: TextStyle(
+//                color: SharedColors.txtAccentColor,
+//              ),
+//            ),
+//          );
+//        }
+//        return Container();
+//      },
+//    );
+//  }
 
   Widget _buildNameField(RegisterViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      width: 316,
       child: Container(
         child: SharedTextFormField(
-          validator: (String value) {
-            return viewModel.validateName(value);
-          },
+          controller: nameController,
+          validator: (String value) => viewModel.validateName(value),
           hintText: "Name",
         ),
       ),
@@ -155,12 +154,11 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildPhoneNumberField(RegisterViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      width: 316,
       child: Container(
         child: SharedTextFormField(
-          validator: (String value) {
-            return viewModel.validatePhoneNumber(value);
-          },
+          controller: phoneNumberController,
+          validator: (String value) => viewModel.validatePhoneNumber(value),
           hintText: "Phone Number",
         ),
       ),
@@ -169,12 +167,11 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildEmailField(RegisterViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      width: 316,
       child: Container(
         child: SharedTextFormField(
-          validator: (String value) {
-            return viewModel.validateEmail(value);
-          },
+          controller: emailController,
+          validator: (String value) => viewModel.validateEmail(value),
           hintText: "Email",
         ),
       ),
@@ -182,33 +179,26 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   Widget _buildPasswordField(RegisterViewModel viewModel) {
-    return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
-      child: Container(
-        child: SharedTextFormField(
-          validator: (String value) {
-            return viewModel.validatePassword(value);
-          },
-          obscureText: true,
-          hintText: "Password",
-        ),
-      ),
-    );
-  }
+    void _toggle() {
+      setState(() {
+        _obscureText = !_obscureText;
+      });
+    }
 
-  Widget _buildConfirmPasswordField(RegisterViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
-      child: Container(
-        child: SharedTextFormField(
-          validator: (String value) {
-            return viewModel.validateConfirmPassword(value);
-          },
-          onChanged: (String value) {
-            viewModel.confirmPassword = value;
-          },
-          obscureText: true,
-          hintText: "Confirm Password",
+      width: 316,
+      child: SharedTextFormField(
+        controller: passwordController,
+        validator: (String value) => viewModel.validatePassword(value),
+        obscureText: _obscureText,
+        hintText: "Password",
+        suffixIcon: IconButton(
+          icon: Icon(
+            // Based on passwordVisible state choose the icon
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+            color: SharedColors.primaryOrangeColor,
+          ),
+          onPressed: _toggle,
         ),
       ),
     );
@@ -216,7 +206,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildSubmitButton(RegisterViewModel viewModel) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        width: 198,
         child: SharedButton(
 //          isLoading: viewModel.busy,
           text: "Submit",
@@ -265,7 +255,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildGoogleSignInButton(RegisterViewModel viewModel) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        width: 198,
         child: SharedButton(
 //          isLoading: viewModel.busy,
           isGoogle: true,

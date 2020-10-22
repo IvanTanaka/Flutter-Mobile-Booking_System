@@ -68,16 +68,16 @@ class RegisterViewModel extends BaseViewModel {
     return null;
   }
 
-  String validateConfirmPassword(String value){
-    if(value.length<=0){
-      return "Confirm password must not be empty";
-    }
-    if(value != password){
-      return "Password and confirm password must be the same";
-    }
-    this.confirmPassword = value;
-    return null;
-  }
+//  String validateConfirmPassword(String value){
+//    if(value.length<=0){
+//      return "Confirm password must not be empty";
+//    }
+//    if(value != password){
+//      return "Password and confirm password must be the same";
+//    }
+//    this.confirmPassword = value;
+//    return null;
+//  }
 
   Future<bool> registerUser() async {
     setBusy(true);
