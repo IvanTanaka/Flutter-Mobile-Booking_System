@@ -108,6 +108,9 @@ class _LoginViewState extends State<LoginView> {
                     child: _buildGoogleSignInButton(viewModel),
                   ),
                   Container(
+                    height: 40,
+                  ),
+                  Container(
                     child: _buildRegisterButton(),
                   ),
                   Container(
@@ -265,8 +268,7 @@ class _LoginViewState extends State<LoginView> {
               TextSpan(
                   text: ' Register',
                   style: TextStyle(
-                      color: SharedColors.primaryColor,
-                      fontWeight: FontWeight.bold)),
+                      color: SharedColors.primaryColor,)),
             ],
           ),
         ),

@@ -52,27 +52,27 @@ class _RegisterViewState extends State<RegisterView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    height: 50,
+                    height: 40,
                   ),
                   _buildSubhead(),
                   Container(
-                    height: 25,
+                    height: 55,
                   ),
                   _buildEmailField(viewModel),
                   Container(
-                    height: 20,
+                    height: 14,
                   ),
                   _buildNameField(viewModel),
                   Container(
-                    height: 20,
+                    height: 14,
                   ),
                   _buildPhoneNumberField(viewModel),
                   Container(
-                    height: 20,
+                    height: 14,
                   ),
                   _buildPasswordField(viewModel),
                   Container(
-                    height: 40,
+                    height: 15,
                   ),
                   _buildSubmitButton(viewModel),
                   Container(
@@ -88,7 +88,7 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   _buildLoginLink(),
                   Container(
-                    height: 50,
+                    height: 30,
                   ),
                 ],
               ),
@@ -141,7 +141,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildNameField(RegisterViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      width: 316,
       child: Container(
         child: SharedTextFormField(
           controller: nameController,
@@ -154,7 +154,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildPhoneNumberField(RegisterViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      width: 316,
       child: Container(
         child: SharedTextFormField(
           controller: phoneNumberController,
@@ -167,7 +167,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildEmailField(RegisterViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      width: 316,
       child: Container(
         child: SharedTextFormField(
           controller: emailController,
@@ -206,7 +206,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildSubmitButton(RegisterViewModel viewModel) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        width: 198,
         child: SharedButton(
 //          isLoading: viewModel.busy,
           text: "Submit",
@@ -255,7 +255,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildGoogleSignInButton(RegisterViewModel viewModel) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        width: 198,
         child: SharedButton(
 //          isLoading: viewModel.busy,
           isGoogle: true,
