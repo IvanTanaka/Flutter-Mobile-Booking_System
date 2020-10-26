@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:member_apps/ui/shared_colors.dart';
 import 'package:member_apps/ui/widgets/shared_button.dart';
 import 'package:member_apps/ui/widgets/shared_text_form_field.dart';
@@ -20,6 +22,10 @@ class _NotificationViewState extends State<NotificationView> {
         backgroundColor: SharedColors.whiteColor,
         title: Text(
           'Notifications',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         centerTitle: true,
       ),
@@ -30,18 +36,53 @@ class _NotificationViewState extends State<NotificationView> {
             child: Card(
               child: ListTile(
                 onTap: () {},
-                title: Text('Title'),
-                subtitle: Text('Subtitle'),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Title',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500
+                      ),
+                    ),
+                    Text(
+                      'Time',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: SharedColors.grayColor,
+                      ),
+                    ),
+                  ],
+                ),
+                subtitle: Text(
+                  'Subtitle',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+
+                  ),
+                ),
                 leading: Badge(
-                  badgeContent: Text(''),
-                  badgeColor: Colors.yellow,
-                  position: BadgePosition(top: 0, end: 15),
+                  padding: EdgeInsets.all(3),
+                  badgeContent: Badge(
+
+                    badgeContent: Padding(
+                      padding: const EdgeInsets.all(1),
+                      child: Text(''),
+                    ),
+                    badgeColor: SharedColors.badgeColor,
+                  ),
+                  badgeColor: SharedColors.whiteColor,
+                  position: BadgePosition.topEnd(top: -14, end: 16),
+                  elevation: 0,
                   child: RawMaterialButton(
                     onPressed: () {},
                     elevation: 2.0,
                     fillColor: SharedColors.primaryOrangeColor,
                     child: Icon(
-                      Icons.mail,
+                      FontAwesomeIcons.envelope,
                       size: 25.0,
                       color: SharedColors.whiteColor,
                     ),

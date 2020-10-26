@@ -38,4 +38,6 @@ class SharedColors {
   static const Color statusWaiting = Color(0xFFFCBA03);
   static const Color statusSuccess = Color(0xFF36BF00);
   static const Color statusFailed = Color(0xFFE81B00);
+
+  static const Color badgeColor = Color(0xFFEBC257);
 }
