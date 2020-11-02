@@ -27,6 +27,18 @@ class _HomeViewState extends State<HomeView> {
         elevation: 1,
         automaticallyImplyLeading: false,
         backgroundColor: SharedColors.scaffoldColor,
+        actions: [
+          GestureDetector(
+            onTap: (){
+              Navigator.of(context).pushNamed(RoutePaths.Notification);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Icon(Icons.notifications),
+            ),
+          )
+        ],
         title: Container(
           height: 50,
           width: MediaQuery.of(context).size.width,
