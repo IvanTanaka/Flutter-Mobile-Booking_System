@@ -34,8 +34,8 @@ class _SharedCarouselState extends State<SharedCarousel> {
             items: imageSliders,
             options: CarouselOptions(
                 autoPlay: true,
-                enableInfiniteScroll: false,
                 disableCenter: true,
+                autoPlayInterval: const Duration(seconds: 8),
                 enlargeCenterPage: false,
                 viewportFraction: 0.8,
                 aspectRatio: 354/164,
