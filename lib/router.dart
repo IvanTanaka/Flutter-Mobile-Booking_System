@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:member_apps/ui/views/news/news_detail_view.dart';
+import 'package:member_apps/ui/views/notification/notification_view.dart';
+import 'package:member_apps/ui/views/notification/notification_detail_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_detail_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
@@ -9,7 +11,6 @@ import 'package:member_apps/ui/views/topup/topup_detail_view.dart';
 import 'package:member_apps/ui/views/topup/topup_history_view.dart';
 import 'package:member_apps/ui/views/topup/topup_view.dart';
 import 'ui/views/registration/login_view.dart';
-import 'package:member_apps/ui/views/notification/notification_view.dart';
 import 'ui/views/main_view.dart';
 
 class RoutePaths {
@@ -18,6 +19,7 @@ class RoutePaths {
   static const String Main = "/home";
 
   static const String Notification = "/notification";
+  static const String NotificationDetail = "/notification/detail";
 
   static const String NewsDetail = "/news/detail";
 
@@ -54,6 +56,11 @@ class Router {
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.Notification),
           builder: (_) => NotificationView(),
+        );
+      case RoutePaths.NotificationDetail:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.NotificationDetail),
+          builder: (_) => NotificationDetailView(),
         );
 
       case RoutePaths.NewsDetail:
