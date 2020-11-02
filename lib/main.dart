@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: RoutePaths.Login,
+        initialRoute: RoutePaths.Main,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Router.generateRoute,
       ),
