@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:member_apps/ui/views/news/news_detail_view.dart';
+import 'package:member_apps/ui/views/notification/notification_view.dart';
+import 'package:member_apps/ui/views/notification/notification_detail_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_detail_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
@@ -15,6 +17,9 @@ class RoutePaths {
   static const String Login = "/login";
   static const String Register = "/register";
   static const String Main = "/home";
+
+  static const String Notification = "/notification";
+  static const String NotificationDetail = "/notification/detail";
 
   static const String NewsDetail = "/news/detail";
 
@@ -45,6 +50,17 @@ class Router {
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.Main),
           builder: (_) => MainView(),
+        );
+
+      case RoutePaths.Notification:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.Notification),
+          builder: (_) => NotificationView(),
+        );
+      case RoutePaths.NotificationDetail:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.NotificationDetail),
+          builder: (_) => NotificationDetailView(),
         );
 
       case RoutePaths.NewsDetail:
