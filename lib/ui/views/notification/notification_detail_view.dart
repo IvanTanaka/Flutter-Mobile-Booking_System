@@ -30,10 +30,7 @@ class _NotificationDetailViewState extends State<NotificationDetailView> {
 }
 
 class _buildBody extends StatelessWidget {
-  const _buildBody({
-    Key key,
-  }) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(
