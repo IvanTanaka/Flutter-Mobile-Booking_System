@@ -16,23 +16,24 @@ class _NotificationViewState extends State<NotificationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: SharedColors.whiteColor,
+      appBar: AppBar(
         backgroundColor: SharedColors.whiteColor,
-        appBar: AppBar(
-          backgroundColor: SharedColors.whiteColor,
-          title: Text(
-            'Notifications',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-            ),
+        title: Text(
+          'Notifications',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
           ),
-          centerTitle: true,
         ),
-        body: ListView.builder(
-          itemBuilder: (context, index) {
-            return _buildNotification();
-          },
-        ));
+        centerTitle: true,
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return _buildNotification();
+        },
+      ),
+    );
   }
 
   Widget _buildNotification() {

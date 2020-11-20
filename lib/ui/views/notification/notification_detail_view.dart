@@ -30,7 +30,7 @@ class _NotificationDetailViewState extends State<NotificationDetailView> {
 }
 
 class _buildBody extends StatelessWidget {
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
