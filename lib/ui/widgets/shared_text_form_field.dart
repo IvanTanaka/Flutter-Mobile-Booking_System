@@ -44,23 +44,23 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          borderSide: BorderSide(color: SharedColors.primaryOrangeColor, width: 1),
+          borderSide: BorderSide(color: SharedColors.primaryBlue, width: 1),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          borderSide: BorderSide(color: SharedColors.primaryOrangeColor, width: 1),
+          borderSide: BorderSide(color: SharedColors.primaryBlue, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          borderSide: BorderSide(color: SharedColors.primaryOrangeColor, width: 1),
+          borderSide: BorderSide(color: SharedColors.primaryBlue, width: 1),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          borderSide: BorderSide(color: SharedColors.primaryOrangeColor, width: 1),
+          borderSide: BorderSide(color: SharedColors.primaryBlue, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          borderSide: BorderSide(color: SharedColors.primaryOrangeColor),
+          borderSide: BorderSide(color: SharedColors.primaryBlue),
         ),
 
       ),

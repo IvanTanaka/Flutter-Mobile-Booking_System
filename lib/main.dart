@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: RoutePaths.Restaurant,
+        initialRoute: RoutePaths.Profile,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Router.generateRoute,
       ),

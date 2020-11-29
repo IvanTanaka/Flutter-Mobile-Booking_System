@@ -5,6 +5,8 @@ import 'package:member_apps/ui/views/notification/notification_detail_view.dart'
 import 'package:member_apps/ui/views/order/order_food/order_food_confirmation_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_detail_view.dart';
 import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
+import 'package:member_apps/ui/views/profile/profile_view.dart';
+import 'package:member_apps/ui/views/profile/profile_edit_view.dart';
 import 'package:member_apps/ui/views/registration/register_view.dart';
 import 'package:member_apps/ui/views/restaurant/restaurant_view.dart';
 import 'package:member_apps/ui/views/search_franchise_view.dart';
@@ -13,6 +15,7 @@ import 'package:member_apps/ui/views/topup/topup_history_view.dart';
 import 'package:member_apps/ui/views/topup/topup_view.dart';
 import 'ui/views/registration/login_view.dart';
 import 'ui/views/main_view.dart';
+
 
 class RoutePaths {
   static const String Login = "/login";
@@ -34,6 +37,9 @@ class RoutePaths {
   static const String Topup = "/topup";
   static const String TopupDetail = "/topup/detail";
   static const String TopupHistory = "/topup/history";
+
+  static const String Profile = '/profile';
+  static const String ProfileEdit = '/profile/edit';
 }
 
 class Router {
@@ -79,6 +85,18 @@ class Router {
         return MaterialPageRoute(
           settings: RouteSettings(name: RoutePaths.Restaurant),
           builder: (_) => RestaurantView(),
+        );
+
+      case RoutePaths.Profile:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.Profile),
+          builder: (_) => ProfileView(),
+        );
+
+      case RoutePaths.ProfileEdit:
+        return MaterialPageRoute(
+          settings: RouteSettings(name: RoutePaths.ProfileEdit),
+          builder: (_) => ProfileEditView(),
         );
 
       case RoutePaths.SearchFranchise:
