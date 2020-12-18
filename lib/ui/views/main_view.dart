@@ -36,19 +36,15 @@ class _MainViewState extends State<MainView> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              title: Text('History'),
+              title: Text('Orders'),
             ),
             BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.newspaper),
-              title: Text('News'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.wallet),
-              title: Text('Wallet'),
+              title: Text('Scan'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              title: Text('Account'),
             )
           ]
         ),
@@ -66,8 +62,6 @@ class _MainViewState extends State<MainView> {
       case 2:
         return NewsView();
       case 3:
-        return TopupHomeView();
-      case 4:
         return ProfileView();
       default:
         return Scaffold(

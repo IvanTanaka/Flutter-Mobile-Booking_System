@@ -7,6 +7,7 @@ import 'package:member_apps/ui/views/order/order_food/order_food_detail_view.dar
 import 'package:member_apps/ui/views/order/order_food/order_food_store_view.dart';
 import 'package:member_apps/ui/views/registration/register_view.dart';
 import 'package:member_apps/ui/views/restaurant/restaurant_view.dart';
+import 'package:member_apps/ui/views/restaurant/order_confirmation_view.dart';
 import 'package:member_apps/ui/views/search_franchise_view.dart';
 import 'package:member_apps/ui/views/topup/topup_detail_view.dart';
 import 'package:member_apps/ui/views/topup/topup_history_view.dart';
@@ -22,6 +23,9 @@ class RoutePaths {
   static const String Notification = "/notification";
   static const String NotificationDetail = "/notification/detail";
 
+  static const String OrderConfirmation = "/order/confirmation";
+
+//  OLD ROUTING
   static const String NewsDetail = "/news/detail";
 
   static const String Restaurant = "/restaurant";
@@ -66,6 +70,15 @@ class Router {
           builder: (_) => NotificationDetailView(),
         );
 
+      case RoutePaths.OrderConfirmation:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RoutePaths.OrderConfirmation
+          ),
+          builder: (_) => OrderConfirmationView(),
+        );
+
+//    OLD ROUTE
       case RoutePaths.NewsDetail:
         String newsId = settings.arguments;
         return MaterialPageRoute(

@@ -60,22 +60,45 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  _buildErrorMessage(viewModel),
+//                  _buildErrorMessage(viewModel),
+                  Container(
+                    height: 62,
+                  ),
                   Container(
                     child: _buildLogo(),
                   ),
                   Container(
+                    height: 100,
+                  ),
+                  Container(
                     child: _buildEmailField(viewModel),
                   ),
-                  _buildPasswordField(viewModel),
                   Container(
-                    child: _buildForgetPassword(),
-                    alignment: Alignment.centerRight,
-                    margin: EdgeInsets.only(bottom: 39, right: 47, top: 35),
+                    height: 14,
+                  ),
+                  Container(
+                    width: 316,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          child: _buildPasswordField(viewModel),
+                        ),
+                        Container(
+                          height: 14,
+                        ),
+                        Container(
+                          child: _buildForgetPassword(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 40,
                   ),
                   Container(
                     child: _buildLoginButton(viewModel),
-                    margin: EdgeInsets.only(bottom: 43,left: 107,right: 106),
+                    margin: EdgeInsets.only(bottom: 43),
                   ),
                   Container(
                     child: _buildDividerLabel(),
@@ -85,8 +108,13 @@ class _LoginViewState extends State<LoginView> {
                     child: _buildGoogleSignInButton(viewModel),
                   ),
                   Container(
+                    height: 40,
+                  ),
+                  Container(
                     child: _buildRegisterButton(),
-                    margin: EdgeInsets.only(top: 39),
+                  ),
+                  Container(
+                    height: 40,
                   )
                 ],
               ),
@@ -98,17 +126,15 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildLogo() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(163,106,164,0),
+    return Container(
       child: Text(
         "Log In",
         style: Theme.of(context).textTheme.headline.merge(
-          TextStyle(
-              color: SharedColors.primaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 30
-          ),
-        ),
+              TextStyle(
+                  color: SharedColors.primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
       ),
     );
   }
@@ -174,13 +200,11 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildEmailField(LoginViewModel viewModel) {
     return Container(
-      margin: EdgeInsets.only(left: 48, right: 47, bottom: 20, top: 100),
-      child: Container(
-        child: SharedTextFormField(
-          controller: emailController,
-          validator: (String value) => viewModel.validateEmail(value),
-          hintText: "Email",
-        ),
+      width: 316,
+      child: SharedTextFormField(
+        controller: emailController,
+        validator: (String value) => viewModel.validateEmail(value),
+        hintText: "Email",
       ),
     );
   }
@@ -191,33 +215,29 @@ class _LoginViewState extends State<LoginView> {
         _obscureText = !_obscureText;
       });
     }
+
     return Container(
-      margin: EdgeInsets.only(left: 48, right: 47, bottom: 0, top: 15),
-      child: Container(
-        child: SharedTextFormField(
-          controller: passwordController,
-          validator: (String value) => viewModel.validatePassword(value),
-          obscureText: _obscureText,
-          hintText: "Password",
-          suffixIcon: IconButton(
-            icon: Icon(
-              // Based on passwordVisible state choose the icon
-              _obscureText
-                  ? Icons.visibility
-                  : Icons.visibility_off,
-              color: SharedColors.primaryOrangeColor,
-            ),
-            onPressed: _toggle,
+      width: 316,
+      child: SharedTextFormField(
+        controller: passwordController,
+        validator: (String value) => viewModel.validatePassword(value),
+        obscureText: _obscureText,
+        hintText: "Password",
+        suffixIcon: IconButton(
+          icon: Icon(
+            // Based on passwordVisible state choose the icon
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+            color: SharedColors.primaryOrangeColor,
           ),
+          onPressed: _toggle,
         ),
       ),
-  
     );
   }
 
-
   Widget _buildLoginButton(LoginViewModel viewModel) {
     return Container(
+      width: 198,
       child: SharedButton(
         text: "LOG IN",
         onTap: () async {
@@ -248,8 +268,7 @@ class _LoginViewState extends State<LoginView> {
               TextSpan(
                   text: ' Register',
                   style: TextStyle(
-                      color: SharedColors.primaryColor,
-                      fontWeight: FontWeight.bold)),
+                      color: SharedColors.primaryColor,)),
             ],
           ),
         ),
@@ -274,7 +293,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildGoogleSignInButton(LoginViewModel viewModel) {
     return Container(
-        margin: EdgeInsets.only(left: 107,right: 106),
+        width: 198,
         child: SharedButton(
 //          isLoading: viewModel.busy,
           isGoogle: true,
