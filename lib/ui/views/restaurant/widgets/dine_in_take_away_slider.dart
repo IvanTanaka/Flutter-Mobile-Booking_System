@@ -12,16 +12,16 @@ class _DineInTakeAwaySliderState extends State<DineInTakeAwaySlider>
   double _drag = 0;
   AnimationController _controller;
   Animation<Alignment> _animation;
-  Alignment _dragAlignment;
+  Alignment _dragAlignment = Alignment.centerLeft;
 
   void _runAnimation() {
     _animation = _controller.drive(
       AlignmentTween(
-        begin: Alignment.centerRight,
-        end: Alignment.centerLeft,
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
       ),
     );
-    if (_toogleDineIn) {
+    if (!_toogleDineIn) {
       _controller.forward();
     } else {
       _controller.reverse();
@@ -78,9 +78,15 @@ class _DineInTakeAwaySliderState extends State<DineInTakeAwaySlider>
             alignment: _dragAlignment,
             width: (MediaQuery.of(context).size.width / 3) * 2,
             child: GestureDetector(
+              onTap: (){
+                setState(() {
+                  _toogleDineIn = !_toogleDineIn;
+                  _runAnimation();
+                });
+              },
               onPanUpdate: (details) {
                 setState(() {
-                  _drag = _drag + (10 * details.delta.dx);
+                  _drag = _drag + (1000 * details.delta.dx);
                   if (_drag > _switchSize / 2) {
                     _toogleDineIn = false;
                   } else {
